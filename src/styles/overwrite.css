@@ -1,0 +1,17 @@
+.ui.form .field {
+  position: relative;
+}
+
+.ui.form .field .prompt.label {
+  padding: 0;
+  margin: 0;
+  font-size: 11px;
+  position: absolute;
+  left: 1px;
+  bottom: -16px;
+  text-align: left;
+  border: none !important;
+}
+.ui.form .field .prompt.label::before {
+  display: none;
+}

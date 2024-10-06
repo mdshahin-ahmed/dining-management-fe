@@ -12,6 +12,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { removeDoubleQuotes } from "../../utils/helper";
 import { ToastContainer } from "react-toastify";
 import { ErrorBoundary } from "react-error-boundary";
+import ErrorPage from "../../components/common/ErrorPage";
 
 const mutationCache = new MutationCache({
   onError(error, variables, context, mutation) {
@@ -62,22 +63,19 @@ const queryClient = new QueryClient({
 function AppProviders({ children }) {
   return (
     <Router basename="/asfood">
+      {console.log("Index page")}
+
       <QueryClientProvider client={queryClient}>
         <QueryErrorResetBoundary>
           {({ reset }) => (
             <ErrorBoundary
               onReset={reset}
               fallbackRender={({ resetErrorBoundary }) => (
-                <div>
-                  <h1 onClick={() => resetErrorBoundary}>
-                    Error page something went wrong from context/app/index
-                  </h1>
-                  {/* <ErrorPage
-                    heading="500 -  Internal server error"
-                    subheader="Opps, something went wrong! The server encountered an internal error and was not able to complete request"
-                    onClick={resetErrorBoundary}
-                  /> */}
-                </div>
+                <ErrorPage
+                  heading="500 -  Internal server error"
+                  subheader="Opps, something went wrong! The server encountered an internal error and was not able to complete request"
+                  onClick={resetErrorBoundary}
+                />
               )}
             >
               <AuthProvider>{children}</AuthProvider>

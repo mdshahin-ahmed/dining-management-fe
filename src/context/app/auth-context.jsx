@@ -5,7 +5,7 @@ AuthContext.displayName = "AuthContext";
 
 function AuthProvider(props) {
   const user = useMemo(() => {
-    return "Shahin";
+    return "";
   }, []);
 
   const value = useMemo(() => ({ user }), [user]);

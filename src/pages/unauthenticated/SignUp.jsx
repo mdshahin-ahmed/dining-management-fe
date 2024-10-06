@@ -5,16 +5,12 @@ import { useHistory, useLocation } from "react-router-dom";
 import { Button, Grid, GridColumn, Header, Image } from "semantic-ui-react";
 import { AsForm, AsInput } from "../../components/common/form";
 import signinSchema from "../../validations/signin/signin.schema";
-import { useEffect, useState } from "react";
-const SignIn = () => {
+import { useEffect } from "react";
+const SignUp = () => {
   const history = useHistory();
   const location = useLocation();
-  const [test, setTest] = useState(0);
-  console.log(test);
-  console.log(location);
-
   useEffect(() => {
-    console.log("Signin component rendered");
+    console.log("Signup component rendered");
     console.log("Current URL:", location.pathname);
   }, [location]);
   const {
@@ -42,27 +38,23 @@ const SignIn = () => {
         <Grid.Column className="loginCardWrap">
           <Image src={logo} />
           <Header as="h3" color="teal" textAlign="center">
-            Log-in to your account
+            Create an account!
           </Header>
           <AsForm control={control} errors={errors} size="large">
             <AsInput name="name" required label="Enter your name" />
             <AsInput name="email" required label="Enter your email" />
             <GridColumn width={16}>
               <Button onClick={handleSubmit(handleSignin)} primary fluid>
-                Sign In
+                Sign Up
               </Button>
             </GridColumn>
             <span className="mx-auto pb-2">
-              Don&apos;t have an account?{" "}
+              Already have an account?{" "}
               <span
                 className="c-primary c-pointer"
-                onClick={() => {
-                  history.push("/signup");
-                  console.log("clicked");
-                  setTest(test + 1);
-                }}
+                onClick={() => history.push("/signin")}
               >
-                Sign Up
+                Sign In
               </span>
             </span>
           </AsForm>
@@ -72,4 +64,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
