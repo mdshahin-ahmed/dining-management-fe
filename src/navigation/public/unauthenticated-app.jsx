@@ -3,8 +3,6 @@ import SignIn from "../../pages/unauthenticated/SignIn";
 import SignUp from "../../pages/unauthenticated/SignUp";
 
 function UnAuthenticatedApp() {
-  console.log("unauth");
-
   return (
     <Routes>
       <Route path="/signin" element={<SignIn />} />

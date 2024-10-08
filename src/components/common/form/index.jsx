@@ -43,6 +43,7 @@ function AsInput({
   label,
   required,
   children,
+  maxLength,
   ...rest
 }) {
   return (
@@ -63,6 +64,11 @@ function AsInput({
               onChange={(e, { value: val }) => onChange(val)}
               {...rest}
             />
+            {maxLength && (
+              <div className="input-cnt">
+                {value?.length ? value?.length : 0}/{maxLength}
+              </div>
+            )}
           </FormField>
         )}
       />
@@ -170,7 +176,7 @@ function AsRadio({
   label,
   optionList,
   columnProps = {},
-  ...rest
+  // ...rest
 }) {
   // ? options example : [{label:'Male', radioValue:'male'}]
   return (

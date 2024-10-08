@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, GridColumn, Header, Image } from "semantic-ui-react";
 import { AsForm, AsInput } from "../../components/common/form";
-import signinSchema from "../../validations/signin/signin.schema";
+import { signinSchema } from "../../validations/signin/signin.schema";
 const SignIn = () => {
   const navigate = useNavigate();
   const {

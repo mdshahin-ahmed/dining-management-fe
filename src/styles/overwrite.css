@@ -15,3 +15,29 @@
 .ui.form .field .prompt.label::before {
   display: none;
 }
+
+.ui.form input {
+  color: rgba(0, 0, 0, 0.95) !important;
+  /* border-color: #2772ea !important; */
+  border-radius: 0.57142857rem !important;
+  background: #fff !important;
+  box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset !important;
+  height: 35px !important;
+}
+
+.input-cnt {
+  opacity: 0.5;
+  font-size: 12px;
+  color: #001f3d;
+  text-align: right;
+  position: absolute;
+  bottom: -20px;
+}
+
+.ui.form .field .field + .input-cnt {
+  right: 0;
+}
+
+.ui.form .fields .field .field + .input-cnt {
+  right: 16px;
+}

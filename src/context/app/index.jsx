@@ -63,7 +63,6 @@ const queryClient = new QueryClient({
 // const queryClient = new QueryClient();
 
 function AppProviders({ children }) {
-  console.log("App provider");
   return (
     <QueryClientProvider client={queryClient}>
       <QueryErrorResetBoundary>
