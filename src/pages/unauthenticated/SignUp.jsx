@@ -1,18 +1,12 @@
 import logo from "@/assets/logo.png";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useForm } from "react-hook-form";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Grid, GridColumn, Header, Image } from "semantic-ui-react";
 import { AsForm, AsInput } from "../../components/common/form";
 import signinSchema from "../../validations/signin/signin.schema";
-import { useEffect } from "react";
 const SignUp = () => {
-  const history = useHistory();
-  const location = useLocation();
-  useEffect(() => {
-    console.log("Signup component rendered");
-    console.log("Current URL:", location.pathname);
-  }, [location]);
+  const navigate = useNavigate();
   const {
     control,
     formState: { errors },
@@ -52,7 +46,7 @@ const SignUp = () => {
               Already have an account?{" "}
               <span
                 className="c-primary c-pointer"
-                onClick={() => history.push("/signin")}
+                onClick={() => navigate("/signin")}
               >
                 Sign In
               </span>

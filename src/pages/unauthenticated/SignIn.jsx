@@ -1,22 +1,12 @@
 import logo from "@/assets/logo.png";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useForm } from "react-hook-form";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Grid, GridColumn, Header, Image } from "semantic-ui-react";
 import { AsForm, AsInput } from "../../components/common/form";
 import signinSchema from "../../validations/signin/signin.schema";
-import { useEffect, useState } from "react";
 const SignIn = () => {
-  const history = useHistory();
-  const location = useLocation();
-  const [test, setTest] = useState(0);
-  console.log(test);
-  console.log(location);
-
-  useEffect(() => {
-    console.log("Signin component rendered");
-    console.log("Current URL:", location.pathname);
-  }, [location]);
+  const navigate = useNavigate();
   const {
     control,
     formState: { errors },
@@ -57,9 +47,7 @@ const SignIn = () => {
               <span
                 className="c-primary c-pointer"
                 onClick={() => {
-                  history.push("/signup");
-                  console.log("clicked");
-                  setTest(test + 1);
+                  navigate("/signup");
                 }}
               >
                 Sign Up

@@ -6,13 +6,13 @@ import {
   QueryErrorResetBoundary,
 } from "@tanstack/react-query";
 import { AuthProvider } from "./auth-context";
-import { BrowserRouter as Router } from "react-router-dom";
 import AsToast from "../../components/common/AsToast";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { removeDoubleQuotes } from "../../utils/helper";
 import { ToastContainer } from "react-toastify";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorPage from "../../components/common/ErrorPage";
+import { BrowserRouter } from "react-router-dom";
 
 const mutationCache = new MutationCache({
   onError(error, variables, context, mutation) {
@@ -60,40 +60,41 @@ const queryClient = new QueryClient({
   },
 });
 
-function AppProviders({ children }) {
-  return (
-    <Router basename="/asfood">
-      {console.log("Index page")}
+// const queryClient = new QueryClient();
 
-      <QueryClientProvider client={queryClient}>
-        <QueryErrorResetBoundary>
-          {({ reset }) => (
-            <ErrorBoundary
-              onReset={reset}
-              fallbackRender={({ resetErrorBoundary }) => (
-                <ErrorPage
-                  heading="500 -  Internal server error"
-                  subheader="Opps, something went wrong! The server encountered an internal error and was not able to complete request"
-                  onClick={resetErrorBoundary}
-                />
-              )}
-            >
+function AppProviders({ children }) {
+  console.log("App provider");
+  return (
+    <QueryClientProvider client={queryClient}>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            fallbackRender={({ resetErrorBoundary }) => (
+              <ErrorPage
+                heading="500 -  Internal server error"
+                subheader="Opps, something went wrong! The server encountered an internal error and was not able to complete request"
+                onClick={resetErrorBoundary}
+              />
+            )}
+          >
+            <BrowserRouter>
+              <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+              />
               <AuthProvider>{children}</AuthProvider>
-            </ErrorBoundary>
-          )}
-        </QueryErrorResetBoundary>
-      </QueryClientProvider>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-      />
-    </Router>
+            </BrowserRouter>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    </QueryClientProvider>
   );
 }
 export { AppProviders };

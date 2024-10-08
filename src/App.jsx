@@ -1,14 +1,17 @@
 import React from "react";
 import "./App.css";
 import { useAuth } from "./context/app/useAuth";
-import AuthenticatedApp from "./navigation/authenticated-app";
-import UnAuthenticatedApp from "./navigation/unauthenticated-app";
 import { Loader } from "semantic-ui-react";
+
+const AuthenticatedApp = React.lazy(() =>
+  import("./navigation/public/authenticated-app")
+);
+const UnAuthenticatedApp = React.lazy(() =>
+  import("./navigation/public/unauthenticated-app")
+);
 
 function App() {
   const { user } = useAuth();
-  console.log(user);
-  console.log("App");
 
   return (
     <React.Suspense fallback={<Loader>Loading...</Loader>}>
