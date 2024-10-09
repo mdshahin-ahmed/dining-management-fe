@@ -39,13 +39,15 @@ const SignIn = () => {
               maxLength={30}
               name="name"
               required
-              label="Enter your name"
+              label="Name"
+              placeholder="Enter your name"
             />
             <AsInput
               maxLength={100}
               name="email"
               required
-              label="Enter your email"
+              label="Email"
+              placeholder="Enter your email"
             />
             <GridColumn width={16}>
               <Button onClick={handleSubmit(handleSignin)} primary fluid>
