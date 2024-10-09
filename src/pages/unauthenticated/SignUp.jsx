@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Grid, GridColumn, Header, Image } from "semantic-ui-react";
 import { AsForm, AsInput } from "../../components/common/form";
 import { signupSchema } from "../../validations/signin/signin.schema";
+import { useAuth } from "../../context/app/useAuth";
 const SignUp = () => {
   const navigate = useNavigate();
   const {
@@ -22,7 +23,10 @@ const SignUp = () => {
     },
     resolver: joiResolver(signupSchema),
   });
+  const { setUser } = useAuth();
   const handleSignin = (data) => {
+    setUser(data);
+    navigate("/home");
     console.log(data);
   };
 

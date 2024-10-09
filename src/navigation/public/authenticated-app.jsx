@@ -1,13 +1,26 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../../pages/authenticated/Home";
+import Home from "../../components/Home/Home";
+import AppLayout from "../../layouts/AppLayout";
 
 function AuthenticatedApp() {
   return (
     <Routes>
-      <Route path="/home">
-        <Home />
-      </Route>
-      {/* <Route path="*" render={() => <Redirect to="/home" />} /> */}
+      <Route
+        path="/home"
+        element={
+          <AppLayout>
+            <Home />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <AppLayout>
+            <Home />
+          </AppLayout>
+        }
+      />
     </Routes>
   );
 }
