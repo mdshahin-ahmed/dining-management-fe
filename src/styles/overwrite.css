@@ -41,3 +41,7 @@
 .ui.form .fields .field .field + .input-cnt {
   right: 16px;
 }
+.ui.form .column {
+  padding: 0px 14px !important;
+  margin-bottom: 14px !important;
+}

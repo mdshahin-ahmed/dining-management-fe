@@ -35,8 +35,18 @@ const SignIn = () => {
             Log-in to your account
           </Header>
           <AsForm control={control} errors={errors} size="large">
-            <AsInput name="name" required label="Enter your name" />
-            <AsInput name="email" required label="Enter your email" />
+            <AsInput
+              maxLength={30}
+              name="name"
+              required
+              label="Enter your name"
+            />
+            <AsInput
+              maxLength={100}
+              name="email"
+              required
+              label="Enter your email"
+            />
             <GridColumn width={16}>
               <Button onClick={handleSubmit(handleSignin)} primary fluid>
                 Sign In

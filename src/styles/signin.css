@@ -13,3 +13,8 @@
   width: 40px;
   margin: 0 auto;
 }
+
+.signupCard {
+  height: 90vh !important;
+  overflow: hidden scroll;
+}

@@ -33,7 +33,7 @@ const SignUp = () => {
         style={{ height: "100%" }}
         verticalAlign="middle"
       >
-        <Grid.Column className="loginCardWrap">
+        <Grid.Column className="loginCardWrap signupCard">
           <Image src={logo} />
           <Header as="h3" color="teal" textAlign="center">
             Create an account!
