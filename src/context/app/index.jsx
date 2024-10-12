@@ -27,7 +27,7 @@ const mutationCache = new MutationCache({
     AsToast.error(
       <div className="errorToast">
         <AiOutlineCheckCircle /> &nbsp;
-        <span>{removeDoubleQuotes(error.message)}testkodf</span>
+        <span>{removeDoubleQuotes(error.message)}</span>
       </div>
     );
   },

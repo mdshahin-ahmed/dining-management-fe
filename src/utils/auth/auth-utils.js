@@ -1,4 +1,4 @@
-const authURL = "http://localhost:5000/api/v1/auth";
+const authURL = import.meta.env.VITE_ACCOUNT_ENDPOINT;
 console.log(authURL);
 
 function getToken() {

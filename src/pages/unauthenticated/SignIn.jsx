@@ -26,7 +26,7 @@ const SignIn = () => {
     mutationFn: login,
     onSuccess: (data) => {
       setToken(data?.token);
-      console.log("Login successful:", data);
+      navigate("/home");
     },
     onError: () => {},
   });
