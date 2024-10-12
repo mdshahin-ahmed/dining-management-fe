@@ -6,7 +6,7 @@ function login(data) {
 }
 
 function signUp(signUpData) {
-  return authClient("", signUpData);
+  return authClient("signup", signUpData);
 }
 
 function forgotPassword(data) {

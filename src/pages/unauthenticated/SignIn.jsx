@@ -8,8 +8,10 @@ import { AsForm, AsInput } from "../../components/common/form";
 import { login } from "../../utils/auth/auth-methods";
 import { signinSchema } from "../../validations/signin/signin.schema";
 import { setToken } from "../../utils/auth/auth-utils";
+import { useAuth } from "../../context/app/useAuth";
 const SignIn = () => {
   const navigate = useNavigate();
+  const { setUser } = useAuth();
   const {
     control,
     formState: { errors },
@@ -26,6 +28,7 @@ const SignIn = () => {
     mutationFn: login,
     onSuccess: (data) => {
       setToken(data?.token);
+      setUser(data?.isUserExists);
       navigate("/home");
     },
     onError: () => {},

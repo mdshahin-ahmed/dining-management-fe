@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Loader } from "semantic-ui-react";
 import "./App.css";
 import { useAuth } from "./context/app/useAuth";
-import { Loader } from "semantic-ui-react";
 
 const AuthenticatedApp = React.lazy(() =>
   import("./navigation/public/authenticated-app")
@@ -13,8 +13,6 @@ const UnAuthenticatedApp = React.lazy(() =>
 function App() {
   const { user } = useAuth();
   console.log(user);
-  useEffect(() => {}, [user]);
-
   return (
     <React.Suspense fallback={<Loader>Loading...</Loader>}>
       {user ? <AuthenticatedApp /> : <UnAuthenticatedApp />}

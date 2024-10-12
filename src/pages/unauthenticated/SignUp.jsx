@@ -1,11 +1,14 @@
 import logo from "@/assets/logo.png";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, GridColumn, Header, Image } from "semantic-ui-react";
+import AsToast from "../../components/common/AsToast";
 import { AsForm, AsInput } from "../../components/common/form";
+import { signUp } from "../../utils/auth/auth-methods";
 import { signupSchema } from "../../validations/signin/signin.schema";
-import { useAuth } from "../../context/app/useAuth";
 const SignUp = () => {
   const navigate = useNavigate();
   const {
@@ -23,11 +26,21 @@ const SignUp = () => {
     },
     resolver: joiResolver(signupSchema),
   });
-  const { setUser } = useAuth();
-  const handleSignin = (data) => {
-    setUser(data);
-    navigate("/home");
-    console.log(data);
+  const { mutate: mutateSignUp, isPending } = useMutation({
+    mutationFn: signUp,
+    onSuccess: () => {
+      navigate("/signin");
+      AsToast.success(
+        <div className="errorToast">
+          <AiOutlineCheckCircle /> &nbsp;
+          <span>User registration successfully!</span>
+        </div>
+      );
+    },
+    onError: () => {},
+  });
+  const handleSignUp = (data) => {
+    mutateSignUp(data);
   };
 
   return (
@@ -86,7 +99,12 @@ const SignUp = () => {
             />
 
             <GridColumn width={16}>
-              <Button onClick={handleSubmit(handleSignin)} primary fluid>
+              <Button
+                loading={isPending}
+                onClick={handleSubmit(handleSignUp)}
+                primary
+                fluid
+              >
                 Sign Up
               </Button>
             </GridColumn>
