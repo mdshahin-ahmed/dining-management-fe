@@ -5,14 +5,14 @@ import {
   QueryClientProvider,
   QueryErrorResetBoundary,
 } from "@tanstack/react-query";
-import { AuthProvider } from "./auth-context";
-import AsToast from "../../components/common/AsToast";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import { removeDoubleQuotes } from "../../utils/helper";
-import { ToastContainer } from "react-toastify";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorPage from "../../components/common/ErrorPage";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import AsToast from "../../components/common/AsToast";
+import ErrorPage from "../../components/common/ErrorPage";
+import { removeDoubleQuotes } from "../../utils/helper";
+import { AuthProvider } from "./auth-context";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 const mutationCache = new MutationCache({
   onError(error, variables, context, mutation) {
@@ -27,7 +27,7 @@ const mutationCache = new MutationCache({
     AsToast.error(
       <div className="errorToast">
         <AiOutlineCheckCircle /> &nbsp;
-        <span>{removeDoubleQuotes(error.message)}</span>
+        <span>{removeDoubleQuotes(error.message)}testkodf</span>
       </div>
     );
   },
@@ -57,6 +57,19 @@ const queryClient = new QueryClient({
         return false;
       },
     },
+    // mutations: {
+    //   onError: (error) => {
+    //     AsToast.error(
+    //       <div className="errorToast">
+    //         <AiOutlineCheckCircle /> &nbsp;
+    //         <span>{removeDoubleQuotes(error.message)}</span>
+    //       </div>
+    //     );
+    //   },
+    //   onSuccess: (data) => {
+    //     console.log("Mutation successful", data);
+    //   },
+    // },
   },
 });
 
@@ -78,17 +91,19 @@ function AppProviders({ children }) {
             )}
           >
             <BrowserRouter>
-              <ToastContainer
-                position="bottom-left"
-                autoClose={5000}
-                hideProgressBar
-                newestOnTop
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-              />
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                {children}
+                <ToastContainer
+                  position="bottom-left"
+                  autoClose={5000}
+                  hideProgressBar
+                  newestOnTop
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                />
+              </AuthProvider>
             </BrowserRouter>
           </ErrorBoundary>
         )}

@@ -1,13 +1,14 @@
 import logo from "@/assets/logo.png";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, GridColumn, Header, Image } from "semantic-ui-react";
 import { AsForm, AsInput } from "../../components/common/form";
+import { login } from "../../utils/auth/auth-methods";
 import { signinSchema } from "../../validations/signin/signin.schema";
-import { useAuth } from "../../context/app/useAuth";
+import { setToken } from "../../utils/auth/auth-utils";
 const SignIn = () => {
-  const { setUser } = useAuth();
   const navigate = useNavigate();
   const {
     control,
@@ -15,15 +16,23 @@ const SignIn = () => {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      name: "",
       email: "",
+      password: "",
     },
     resolver: joiResolver(signinSchema),
   });
+
+  const { mutate: mutateLogin, isPending } = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      setToken(data?.token);
+      console.log("Login successful:", data);
+    },
+    onError: () => {},
+  });
+
   const handleSignin = (data) => {
-    setUser(data);
-    navigate("/home");
-    console.log(data);
+    mutateLogin(data);
   };
 
   return (
@@ -40,21 +49,26 @@ const SignIn = () => {
           </Header>
           <AsForm control={control} errors={errors} size="large">
             <AsInput
-              maxLength={30}
-              name="name"
-              required
-              label="Name"
-              placeholder="Enter your name"
-            />
-            <AsInput
               maxLength={100}
               name="email"
               required
               label="Email"
               placeholder="Enter your email"
             />
+            <AsInput
+              maxLength={100}
+              name="password"
+              required
+              label="Password"
+              placeholder="Enter your password"
+            />
             <GridColumn width={16}>
-              <Button onClick={handleSubmit(handleSignin)} primary fluid>
+              <Button
+                loading={isPending}
+                onClick={handleSubmit(handleSignin)}
+                primary
+                fluid
+              >
                 Sign In
               </Button>
             </GridColumn>

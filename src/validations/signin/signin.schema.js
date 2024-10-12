@@ -1,8 +1,8 @@
 import Joi from "joi";
 
 const signinSchema = Joi.object({
-  name: Joi.string().min(3).max(30),
   email: Joi.string().email({ tlds: { allow: false } }),
+  password: Joi.string().min(5).max(30),
 });
 const signupSchema = Joi.object({
   name: Joi.string().min(3).max(30),

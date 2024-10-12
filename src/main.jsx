@@ -1,11 +1,12 @@
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
 import "semantic-ui-css/semantic.min.css";
-import "./styles/global-styles";
+import App from "./App.jsx";
 import { AppProviders } from "./context/app/index.jsx";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import "./index.css";
+import "./styles/global-styles";
+import "react-toastify/dist/ReactToastify.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
