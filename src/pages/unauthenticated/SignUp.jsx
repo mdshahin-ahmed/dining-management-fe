@@ -16,8 +16,8 @@ const SignUp = () => {
     defaultValues: {
       name: "",
       email: "",
-      phone: "",
-      hall: "",
+      mobile: "",
+      hostel: "",
       room: "",
       password: "",
     },
@@ -58,32 +58,33 @@ const SignUp = () => {
               placeholder="Enter your email"
             />
             <AsInput
-              name="phone"
-              required
-              label="Phone number"
-              placeholder="Enter your phone number"
-            />
-            <AsInput
-              maxLength={30}
-              name="hall"
-              required
-              label="Hall name"
-              placeholder="Enter your hall name"
-            />
-            <AsInput
-              maxLength={3}
-              name="room"
-              required
-              label="Room number"
-              placeholder="Room number"
-            />
-            <AsInput
               maxLength={30}
               name="password"
               required
               label="Password"
               placeholder="Enter a password"
             />
+            <AsInput
+              name="mobile"
+              required
+              label="Mobile"
+              placeholder="Enter your mobile number"
+            />
+            <AsInput
+              maxLength={30}
+              name="hostel"
+              required
+              label="Hostel Name"
+              placeholder="Enter your hall name"
+            />
+            <AsInput
+              maxLength={4}
+              name="room"
+              required
+              label="Room Number"
+              placeholder="Room number"
+            />
+
             <GridColumn width={16}>
               <Button onClick={handleSubmit(handleSignin)} primary fluid>
                 Sign Up
