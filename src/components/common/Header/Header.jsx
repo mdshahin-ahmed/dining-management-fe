@@ -1,7 +1,11 @@
 import { Menu } from "semantic-ui-react";
+import { useAuth } from "../../../context/app/useAuth";
 
 const Header = () => {
-  return <Menu className="headerWrap">This is header page</Menu>;
+  const { user } = useAuth();
+  console.log(user);
+
+  return <Menu className="headerWrap">Welcome! {user?.name}</Menu>;
 };
 
 export default Header;

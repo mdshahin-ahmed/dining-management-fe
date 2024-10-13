@@ -10,7 +10,6 @@ AuthContext.displayName = "AuthContext";
 function AuthProvider(props) {
   const [user, setUser] = useState("");
   const token = getToken();
-  console.log(user);
   const client = useClient();
   const { data, isFetching: isMeApiFetching } = useQuery({
     queryKey: ["me"],
