@@ -13,6 +13,7 @@ function AuthenticatedApp() {
           </AppLayout>
         }
       />
+      {/* <Route path="*" element={<Navigate to="/signin" />} /> */}
       <Route
         path="*"
         element={

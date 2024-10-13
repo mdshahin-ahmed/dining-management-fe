@@ -17,7 +17,7 @@ function toDropdownOption(key, value, text) {
   };
 }
 
-const __DEV__ = process.env.NODE_ENV !== "production";
+// const __DEV__ = process.env.NODE_ENV !== "production";
 
 const capitalize = (str) =>
   `${str?.charAt(0).toUpperCase()}${str.slice(1).toLowerCase()}`;
@@ -256,7 +256,7 @@ const copyToClipboard = (e, textAreaRef, setCopySuccess) => {
 };
 
 export {
-  __DEV__,
+  // __DEV__,
   capitalize,
   cleanUpObject,
   convertDateStructureString,

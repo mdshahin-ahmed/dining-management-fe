@@ -21,4 +21,4 @@ function setNewPassword(data) {
   return authClient("setpassword", data);
 }
 
-export { login, signUp, forgotPassword, logout, setNewPassword };
+export { forgotPassword, login, logout, setNewPassword, signUp };

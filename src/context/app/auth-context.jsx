@@ -8,7 +8,7 @@ export const AuthContext = createContext();
 AuthContext.displayName = "AuthContext";
 
 function AuthProvider(props) {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
   const token = getToken();
   const client = useClient();
   const { data, isFetching: isMeApiFetching } = useQuery({
@@ -19,7 +19,7 @@ function AuthProvider(props) {
 
   useEffect(() => {
     setUser(data);
-  }, [data, token]);
+  }, [data]);
 
   const value = useMemo(
     () => ({ user, setUser, isMeApiFetching }),

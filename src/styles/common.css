@@ -43,6 +43,9 @@ body {
 .jcsb {
   justify-content: space-between !important;
 }
+.jce {
+  justify-content: end !important;
+}
 .asc {
   align-self: center !important;
 }

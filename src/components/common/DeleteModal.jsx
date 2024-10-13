@@ -1,0 +1,69 @@
+import React from "react";
+import {
+  Button,
+  FormField,
+  Modal,
+  ModalActions,
+  ModalContent,
+  ModalHeader,
+} from "semantic-ui-react";
+import { AsForm, AsInput } from "./form";
+
+function DeleteModal({
+  open = false,
+  onClose,
+  onConfirm,
+  isLoading = false,
+  modalHeader = "Delete!!!",
+  modalContent = "Are you sure you want to Delete?",
+  confirmText = "Delete",
+  isManual = false,
+}) {
+  const [inputText, setInputText] = React.useState("");
+  if (!open) return null;
+
+  return (
+    <Modal
+      closeIcon
+      size="tiny"
+      centered={false}
+      open={Boolean(open)}
+      onClose={onClose}
+    >
+      <ModalHeader>{modalHeader}</ModalHeader>
+      <ModalContent>
+        {!isManual && modalContent}
+        {isManual && (
+          <AsForm>
+            <FormField>
+              <label>
+                To confirm, type &quot;<b>DELETE</b>&quot; in the text below
+              </label>
+              <AsInput
+                type="text"
+                value={inputText}
+                onChange={(e, { value }) => setInputText(value)}
+              />
+            </FormField>
+          </AsForm>
+        )}
+      </ModalContent>
+      <ModalActions>
+        <Button data-test-id="cancel-btn" basic onClick={onClose}>
+          Cancel
+        </Button>
+        <Button
+          disabled={isManual && inputText !== "DELETE"}
+          data-test-id="delete-btn"
+          loading={isLoading}
+          color="red"
+          onClick={onConfirm}
+        >
+          {confirmText}
+        </Button>
+      </ModalActions>
+    </Modal>
+  );
+}
+
+export default DeleteModal;
