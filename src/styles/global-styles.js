@@ -4,3 +4,4 @@ import "./overwrite.css";
 import "./navbar.css";
 import "./header.css";
 import "./appBody.css";
+import "./profile.css";

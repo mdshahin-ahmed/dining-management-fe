@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../../components/Home/Home";
 import AppLayout from "../../layouts/AppLayout";
+import Profile from "../../components/Profile/Profile";
 
 function AuthenticatedApp() {
   return (
@@ -10,6 +11,14 @@ function AuthenticatedApp() {
         element={
           <AppLayout>
             <Home />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <AppLayout>
+            <Profile />
           </AppLayout>
         }
       />

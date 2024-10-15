@@ -1,5 +1,4 @@
 const authURL = import.meta.env.VITE_ACCOUNT_ENDPOINT;
-console.log(authURL);
 
 function getToken() {
   return JSON.parse(window.localStorage.getItem("asfood"));

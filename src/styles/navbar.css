@@ -17,3 +17,22 @@
   text-align: center;
   margin: 0 auto;
 }
+
+.navListItem {
+  margin: 8px 10px;
+  padding: 8px 10px !important;
+  text-align: center;
+  border-radius: 7px;
+}
+.navListItem.active {
+  background-color: hsla(0, 0%, 100%, 0.24);
+}
+.navListItem:hover {
+  background-color: hsla(0, 0%, 100%, 0.24);
+}
+
+.navListItem svg {
+  color: white;
+  height: 20px;
+  width: 20px;
+}
