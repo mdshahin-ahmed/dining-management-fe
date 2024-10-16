@@ -6,6 +6,7 @@ import { FaRegEnvelope } from "react-icons/fa";
 import { BsTelephone } from "react-icons/bs";
 import { LuHotel } from "react-icons/lu";
 import { MdOutlineMeetingRoom } from "react-icons/md";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -35,6 +36,10 @@ const Profile = () => {
             <h4 className="mt-0 profileDetails">
               <MdOutlineMeetingRoom />
               <span>{capitalize(user?.room)}</span>
+            </h4>
+            <h4 className="mt-0 profileDetails">
+              <FaBangladeshiTakaSign />
+              <span>{user?.balance || 0}</span>
             </h4>
           </GridColumn>
         </Grid>

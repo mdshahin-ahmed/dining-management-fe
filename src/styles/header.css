@@ -16,3 +16,15 @@
   /* margin-left: 50px; */
   background-color: aqua;
 }
+.headerBalance {
+  margin-right: 10px;
+}
+.headerAvatar {
+  height: 25px;
+  width: 25px;
+}
+.headerBalanceCount {
+  color: #ff0066;
+  font-size: 25px;
+  font-weight: bold;
+}

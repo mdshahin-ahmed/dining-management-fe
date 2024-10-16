@@ -1,11 +1,11 @@
+import avatar from "@/assets/user-avatar.png";
 import { FaSignInAlt } from "react-icons/fa";
-import { Button, Menu, MenuItem, Popup } from "semantic-ui-react";
-import { useAuth } from "../../../context/app/useAuth";
-import { logout } from "../../../utils/auth/auth-methods";
-import { capitalize } from "../../../utils/helper";
-import DeleteModal from "../DeleteModal";
-import { useDisclosure } from "../../../hooks/pure/useDisclosure";
 import { useNavigate } from "react-router-dom";
+import { Image, Menu, MenuItem, Popup } from "semantic-ui-react";
+import { useAuth } from "../../../context/app/useAuth";
+import { useDisclosure } from "../../../hooks/pure/useDisclosure";
+import { logout } from "../../../utils/auth/auth-methods";
+import DeleteModal from "../DeleteModal";
 
 const Header = () => {
   const { user, setUser } = useAuth();
@@ -30,16 +30,31 @@ const Header = () => {
         onConfirm={() => handleDelete(isOpen)}
       />
       <Menu className="headerWrap d-flex jce">
-        <span>Welcome! {capitalize(user?.name)}</span>
-
+        <span className="headerBalance">Balance</span>
+        <span className="headerBalanceCount">{user?.balance || 0}</span>
+        <MenuItem>
+          <Popup
+            content={user?.name}
+            position="bottom center"
+            trigger={
+              <Image
+                className="b-radius-50 headerAvatar c-pointer"
+                src={user?.src || avatar}
+              />
+            }
+          />
+        </MenuItem>
         <MenuItem>
           <Popup
             content="Logout"
             position="bottom center"
             trigger={
-              <Button onClick={() => setCustom(true)}>
-                <FaSignInAlt />
-              </Button>
+              // <Button onClick={() => setCustom(true)}>
+              <FaSignInAlt
+                className="c-pointer"
+                onClick={() => setCustom(true)}
+              />
+              // </Button>
             }
           />
         </MenuItem>
