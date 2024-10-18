@@ -571,3 +571,7 @@ body {
 .c-primary {
   color: #2185d0 !important;
 }
+
+.disable-btn {
+  opacity: 0.8;
+}

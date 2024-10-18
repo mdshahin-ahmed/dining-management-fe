@@ -11,18 +11,16 @@ const Header = () => {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const { isOpen, onClose, setCustom } = useDisclosure();
-  const handleDelete = (data) => {
+  const handleDelete = () => {
     logout();
     setUser(null);
     onClose();
     navigate("/signin");
-    console.log(data);
   };
   return (
     <>
       <DeleteModal
         confirmText="Logout"
-        // isLoading={isDeleteCaseLoading}
         modalContent="Are you sure you want to logout?"
         modalHeader="Logout"
         onClose={onClose}
@@ -49,12 +47,10 @@ const Header = () => {
             content="Logout"
             position="bottom center"
             trigger={
-              // <Button onClick={() => setCustom(true)}>
               <FaSignInAlt
                 className="c-pointer"
                 onClick={() => setCustom(true)}
               />
-              // </Button>
             }
           />
         </MenuItem>
