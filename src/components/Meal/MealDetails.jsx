@@ -1,35 +1,60 @@
+import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 import { Button, FormField, FormInput, GridColumn } from "semantic-ui-react";
 import { mealTypeOptions } from "../../constant/common.constant";
+import { useClient } from "../../hooks/pure/useClient";
 import { imageUpload } from "../../utils/cloud-method";
+import { mealValidationSchema } from "../../validations/meal.schema";
 import AsToast from "../common/AsToast";
 import { AsForm, AsInput, AsSelect, AsTextArea } from "../common/form";
 
 const MealDetails = () => {
+  const client = useClient();
   const [file, setFile] = useState(null);
   const [fileError, setFileError] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [data, setData] = useState(null);
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: "",
+      type: "",
+      price: "",
+      description: "",
+    },
+    resolver: joiResolver(mealValidationSchema),
+  });
 
   const { mutate: mutationImageUpload, isPending: isImageUploadPending } =
     useMutation({
       mutationFn: imageUpload,
-      onSuccess: (data) => {
-        setImageUrl(data?.secure_url);
+      onSuccess: (res) => {
+        addMealMutate({ ...data, image: res?.secure_url });
       },
       onError: (error) => {
         console.log(error);
       },
     });
+  const { mutate: addMealMutate, isPending: isAddMealPending } = useMutation({
+    mutationFn: (data) => client("meal", { data }),
+    onSuccess: () => {
+      AsToast.success(
+        <div className="errorToast">
+          <AiOutlineCheckCircle /> &nbsp;
+          <span>Meal created successfully!</span>
+        </div>
+      );
+    },
+  });
 
   const handleMealSubmit = (data) => {
+    setData(data);
     if (!file) {
       setFileError(true);
       return;
@@ -45,8 +70,6 @@ const MealDetails = () => {
     formData.append("upload_preset", "asfood");
     formData.append("cloud_name", "diqirua3k");
     mutationImageUpload(formData);
-
-    // mutateCsv(formData)
   };
   return (
     <div className="previewLayout">
@@ -60,7 +83,6 @@ const MealDetails = () => {
           placeholder="Enter meal name"
         />
         <AsSelect
-          maxLength={100}
           name="type"
           required
           label="Meal Type"
@@ -72,13 +94,14 @@ const MealDetails = () => {
           required
           label="Meal Price"
           placeholder="Enter a price"
+          type="number"
         />
         <GridColumn mobile={16} computer={8}>
           <FormField required>
             <label>Select Image</label>
             <FormInput
-              data-test-id="import-file-input"
-              // accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel, .csv"
+              className="import-file-input"
+              accept="image/*"
               type="file"
               error={
                 fileError && {
@@ -101,29 +124,19 @@ const MealDetails = () => {
             />
           </FormField>
         </GridColumn>
-        {/* <AsInput
-          name="price"
-          required
-          label="Meal Price"
-          placeholder="Enter a price"
-        /> */}
         <AsTextArea
+          maxLength={100}
           name="description"
           required
           label="Enter description"
           placeholder="Enter meal description"
         />
-
-        {/* <GridColum width={16}> */}
-
-        {/* </GridColum> */}
       </AsForm>
       <Button
         className="mt-5"
-        loading={isImageUploadPending}
+        loading={isImageUploadPending || isAddMealPending}
         onClick={handleSubmit(handleMealSubmit)}
         primary
-        // fluid
       >
         Submit
       </Button>

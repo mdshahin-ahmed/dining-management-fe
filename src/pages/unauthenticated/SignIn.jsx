@@ -57,6 +57,7 @@ const SignIn = () => {
               required
               label="Email"
               placeholder="Enter your email"
+              computer={16}
             />
             <AsInput
               maxLength={100}
@@ -64,6 +65,7 @@ const SignIn = () => {
               required
               label="Password"
               placeholder="Enter your password"
+              computer={16}
             />
             <GridColumn width={16}>
               <Button

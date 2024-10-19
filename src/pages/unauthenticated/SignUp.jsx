@@ -62,6 +62,7 @@ const SignUp = () => {
               required
               label="Name"
               placeholder="Enter your name"
+              computer={16}
             />
             <AsInput
               maxLength={100}
@@ -69,6 +70,7 @@ const SignUp = () => {
               required
               label="Email"
               placeholder="Enter your email"
+              computer={16}
             />
             <AsInput
               maxLength={30}
@@ -76,12 +78,14 @@ const SignUp = () => {
               required
               label="Password"
               placeholder="Enter a password"
+              computer={16}
             />
             <AsInput
               name="mobile"
               required
               label="Mobile"
               placeholder="Enter your mobile number"
+              computer={16}
             />
             <AsInput
               maxLength={30}
@@ -89,6 +93,7 @@ const SignUp = () => {
               required
               label="Hostel Name"
               placeholder="Enter your hall name"
+              computer={16}
             />
             <AsInput
               maxLength={4}
@@ -96,6 +101,7 @@ const SignUp = () => {
               required
               label="Room Number"
               placeholder="Room number"
+              computer={16}
             />
 
             <GridColumn width={16}>

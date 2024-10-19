@@ -1,5 +1,6 @@
 .ui.form .field {
   position: relative;
+  margin: 0px 0px 1rem 0px !important;
 }
 
 .ui.form .field .prompt.label {

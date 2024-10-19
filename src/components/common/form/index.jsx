@@ -103,6 +103,11 @@ function AsTextArea({
               onChange={(e, { value: val }) => onChange(val)}
               {...rest}
             />
+            {rest?.maxLength && (
+              <div className="input-cnt">
+                {value?.length ? value?.length : 0}/{rest?.maxLength}
+              </div>
+            )}
           </FormField>
         )}
       />
