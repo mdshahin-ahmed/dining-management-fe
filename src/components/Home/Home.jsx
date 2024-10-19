@@ -50,7 +50,7 @@ const Home = () => {
   // const {i}
 
   return (
-    <div className="p-3">
+    <div className="previewLayout">
       <DeleteModal
       // onClose={}
       />

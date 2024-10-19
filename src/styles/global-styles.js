@@ -5,3 +5,4 @@ import "./navbar.css";
 import "./header.css";
 import "./appBody.css";
 import "./profile.css";
+import "./meal.css";

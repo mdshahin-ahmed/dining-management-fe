@@ -127,6 +127,9 @@ body {
 .ml-10 {
   margin-left: 50px !important;
 }
+.ml-auto {
+  margin-left: auto !important;
+}
 
 /* Margin Right */
 .mr-1 {
@@ -158,6 +161,9 @@ body {
 }
 .mr-10 {
   margin-right: 50px !important;
+}
+.mr-auto {
+  margin-right: auto !important;
 }
 
 /* Margin Top */
@@ -574,4 +580,8 @@ body {
 
 .disable-btn {
   opacity: 0.8;
+}
+
+.previewLayout {
+  padding: 20px;
 }

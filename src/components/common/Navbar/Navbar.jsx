@@ -1,11 +1,13 @@
 import logo from "@/assets/logo.png";
 import { FaRegUser } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
+import { GiHotMeal } from "react-icons/gi";
 import { NavLink, useLocation } from "react-router-dom";
 import { Image, List, ListItem, Popup } from "semantic-ui-react";
 
 const routeList = [
   { content: "Home", pathname: "home", src: IoHomeOutline },
+  { content: "Meal", pathname: "meal", src: GiHotMeal },
   { content: "Profile", pathname: "profile", src: FaRegUser },
 ];
 
