@@ -11,8 +11,12 @@ import { imageUpload } from "../../utils/cloud-method";
 import { mealValidationSchema } from "../../validations/meal.schema";
 import AsToast from "../common/AsToast";
 import { AsForm, AsInput, AsSelect, AsTextArea } from "../common/form";
+import { useParams } from "react-router-dom";
 
 const MealDetails = () => {
+  const { id } = useParams();
+  console.log(id);
+
   const client = useClient();
   const [file, setFile] = useState(null);
   const [fileError, setFileError] = useState(false);

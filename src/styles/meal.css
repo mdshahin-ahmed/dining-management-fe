@@ -1,3 +1,12 @@
 .import-file-input input {
   padding: 5px !important;
 }
+.meal-card-image img {
+  height: 240px !important;
+}
+
+.meal-modify-btn svg {
+  font-size: 13px;
+  margin-right: 5px;
+  margin-bottom: -1px;
+}
