@@ -17,7 +17,7 @@ function AsForm({ children, control, errors, onSubmit = () => {}, ...rest }) {
     <form className="ui form errorLabel" onSubmit={onSubmit} {...rest}>
       <Grid>
         {React.Children.map(children, (child) => {
-          const { name, width = 16 } = child.props;
+          const { name, width = 16, mobile = 16, computer = 8 } = child.props;
           if (!name) return child;
           const error = get(errors, name, null);
           return React.createElement(child.type, {
@@ -27,6 +27,8 @@ function AsForm({ children, control, errors, onSubmit = () => {}, ...rest }) {
               key: name,
               error: error && { content: removeDoubleQuotes(error?.message) },
               width,
+              mobile,
+              computer,
             },
           });
         })}
@@ -43,10 +45,12 @@ function AsInput({
   label,
   required,
   children,
+  mobile,
+  computer,
   ...rest
 }) {
   return (
-    <GridColumn width={width}>
+    <GridColumn mobile={mobile} computer={computer} width={width}>
       <Controller
         control={control}
         name={name}
@@ -81,10 +85,12 @@ function AsTextArea({
   label,
   children,
   required,
+  mobile,
+  computer,
   ...rest
 }) {
   return (
-    <GridColumn width={width}>
+    <GridColumn mobile={mobile} computer={computer} width={width}>
       <Controller
         control={control}
         name={name}
@@ -111,10 +117,12 @@ function AsSelect({
   children,
   required,
   label,
+  mobile,
+  computer,
   ...rest
 }) {
   return (
-    <GridColumn width={width}>
+    <GridColumn mobile={mobile} computer={computer} width={width}>
       <Controller
         control={control}
         name={name}
