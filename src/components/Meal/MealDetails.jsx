@@ -52,25 +52,25 @@ const MealDetails = () => {
       AsToast.success(
         <div className="errorToast">
           <AiOutlineCheckCircle /> &nbsp;
-          <span>Meal created successfully!</span>
+          <span>
+            {id ? "Meal Updated Successfully!" : "Meal Added Successfully!"}
+          </span>
         </div>
       );
-      navigate("/meal");
+      !id && navigate("/meal");
     },
   });
 
-  const {
-    data: mealDetails,
-    isFetching: isMealDetailsFetching,
-    isSuccess: getSingleMealSuccess,
-  } = useQuery({
+  const { data: mealDetails, isFetching: isMealDetailsFetching } = useQuery({
     queryKey: ["meal"],
     queryFn: () => client(`meal/${id}`),
     enabled: !!id,
   });
 
+  console.log("mealDetails", mealDetails);
+
   useEffect(() => {
-    if (getSingleMealSuccess && mealDetails) {
+    if (mealDetails && id) {
       const { name, price, description, type } = mealDetails;
       reset({
         name,
@@ -79,7 +79,7 @@ const MealDetails = () => {
         type,
       });
     }
-  }, [getSingleMealSuccess && mealDetails]);
+  }, [mealDetails]);
 
   const handleMealSubmit = (data) => {
     addMealMutate(data);
