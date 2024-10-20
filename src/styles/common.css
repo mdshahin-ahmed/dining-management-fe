@@ -585,3 +585,9 @@ body {
 .previewLayout {
   padding: 20px;
 }
+
+.noDataWrap img {
+  width: 370px;
+  height: 350px;
+  margin: 0 auto;
+}

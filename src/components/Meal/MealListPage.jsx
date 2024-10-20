@@ -15,6 +15,9 @@ import { useClient } from "../../hooks/pure/useClient";
 import { useDisclosure } from "../../hooks/pure/useDisclosure";
 import CardLoader from "../common/CardLoader";
 import DeleteModal from "../common/DeleteModal";
+import AsToast from "../common/AsToast";
+import { FiTrash2 } from "react-icons/fi";
+import NoDataAvailable from "../common/NoDataAvailable";
 
 const MealListPage = () => {
   const { isOpen, onClose, setCustom } = useDisclosure();
@@ -34,8 +37,29 @@ const MealListPage = () => {
         type: "active",
       });
       onClose();
+      AsToast.error(
+        <div className="errorToast">
+          <FiTrash2 /> &nbsp;
+          <span>Meal Deleted Successfully!</span>
+        </div>
+      );
     },
   });
+
+  if (mealList?.length === 0 && !isMealListFetching) {
+    return (
+      <div className="previewLayout">
+        <Button
+          onClick={() => navigate("add")}
+          className="d-flex ml-auto mb-5"
+          primary
+        >
+          Add Meal
+        </Button>
+        <NoDataAvailable />;
+      </div>
+    );
+  }
 
   return (
     <>
