@@ -10,14 +10,13 @@ import {
   CardHeader,
   Grid,
   GridColumn,
-  Image,
 } from "semantic-ui-react";
 import { useClient } from "../../hooks/pure/useClient";
 
 const MealListPage = () => {
   const client = useClient();
   const navigate = useNavigate();
-  const { data: mealList, isLoading } = useQuery({
+  const { data: mealList, isFetching: isMealListFetching } = useQuery({
     queryKey: ["meal-list"],
     queryFn: () => client("meal"),
   });
@@ -31,19 +30,13 @@ const MealListPage = () => {
         Add Meal
       </Button>
       <Grid>
-        {isLoading ? (
+        {isMealListFetching ? (
           <span>Loading...</span>
         ) : (
           <>
             {mealList?.map((meal) => (
-              <GridColumn key={meal?._id} mobile={16} computer={5}>
+              <GridColumn key={meal?._id} mobile={16} computer={4}>
                 <Card className="w-100">
-                  <Image
-                    className="meal-card-image"
-                    src={meal?.image}
-                    wrapped
-                    ui={false}
-                  />
                   <CardContent>
                     <CardHeader>{meal?.name}</CardHeader>
                     <CardDescription>{meal?.description}</CardDescription>
