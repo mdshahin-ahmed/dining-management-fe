@@ -4,6 +4,10 @@ import AppLayout from "../../layouts/AppLayout";
 import Profile from "../../components/Profile/Profile";
 import MealListPage from "../../components/Meal/MealListPage";
 import MealDetails from "../../components/Meal/MealDetails";
+import UserMeal from "../../components/Meal/User/UserMeal";
+import Breakfast from "../../components/Meal/User/Breakfast";
+import Lunch from "../../components/Meal/User/Lunch";
+import Dinner from "../../components/Meal/User/Dinner";
 
 function AuthenticatedApp() {
   return (
@@ -17,7 +21,7 @@ function AuthenticatedApp() {
         }
       />
       <Route
-        path="/meal"
+        path="/manage-meal"
         element={
           <AppLayout>
             <MealListPage />
@@ -25,7 +29,39 @@ function AuthenticatedApp() {
         }
       />
       <Route
-        path="/meal/add"
+        path="/meals"
+        element={
+          <AppLayout>
+            <UserMeal />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/meals/breakfast"
+        element={
+          <AppLayout>
+            <Breakfast />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/meals/lunch"
+        element={
+          <AppLayout>
+            <Lunch />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/meals/dinner"
+        element={
+          <AppLayout>
+            <Dinner />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/manage-meal/add"
         element={
           <AppLayout>
             <MealDetails />
@@ -33,7 +69,7 @@ function AuthenticatedApp() {
         }
       />
       <Route
-        path="/meal/:id/edit"
+        path="/manage-meal/:id/edit"
         element={
           <AppLayout>
             <MealDetails />

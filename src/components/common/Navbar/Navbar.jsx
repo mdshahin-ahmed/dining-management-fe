@@ -7,7 +7,8 @@ import { Image, List, ListItem, Popup } from "semantic-ui-react";
 
 const routeList = [
   { content: "Home", pathname: "home", src: IoHomeOutline },
-  { content: "Meal", pathname: "meal", src: GiHotMeal },
+  { content: "Manage Meal", pathname: "manage-meal", src: GiHotMeal },
+  { content: "Meals", pathname: "meals", src: GiHotMeal },
   { content: "Profile", pathname: "profile", src: FaRegUser },
 ];
 
