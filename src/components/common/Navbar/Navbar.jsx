@@ -1,5 +1,5 @@
 import logo from "@/assets/logo.png";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaUsers } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 import { GiHotMeal } from "react-icons/gi";
 import { NavLink, useLocation } from "react-router-dom";
@@ -9,6 +9,7 @@ const routeList = [
   { content: "Home", pathname: "home", src: IoHomeOutline },
   { content: "Manage Meal", pathname: "manage-meal", src: GiHotMeal },
   { content: "Meals", pathname: "meals", src: GiHotMeal },
+  { content: "Users", pathname: "users", src: FaUsers },
   { content: "Profile", pathname: "profile", src: FaRegUser },
 ];
 

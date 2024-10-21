@@ -1,13 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../../components/Home/Home";
-import AppLayout from "../../layouts/AppLayout";
-import Profile from "../../components/Profile/Profile";
-import MealListPage from "../../components/Meal/MealListPage";
 import MealDetails from "../../components/Meal/MealDetails";
+import MealListPage from "../../components/Meal/MealListPage";
 import UserMeal from "../../components/Meal/User/UserMeal";
-import Breakfast from "../../components/Meal/User/Breakfast";
-import Lunch from "../../components/Meal/User/Lunch";
-import Dinner from "../../components/Meal/User/Dinner";
+import Profile from "../../components/Profile/Profile";
+import UsersList from "../../components/Users/UsersList";
+import AppLayout from "../../layouts/AppLayout";
 
 function AuthenticatedApp() {
   return (
@@ -36,7 +34,7 @@ function AuthenticatedApp() {
           </AppLayout>
         }
       />
-      <Route
+      {/* <Route
         path="/meals/breakfast"
         element={
           <AppLayout>
@@ -59,7 +57,7 @@ function AuthenticatedApp() {
             <Dinner />
           </AppLayout>
         }
-      />
+      /> */}
       <Route
         path="/manage-meal/add"
         element={
@@ -73,6 +71,14 @@ function AuthenticatedApp() {
         element={
           <AppLayout>
             <MealDetails />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/users"
+        element={
+          <AppLayout>
+            <UsersList />
           </AppLayout>
         }
       />
