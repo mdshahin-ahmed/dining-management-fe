@@ -1,6 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useClient } from "../../hooks/pure/useClient";
-import { Table, TableBody, TableCell, TableHeader } from "semantic-ui-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+} from "semantic-ui-react";
+import { capitalize } from "../../utils/helper";
 
 const UsersList = () => {
   const client = useClient();
@@ -12,18 +20,34 @@ const UsersList = () => {
 
   return (
     <div className="previewLayout">
-      <Table>
+      <Table basic>
         <TableHeader>
-          <TableCell>#</TableCell>
-          <TableCell>Name</TableCell>
-          <TableCell>Role</TableCell>
-          <TableCell>Email</TableCell>
-          <TableCell>Phone</TableCell>
-          <TableCell>Balance</TableCell>
-          <TableCell>Actions</TableCell>
+          <TableRow>
+            <TableHeaderCell>#</TableHeaderCell>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Role</TableHeaderCell>
+            <TableHeaderCell>Email</TableHeaderCell>
+            <TableHeaderCell>Mobile</TableHeaderCell>
+            <TableHeaderCell>Balance</TableHeaderCell>
+            {/* <TableHeaderCell>Actions</TableHeaderCell> */}
+          </TableRow>
         </TableHeader>
         <TableBody>
-          <TableCell>1</TableCell>
+          {usersList?.map((user, index) => (
+            <TableRow key={user?._id}>
+              <TableCell>{index + 1}</TableCell>
+              <TableCell>{capitalize(user?.name)}</TableCell>
+              <TableCell>
+                <span className={`roleDesign ${user?.role}Role`}>
+                  {capitalize(user?.role)}
+                </span>
+              </TableCell>
+              <TableCell>{user?.email}</TableCell>
+              <TableCell>{user?.mobile}</TableCell>
+              <TableCell>{user?.balance}</TableCell>
+              {/* <TableCell>{user?.name}</TableCell> */}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>

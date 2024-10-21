@@ -6,3 +6,4 @@ import "./header.css";
 import "./appBody.css";
 import "./profile.css";
 import "./meal.css";
+import "./user.css";
