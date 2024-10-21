@@ -57,7 +57,7 @@ const MealDetails = () => {
           </span>
         </div>
       );
-      !id && navigate("/meal");
+      !id && navigate("/manage-meal");
     },
   });
 

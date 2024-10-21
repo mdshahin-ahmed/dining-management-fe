@@ -29,18 +29,28 @@ const UserMeal = () => {
         <Button primary onClick={() => navigate("dinner")}>
           Dinner
         </Button> */}
-        <Button primary onClick={() => setMealType("breakfast")}>
+        <Button
+          primary={mealType === "breakfast"}
+          onClick={() => setMealType("breakfast")}
+        >
           Breakfast
         </Button>
-        <Button primary onClick={() => setMealType("lunch")} className="mx-3">
+        <Button
+          primary={mealType === "lunch"}
+          onClick={() => setMealType("lunch")}
+          className="mx-3"
+        >
           Lunch
         </Button>
-        <Button primary onClick={() => setMealType("dinner")}>
+        <Button
+          primary={mealType === "dinner"}
+          onClick={() => setMealType("dinner")}
+        >
           Dinner
         </Button>
       </div>
       {mealType ? (
-        <h2 className="tac">Choose your {mealType}</h2>
+        mealList?.length > 0 && <h2 className="tac">Choose your {mealType}</h2>
       ) : (
         <h2 className="tac">Please Choose Meal</h2>
       )}
