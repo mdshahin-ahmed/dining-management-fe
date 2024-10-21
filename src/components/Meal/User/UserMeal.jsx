@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "semantic-ui-react";
-import UserMealCard from "./UserMealCard";
-import { useClient } from "../../../hooks/pure/useClient";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Button } from "semantic-ui-react";
+import { useClient } from "../../../hooks/pure/useClient";
+import UserMealCard from "./UserMealCard";
+import NoDataAvailable from "../../common/NoDataAvailable";
 
 const UserMeal = () => {
   const [mealType, setMealType] = useState("");
@@ -16,6 +16,7 @@ const UserMeal = () => {
     queryFn: () => client(`meal?type=${mealType}`),
     enabled: !!mealType,
   });
+
   return (
     <div className="previewLayout">
       <div className="d-flex jcc mb-5">
@@ -38,8 +39,16 @@ const UserMeal = () => {
           Dinner
         </Button>
       </div>
-      {mealType && <h2>Choose your {mealType}</h2>}
-      <UserMealCard mealList={mealList} isFetching={isFetching} />
+      {mealType ? (
+        <h2 className="tac">Choose your {mealType}</h2>
+      ) : (
+        <h2 className="tac">Please Choose Meal</h2>
+      )}
+      {mealList?.length === 0 && !isFetching && mealType ? (
+        <NoDataAvailable />
+      ) : (
+        <UserMealCard mealList={mealList} isFetching={isFetching} />
+      )}
     </div>
   );
 };
