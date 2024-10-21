@@ -20,15 +20,6 @@ const UserMeal = () => {
   return (
     <div className="previewLayout">
       <div className="d-flex jcc mb-5">
-        {/* <Button primary onClick={() => navigate("breakfast")}>
-          Breakfast
-        </Button>
-        <Button primary onClick={() => navigate("lunch")} className="mx-3">
-          Lunch
-        </Button>
-        <Button primary onClick={() => navigate("dinner")}>
-          Dinner
-        </Button> */}
         <Button
           primary={mealType === "breakfast"}
           onClick={() => setMealType("breakfast")}

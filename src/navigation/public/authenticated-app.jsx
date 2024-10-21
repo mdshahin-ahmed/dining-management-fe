@@ -6,6 +6,7 @@ import UserMeal from "../../components/Meal/User/UserMeal";
 import Profile from "../../components/Profile/Profile";
 import UsersList from "../../components/Users/UsersList";
 import AppLayout from "../../layouts/AppLayout";
+import ManageUser from "../../components/Users/ManageUser";
 
 function AuthenticatedApp() {
   return (
@@ -34,30 +35,6 @@ function AuthenticatedApp() {
           </AppLayout>
         }
       />
-      {/* <Route
-        path="/meals/breakfast"
-        element={
-          <AppLayout>
-            <Breakfast />
-          </AppLayout>
-        }
-      />
-      <Route
-        path="/meals/lunch"
-        element={
-          <AppLayout>
-            <Lunch />
-          </AppLayout>
-        }
-      />
-      <Route
-        path="/meals/dinner"
-        element={
-          <AppLayout>
-            <Dinner />
-          </AppLayout>
-        }
-      /> */}
       <Route
         path="/manage-meal/add"
         element={
@@ -79,6 +56,14 @@ function AuthenticatedApp() {
         element={
           <AppLayout>
             <UsersList />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/manage-user"
+        element={
+          <AppLayout>
+            <ManageUser />
           </AppLayout>
         }
       />

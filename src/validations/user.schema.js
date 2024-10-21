@@ -1,10 +1,6 @@
 import Joi from "joi";
 
-const signinSchema = Joi.object({
-  email: Joi.string().email({ tlds: { allow: false } }),
-  password: Joi.string().min(5).max(30),
-});
-const signupSchema = Joi.object({
+export const userSchema = Joi.object({
   name: Joi.string().min(3).max(30),
   email: Joi.string().email({ tlds: { allow: false } }),
   mobile: Joi.string()
@@ -19,6 +15,9 @@ const signupSchema = Joi.object({
   hostel: Joi.string().min(3).max(30),
   room: Joi.string().min(1).max(4),
   password: Joi.string().min(5).max(30),
+  role: Joi.string().valid("admin").required().messages({
+    "string.base": "Role must be a text.",
+    "any.only": "Role must be one of admin.",
+    "any.required": "Role is required.",
+  }),
 });
-
-export { signinSchema, signupSchema };

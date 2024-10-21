@@ -15,3 +15,11 @@ export const mealTypeOptions = [
     value: "dinner",
   },
 ];
+
+export const RoleOptions = [
+  {
+    key: 1,
+    text: "Admin",
+    value: "admin",
+  },
+];

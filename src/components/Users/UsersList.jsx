@@ -29,6 +29,8 @@ const UsersList = () => {
             <TableHeaderCell>Role</TableHeaderCell>
             <TableHeaderCell>Email</TableHeaderCell>
             <TableHeaderCell>Mobile</TableHeaderCell>
+            <TableHeaderCell>Hostel</TableHeaderCell>
+            <TableHeaderCell>Room</TableHeaderCell>
             <TableHeaderCell>Balance</TableHeaderCell>
           </TableRow>
         </TableHeader>
@@ -45,6 +47,8 @@ const UsersList = () => {
                 </TableCell>
                 <TableCell>{user?.email}</TableCell>
                 <TableCell>{user?.mobile}</TableCell>
+                <TableCell>{user?.hostel}</TableCell>
+                <TableCell>{user?.room}</TableCell>
                 <TableCell>{user?.balance}</TableCell>
               </TableRow>
             ))

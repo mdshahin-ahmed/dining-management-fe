@@ -1,16 +1,17 @@
 import logo from "@/assets/logo.png";
-import { FaRegUser, FaUsers } from "react-icons/fa";
-import { IoHomeOutline } from "react-icons/io5";
+import { FaUserAlt, FaUserEdit, FaUsers } from "react-icons/fa";
 import { GiHotMeal } from "react-icons/gi";
+import { IoHomeSharp } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { Image, List, ListItem, Popup } from "semantic-ui-react";
 
 const routeList = [
-  { content: "Home", pathname: "home", src: IoHomeOutline },
+  { content: "Home", pathname: "home", src: IoHomeSharp },
   { content: "Manage Meal", pathname: "manage-meal", src: GiHotMeal },
   { content: "Meals", pathname: "meals", src: GiHotMeal },
   { content: "Users", pathname: "users", src: FaUsers },
-  { content: "Profile", pathname: "profile", src: FaRegUser },
+  { content: "Manage User", pathname: "manage-user", src: FaUserEdit },
+  { content: "Profile", pathname: "profile", src: FaUserAlt },
 ];
 
 const Navbar = () => {
