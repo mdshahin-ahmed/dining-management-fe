@@ -12,7 +12,7 @@ import NoDataAvailable from "../../common/NoDataAvailable";
 import { useAuth } from "../../../context/app/useAuth";
 import CardLoader from "../../common/CardLoader";
 
-const UserMealCard = ({ mealList, isFetching }) => {
+const UserMealCard = ({ mealList, isFetching, setCustom }) => {
   const { user } = useAuth();
   const loading = false;
   if (mealList?.length === 0 && !loading) {
@@ -53,6 +53,7 @@ const UserMealCard = ({ mealList, isFetching }) => {
                             : "d-flex mx-auto"
                         }
                         primary
+                        onClick={() => setCustom(meal?._id)}
                       >
                         Purchase
                       </Button>

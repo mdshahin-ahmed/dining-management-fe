@@ -18,6 +18,7 @@ function DeleteModal({
   modalContent = "Are you sure you want to Delete?",
   confirmText = "Delete",
   isManual = false,
+  confirm = false,
 }) {
   const [inputText, setInputText] = React.useState("");
   if (!open) return null;
@@ -49,14 +50,13 @@ function DeleteModal({
         )}
       </ModalContent>
       <ModalActions>
-        <Button data-test-id="cancel-btn" basic onClick={onClose}>
+        <Button basic onClick={onClose}>
           Cancel
         </Button>
         <Button
           disabled={isManual && inputText !== "DELETE"}
-          data-test-id="delete-btn"
           loading={isLoading}
-          color="red"
+          color={confirm ? "primary" : "red"}
           onClick={onConfirm}
         >
           {confirmText}

@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useClient } from "../../hooks/pure/useClient";
 import {
   Table,
   TableBody,
@@ -8,9 +7,10 @@ import {
   TableHeaderCell,
   TableRow,
 } from "semantic-ui-react";
+import { useClient } from "../../hooks/pure/useClient";
 import { capitalize } from "../../utils/helper";
-import TableLoader from "../common/TableLoader";
 import NoDataAvailable from "../common/NoDataAvailable";
+import TableLoader from "../common/TableLoader";
 
 const UsersList = () => {
   const client = useClient();
@@ -20,7 +20,7 @@ const UsersList = () => {
   });
 
   return (
-    <div className="previewLayout" style={{ overflowX: "auto" }}>
+    <div className="previewLayout">
       <Table basic>
         <TableHeader>
           <TableRow>
