@@ -26,7 +26,7 @@ const OrderList = () => {
         <TableHeader>
           <TableRow>
             <TableHeaderCell>#</TableHeaderCell>
-            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>User Name</TableHeaderCell>
             <TableHeaderCell>Meal Name</TableHeaderCell>
             <TableHeaderCell>Description</TableHeaderCell>
             <TableHeaderCell>Created At</TableHeaderCell>
@@ -40,7 +40,7 @@ const OrderList = () => {
             ordersList?.map((order, index) => (
               <TableRow key={order?._id}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{capitalize(order?.name || "-")}</TableCell>
+                <TableCell>{capitalize(order?.user?.name || "-")}</TableCell>
                 <TableCell>{capitalize(order?.name || "-")}</TableCell>
                 <TableCell>{capitalize(order?.description || "-")}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
