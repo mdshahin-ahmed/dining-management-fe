@@ -6,13 +6,19 @@ import {
   TableHeaderCell,
   TableRow,
 } from "semantic-ui-react";
-import { capitalize } from "../../utils/helper";
+import { capitalize, getFormattedDateTime } from "../../utils/helper";
 import TableLoader from "../common/TableLoader";
 import NoDataAvailable from "../common/NoDataAvailable";
+import { useQuery } from "@tanstack/react-query";
+import { useClient } from "../../hooks/pure/useClient";
 
 const OrderList = () => {
-  const usersList = [];
-  const isFetching = false;
+  const client = useClient();
+  const { data: ordersList, isFetching } = useQuery({
+    queryKey: ["users-list"],
+    queryFn: () => client("order"),
+  });
+  console.log(ordersList);
 
   return (
     <div className="previewLayout">
@@ -21,30 +27,26 @@ const OrderList = () => {
           <TableRow>
             <TableHeaderCell>#</TableHeaderCell>
             <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Role</TableHeaderCell>
-            <TableHeaderCell>Email</TableHeaderCell>
-            <TableHeaderCell>Mobile</TableHeaderCell>
-            <TableHeaderCell>Hostel</TableHeaderCell>
-            <TableHeaderCell>Room</TableHeaderCell>
-            <TableHeaderCell>Balance</TableHeaderCell>
+            <TableHeaderCell>Meal Name</TableHeaderCell>
+            <TableHeaderCell>Description</TableHeaderCell>
+            <TableHeaderCell>Created At</TableHeaderCell>
+            <TableHeaderCell>Updated At</TableHeaderCell>
+            <TableHeaderCell>Price</TableHeaderCell>
+            <TableHeaderCell>Action</TableHeaderCell>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {usersList?.length > 0 && !isFetching ? (
-            usersList?.map((user, index) => (
-              <TableRow key={user?._id}>
+          {ordersList?.length > 0 && !isFetching ? (
+            ordersList?.map((order, index) => (
+              <TableRow key={order?._id}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{capitalize(user?.name)}</TableCell>
-                <TableCell>
-                  <span className={`roleDesign ${user?.role}Role`}>
-                    {capitalize(user?.role)}
-                  </span>
-                </TableCell>
-                <TableCell>{user?.email}</TableCell>
-                <TableCell>{user?.mobile}</TableCell>
-                <TableCell>{user?.hostel}</TableCell>
-                <TableCell>{user?.room}</TableCell>
-                <TableCell>{user?.balance}</TableCell>
+                <TableCell>{capitalize(order?.name || "-")}</TableCell>
+                <TableCell>{capitalize(order?.name || "-")}</TableCell>
+                <TableCell>{capitalize(order?.description || "-")}</TableCell>
+                <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
+                <TableCell>{getFormattedDateTime(order?.updatedAt)}</TableCell>
+                <TableCell>{order?.price}</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             ))
           ) : (
