@@ -8,10 +8,11 @@ import DeleteModal from "../../common/DeleteModal";
 import { useDisclosure } from "../../../hooks/pure/useDisclosure";
 import AsToast from "../../common/AsToast";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { useAuth } from "../../../context/app/useAuth";
 
 const UserMeal = () => {
   const [mealType, setMealType] = useState("");
-
+  const { setUser } = useAuth();
   const { isOpen, onClose, setCustom } = useDisclosure();
 
   const client = useClient();
@@ -23,7 +24,8 @@ const UserMeal = () => {
 
   const { mutate: addOrderMutate, isPending } = useMutation({
     mutationFn: (id) => client(`order?id=${id}`, { method: "POST" }),
-    onSuccess: () => {
+    onSuccess: (res) => {
+      console.log(res);
       AsToast.success(
         <div className="errorToast">
           <AiOutlineCheckCircle /> &nbsp;
@@ -31,11 +33,11 @@ const UserMeal = () => {
         </div>
       );
       onClose();
+      setUser((prev) => ({ ...prev, balance: prev.balance - res?.price }));
     },
   });
 
   const handlePurchase = (id) => {
-    console.log("Id", id);
     addOrderMutate(id);
   };
 
