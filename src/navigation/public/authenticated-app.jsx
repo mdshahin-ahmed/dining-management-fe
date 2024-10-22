@@ -7,6 +7,7 @@ import Profile from "../../components/Profile/Profile";
 import UsersList from "../../components/Users/UsersList";
 import AppLayout from "../../layouts/AppLayout";
 import ManageUser from "../../components/Users/ManageUser";
+import OrderList from "../../components/Order/OrderList";
 
 function AuthenticatedApp() {
   return (
@@ -64,6 +65,14 @@ function AuthenticatedApp() {
         element={
           <AppLayout>
             <ManageUser />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/orders"
+        element={
+          <AppLayout>
+            <OrderList />
           </AppLayout>
         }
       />

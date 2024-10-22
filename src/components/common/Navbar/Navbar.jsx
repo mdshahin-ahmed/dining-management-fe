@@ -1,5 +1,10 @@
 import logo from "@/assets/logo.png";
-import { FaUserAlt, FaUserEdit, FaUsers } from "react-icons/fa";
+import {
+  FaCartArrowDown,
+  FaUserAlt,
+  FaUserEdit,
+  FaUsers,
+} from "react-icons/fa";
 import { GiHotMeal } from "react-icons/gi";
 import { IoHomeSharp } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
@@ -10,6 +15,7 @@ const routeList = [
   { content: "Manage Meal", pathname: "manage-meal", src: GiHotMeal },
   { content: "Meals", pathname: "meals", src: GiHotMeal },
   { content: "Users", pathname: "users", src: FaUsers },
+  { content: "Order", pathname: "orders", src: FaCartArrowDown },
   { content: "Manage User", pathname: "manage-user", src: FaUserEdit },
   { content: "Profile", pathname: "profile", src: FaUserAlt },
 ];
