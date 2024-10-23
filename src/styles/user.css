@@ -1,10 +1,12 @@
 .roleDesign {
-  padding: 3px 10px;
-  border-radius: 10px;
+  padding: 6px 12px;
+  border-radius: 13px;
 }
 .adminRole {
-  background-color: rgb(44, 253, 184);
+  background-color: #21ba45;
+  color: white;
 }
 .userRole {
-  background-color: rgb(247, 140, 140);
+  background-color: #d01919;
+  color: white;
 }

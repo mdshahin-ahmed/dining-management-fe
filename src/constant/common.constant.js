@@ -1,16 +1,16 @@
 export const mealTypeOptions = [
   {
-    key: 1,
+    key: "breakfast",
     text: "Break Fast",
     value: "breakfast",
   },
   {
-    key: 2,
+    key: "lunch",
     text: "Lunch",
     value: "lunch",
   },
   {
-    key: 3,
+    key: "dinner",
     text: "Dinner",
     value: "dinner",
   },
@@ -18,8 +18,26 @@ export const mealTypeOptions = [
 
 export const RoleOptions = [
   {
-    key: 1,
+    key: "admin",
     text: "Admin",
     value: "admin",
+  },
+];
+
+export const orderStatus = [
+  {
+    key: "pending",
+    text: "Pending",
+    value: "pending",
+  },
+  {
+    key: "approved",
+    text: "Approve",
+    value: "approved",
+  },
+  {
+    key: "canceled",
+    text: "Cancel",
+    value: "canceled",
   },
 ];

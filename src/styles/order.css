@@ -1,0 +1,19 @@
+.orderStatusBtn {
+  padding: 6px 12px;
+  border-radius: 13px;
+  color: white;
+}
+
+.pendingOrderStatus {
+  background-color: #fbbd08;
+}
+.approvedOrderStatus {
+  background-color: #21ba45;
+}
+.canceledOrderStatus {
+  background-color: #d01919;
+}
+.orderStatusDropdown {
+  min-width: 100px !important;
+  width: 100%;
+}

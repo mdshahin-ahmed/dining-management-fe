@@ -1,4 +1,6 @@
 import {
+  Button,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -9,16 +11,33 @@ import {
 import { capitalize, getFormattedDateTime } from "../../utils/helper";
 import TableLoader from "../common/TableLoader";
 import NoDataAvailable from "../common/NoDataAvailable";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useClient } from "../../hooks/pure/useClient";
+import { orderStatus } from "../../constant/common.constant";
 
 const OrderList = () => {
   const client = useClient();
+  const queryClient = useQueryClient();
   const { data: ordersList, isFetching } = useQuery({
-    queryKey: ["users-list"],
+    queryKey: ["orders-list"],
     queryFn: () => client("order"),
   });
   console.log(ordersList);
+
+  const { mutate: updateStatusMutate } = useMutation({
+    mutationFn: ({ id, status }) =>
+      client(`order/${id}`, { method: "PATCH", data: { status } }),
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: ["orders-list"],
+        type: "active",
+      });
+    },
+  });
+
+  const handleStatusChange = (e, { value }, id) => {
+    updateStatusMutate({ id, status: value });
+  };
 
   return (
     <div className="previewLayout">
@@ -31,6 +50,7 @@ const OrderList = () => {
             <TableHeaderCell>Description</TableHeaderCell>
             <TableHeaderCell>Created At</TableHeaderCell>
             <TableHeaderCell>Updated At</TableHeaderCell>
+            <TableHeaderCell>Status</TableHeaderCell>
             <TableHeaderCell>Price</TableHeaderCell>
             <TableHeaderCell>Action</TableHeaderCell>
           </TableRow>
@@ -45,16 +65,32 @@ const OrderList = () => {
                 <TableCell>{capitalize(order?.description || "-")}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.updatedAt)}</TableCell>
+                <TableCell>
+                  <span
+                    className={`${order?.status}OrderStatus orderStatusBtn`}
+                  >
+                    {capitalize(order?.status || "-")}
+                  </span>
+                </TableCell>
                 <TableCell>{order?.price}</TableCell>
-                <TableCell></TableCell>
+                <TableCell>
+                  <Select
+                    defaultValue={order?.status}
+                    className="orderStatusDropdown"
+                    options={orderStatus}
+                    onChange={(e, data) =>
+                      handleStatusChange(e, data, order?._id)
+                    }
+                  />
+                </TableCell>
               </TableRow>
             ))
           ) : (
             <>
-              {isFetching && <TableLoader columns={8} />}
+              {isFetching && <TableLoader columns={9} />}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan="8">
+                  <TableCell colSpan="9">
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>

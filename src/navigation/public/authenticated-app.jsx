@@ -3,11 +3,11 @@ import Home from "../../components/Home/Home";
 import MealDetails from "../../components/Meal/MealDetails";
 import MealListPage from "../../components/Meal/MealListPage";
 import UserMeal from "../../components/Meal/User/UserMeal";
+import OrderList from "../../components/Order/OrderList";
 import Profile from "../../components/Profile/Profile";
+import ManageUser from "../../components/Users/ManageUser";
 import UsersList from "../../components/Users/UsersList";
 import AppLayout from "../../layouts/AppLayout";
-import ManageUser from "../../components/Users/ManageUser";
-import OrderList from "../../components/Order/OrderList";
 
 function AuthenticatedApp() {
   return (
