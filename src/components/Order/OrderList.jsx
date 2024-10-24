@@ -1,5 +1,7 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
-  Button,
   Select,
   Table,
   TableBody,
@@ -8,30 +10,53 @@ import {
   TableHeaderCell,
   TableRow,
 } from "semantic-ui-react";
-import { capitalize, getFormattedDateTime } from "../../utils/helper";
-import TableLoader from "../common/TableLoader";
-import NoDataAvailable from "../common/NoDataAvailable";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useClient } from "../../hooks/pure/useClient";
+import { useGetQueryDataList } from "../../api/query.api";
 import { orderStatus } from "../../constant/common.constant";
+import { useClient } from "../../hooks/pure/useClient";
+import { capitalize, getFormattedDateTime } from "../../utils/helper";
+import AsToast from "../common/AsToast";
+import CustomPagination from "../common/CustomPagination";
+import NoDataAvailable from "../common/NoDataAvailable";
+import SearchBar from "../common/SearchBar";
+import TableLoader from "../common/TableLoader";
 
 const OrderList = () => {
+  const [defaultQuery, setDefaultQuery] = useState({
+    page: 1,
+    limit: 20,
+    searchTerm: "",
+  });
+
   const client = useClient();
   const queryClient = useQueryClient();
-  const { data: ordersList, isFetching } = useQuery({
-    queryKey: ["orders-list"],
-    queryFn: () => client("order"),
-  });
-  console.log(ordersList);
+
+  const { data: ordersList, isFetching } = useGetQueryDataList(
+    "order",
+    defaultQuery,
+    {
+      onSuccess: (data) => {
+        console.log(data);
+      },
+    }
+  );
+
+  console.log(ordersList?.meta?.totalPage);
 
   const { mutate: updateStatusMutate } = useMutation({
     mutationFn: ({ id, status }) =>
       client(`order/${id}`, { method: "PATCH", data: { status } }),
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: ["orders-list"],
+        queryKey: ["order-list"],
         type: "active",
       });
+
+      AsToast.success(
+        <div className="errorToast">
+          <AiOutlineCheckCircle /> &nbsp;
+          <span>Order updated successfully!</span>
+        </div>
+      );
     },
   });
 
@@ -41,12 +66,22 @@ const OrderList = () => {
 
   return (
     <div className="previewLayout">
+      <div className="d-flex jce">
+        <SearchBar
+          placeholder="Search meal"
+          stillTime={500}
+          onSuccess={(e) =>
+            setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
+          }
+        />
+      </div>
       <Table basic>
         <TableHeader>
           <TableRow>
             <TableHeaderCell>#</TableHeaderCell>
             <TableHeaderCell>User Name</TableHeaderCell>
             <TableHeaderCell>Meal Name</TableHeaderCell>
+            <TableHeaderCell>Meal Id</TableHeaderCell>
             <TableHeaderCell>Description</TableHeaderCell>
             <TableHeaderCell>Created At</TableHeaderCell>
             <TableHeaderCell>Updated At</TableHeaderCell>
@@ -56,12 +91,13 @@ const OrderList = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {ordersList?.length > 0 && !isFetching ? (
-            ordersList?.map((order, index) => (
+          {ordersList?.result?.length > 0 && !isFetching ? (
+            ordersList?.result?.map((order, index) => (
               <TableRow key={order?._id}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{capitalize(order?.user?.name || "-")}</TableCell>
                 <TableCell>{capitalize(order?.name || "-")}</TableCell>
+                <TableCell>{order?.uId || "-"}</TableCell>
                 <TableCell>{capitalize(order?.description || "-")}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.updatedAt)}</TableCell>
@@ -87,10 +123,10 @@ const OrderList = () => {
             ))
           ) : (
             <>
-              {isFetching && <TableLoader columns={9} />}
+              {isFetching && <TableLoader columns={10} />}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan="9">
+                  <TableCell colSpan="10">
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>
@@ -99,6 +135,13 @@ const OrderList = () => {
           )}
         </TableBody>
       </Table>
+      <CustomPagination
+        totalPages={ordersList?.meta?.totalPage || 0}
+        activePage={defaultQuery?.page || 0}
+        onPageChange={(value) =>
+          setDefaultQuery((prev) => ({ ...prev, page: value }))
+        }
+      />
     </div>
   );
 };
