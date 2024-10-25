@@ -26,11 +26,6 @@ export const RoleOptions = [
 
 export const orderStatus = [
   {
-    key: "pending",
-    text: "Pending",
-    value: "pending",
-  },
-  {
     key: "approved",
     text: "Approve",
     value: "approved",

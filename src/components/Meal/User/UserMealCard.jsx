@@ -53,7 +53,9 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                             : "d-flex mx-auto"
                         }
                         primary
-                        onClick={() => setCustom(meal?._id)}
+                        onClick={() =>
+                          user?.balance > meal?.price && setCustom(meal?._id)
+                        }
                       >
                         Purchase
                       </Button>

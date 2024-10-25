@@ -21,10 +21,12 @@ import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
 
 const OrderList = () => {
+  // const { user } = useAuth();
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
     limit: 20,
     searchTerm: "",
+    // status: ["pending", "canceled"],
   });
 
   const client = useClient();
@@ -34,13 +36,9 @@ const OrderList = () => {
     "order",
     defaultQuery,
     {
-      onSuccess: (data) => {
-        console.log(data);
-      },
+      onSuccess: () => {},
     }
   );
-
-  console.log(ordersList?.meta?.totalPage);
 
   const { mutate: updateStatusMutate } = useMutation({
     mutationFn: ({ id, status }) =>
@@ -113,6 +111,9 @@ const OrderList = () => {
                   <Select
                     defaultValue={order?.status}
                     className="orderStatusDropdown"
+                    // options={
+                    //   user?.role === "user" ? orderStatus.slice(1) : orderStatus
+                    // }
                     options={orderStatus}
                     onChange={(e, data) =>
                       handleStatusChange(e, data, order?._id)
