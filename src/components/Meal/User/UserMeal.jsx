@@ -1,6 +1,12 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { Button } from "semantic-ui-react";
+import {
+  Button,
+  Modal,
+  ModalActions,
+  ModalContent,
+  ModalHeader,
+} from "semantic-ui-react";
 import { useClient } from "../../../hooks/pure/useClient";
 import UserMealCard from "./UserMealCard";
 import NoDataAvailable from "../../common/NoDataAvailable";
@@ -10,10 +16,38 @@ import AsToast from "../../common/AsToast";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { useAuth } from "../../../context/app/useAuth";
 
+const OrderUIdModal = ({ onClose, open = true }) => {
+  return (
+    <Modal
+      closeIcon
+      size="tiny"
+      centered={false}
+      open={Boolean(open)}
+      onClose={onClose}
+    >
+      <ModalHeader>Your order placed successfully!</ModalHeader>
+      <ModalContent className="d-flex">
+        <span className="mr-1">Your order id is</span>{" "}
+        <span className="orderUid">{open || ""}</span>
+      </ModalContent>
+      <ModalActions>
+        <Button color={confirm ? "primary" : "red"} onClick={onClose}>
+          Okay
+        </Button>
+      </ModalActions>
+    </Modal>
+  );
+};
+
 const UserMeal = () => {
   const [mealType, setMealType] = useState("");
   const { setUser } = useAuth();
   const { isOpen, onClose, setCustom } = useDisclosure();
+  const {
+    isOpen: isOrderOpen,
+    onClose: onOrderClose,
+    setCustom: setOrderCustom,
+  } = useDisclosure();
 
   const client = useClient();
   const { data: mealList, isFetching } = useQuery({
@@ -33,6 +67,7 @@ const UserMeal = () => {
         </div>
       );
       onClose();
+      setOrderCustom(res?.uId);
       setUser((prev) => ({ ...prev, balance: prev.balance - res?.price }));
     },
   });
@@ -43,6 +78,7 @@ const UserMeal = () => {
 
   return (
     <div className="previewLayout">
+      <OrderUIdModal onClose={onOrderClose} open={isOrderOpen} />
       <DeleteModal
         isLoading={isPending}
         modalHeader="Purchase"

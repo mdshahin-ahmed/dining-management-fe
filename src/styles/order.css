@@ -17,3 +17,8 @@
   min-width: 100px !important;
   width: 100%;
 }
+.orderUid {
+  color: #ff0066;
+  font-size: 25px;
+  font-weight: bold;
+}
