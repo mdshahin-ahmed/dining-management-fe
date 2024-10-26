@@ -21,3 +21,14 @@ export const userSchema = Joi.object({
     "any.required": "Role is required.",
   }),
 });
+
+export const addBalanceSchema = Joi.object({
+  balance: Joi.number()
+    .positive() // Balance should be a positive number
+    .required()
+    .messages({
+      "number.base": "Balance must be a number",
+      "number.positive": "Balance must be a positive number",
+      "any.required": "Balance is required",
+    }),
+});

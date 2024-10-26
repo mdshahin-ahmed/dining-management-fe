@@ -64,7 +64,8 @@ const OrderList = () => {
 
   return (
     <div className="previewLayout">
-      <div className="d-flex jce">
+      <div className="d-flex jcsb">
+        <h2>Orders ({ordersList?.meta?.total || 0})</h2>
         <SearchBar
           placeholder="Search meal"
           stillTime={500}
@@ -92,7 +93,9 @@ const OrderList = () => {
           {ordersList?.result?.length > 0 && !isFetching ? (
             ordersList?.result?.map((order, index) => (
               <TableRow key={order?._id}>
-                <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                  {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
+                </TableCell>
                 <TableCell>{capitalize(order?.user?.name || "-")}</TableCell>
                 <TableCell>{capitalize(order?.name || "-")}</TableCell>
                 <TableCell>{order?.uId || "-"}</TableCell>

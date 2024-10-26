@@ -1,5 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { MdAdd } from "react-icons/md";
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -7,20 +10,39 @@ import {
   TableHeaderCell,
   TableRow,
 } from "semantic-ui-react";
-import { useClient } from "../../hooks/pure/useClient";
+import { useGetQueryDataList } from "../../api/query.api";
+import { useDisclosure } from "../../hooks/pure/useDisclosure";
 import { capitalize } from "../../utils/helper";
+import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
+import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
+import AddBalanceModal from "../Meal/User/AddBalanceModal";
 
 const UsersList = () => {
-  const client = useClient();
-  const { data: usersList, isFetching } = useQuery({
-    queryKey: ["users-list"],
-    queryFn: () => client("user/all"),
+  const [defaultQuery, setDefaultQuery] = useState({
+    page: 1,
+    limit: 20,
+    searchTerm: "",
   });
-
+  const { data: usersList, isFetching } = useGetQueryDataList(
+    "user/all",
+    defaultQuery
+  );
+  const { isOpen, onClose, setCustom } = useDisclosure();
   return (
     <div className="previewLayout">
+      <AddBalanceModal onClose={onClose} open={isOpen} />
+      <div className="d-flex jcsb">
+        <h2>Users ({usersList?.meta?.total || 0})</h2>
+        <SearchBar
+          placeholder="Search meal"
+          stillTime={500}
+          onSuccess={(e) =>
+            setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
+          }
+        />
+      </div>
       <Table basic>
         <TableHeader>
           <TableRow>
@@ -32,13 +54,16 @@ const UsersList = () => {
             <TableHeaderCell>Hostel</TableHeaderCell>
             <TableHeaderCell>Room</TableHeaderCell>
             <TableHeaderCell>Balance</TableHeaderCell>
+            <TableHeaderCell>Action</TableHeaderCell>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {usersList?.length > 0 && !isFetching ? (
-            usersList?.map((user, index) => (
+          {usersList?.result?.length > 0 && !isFetching ? (
+            usersList?.result?.map((user, index) => (
               <TableRow key={user?._id}>
-                <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                  {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
+                </TableCell>
                 <TableCell>{capitalize(user?.name)}</TableCell>
                 <TableCell>
                   <span className={`roleDesign ${user?.role}Role`}>
@@ -50,14 +75,20 @@ const UsersList = () => {
                 <TableCell>{user?.hostel}</TableCell>
                 <TableCell>{user?.room}</TableCell>
                 <TableCell>{user?.balance}</TableCell>
+                <TableCell>
+                  <Button onClick={() => setCustom(user?._id)}>
+                    <FaBangladeshiTakaSign />
+                    <MdAdd />
+                  </Button>
+                </TableCell>
               </TableRow>
             ))
           ) : (
             <>
-              {isFetching && <TableLoader columns={8} />}
+              {isFetching && <TableLoader columns={9} />}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan="8">
+                  <TableCell colSpan="9">
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>
@@ -66,6 +97,13 @@ const UsersList = () => {
           )}
         </TableBody>
       </Table>
+      <CustomPagination
+        totalPages={usersList?.meta?.totalPage || 0}
+        activePage={defaultQuery?.page || 0}
+        onPageChange={(value) =>
+          setDefaultQuery((prev) => ({ ...prev, page: value }))
+        }
+      />
     </div>
   );
 };

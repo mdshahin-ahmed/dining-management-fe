@@ -27,7 +27,7 @@ const OrderUIdModal = ({ onClose, open = true }) => {
     >
       <ModalHeader>Your order placed successfully!</ModalHeader>
       <ModalContent className="d-flex">
-        <span className="mr-1">Your order id is</span>{" "}
+        <span className="mr-1 asc">Your order id is</span>{" "}
         <span className="orderUid">{open || ""}</span>
       </ModalContent>
       <ModalActions>
