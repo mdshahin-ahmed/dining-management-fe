@@ -22,3 +22,26 @@
   font-size: 25px;
   font-weight: bold;
 }
+.orderHeaderWrap {
+  display: flex;
+  justify-content: space-between;
+}
+.orderFilterWro {
+  display: flex;
+}
+.orderFilterDropdown {
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 900px) {
+  /* Mobile devices */
+  .orderHeaderWrap {
+    display: block;
+  }
+  .orderFilterWrap {
+    display: block;
+  }
+  .orderFilterDropdown {
+    margin-right: 0px;
+  }
+}

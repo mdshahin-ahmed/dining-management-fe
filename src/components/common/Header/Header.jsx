@@ -20,10 +20,10 @@ const Header = () => {
   return (
     <>
       <DeleteModal
-        confirmText="Logout"
-        modalContent="Are you sure you want to logout?"
         modalHeader="Logout"
+        modalContent="Are you sure you want to logout?"
         onClose={onClose}
+        confirmText="Logout"
         open={isOpen}
         onConfirm={() => handleDelete(isOpen)}
       />

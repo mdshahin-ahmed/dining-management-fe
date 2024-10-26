@@ -11,7 +11,12 @@ import {
   TableRow,
 } from "semantic-ui-react";
 import { useGetQueryDataList } from "../../api/query.api";
-import { orderStatus } from "../../constant/common.constant";
+import {
+  adminOrderStatus,
+  orderTypeOptions,
+  userOrderStatus,
+} from "../../constant/common.constant";
+import { useAuth } from "../../context/app/useAuth";
 import { useClient } from "../../hooks/pure/useClient";
 import { capitalize, getFormattedDateTime } from "../../utils/helper";
 import AsToast from "../common/AsToast";
@@ -19,13 +24,13 @@ import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
-
 const OrderList = () => {
-  // const { user } = useAuth();
+  const { user } = useAuth();
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
     limit: 20,
     searchTerm: "",
+    type: "lunch",
     // status: ["pending", "canceled"],
   });
 
@@ -48,7 +53,6 @@ const OrderList = () => {
         queryKey: ["order-list"],
         type: "active",
       });
-
       AsToast.success(
         <div className="errorToast">
           <AiOutlineCheckCircle /> &nbsp;
@@ -58,21 +62,31 @@ const OrderList = () => {
     },
   });
 
-  const handleStatusChange = (e, { value }, id) => {
-    updateStatusMutate({ id, status: value });
+  const handleStatusChange = (data) => {
+    updateStatusMutate(data);
   };
 
   return (
     <div className="previewLayout">
-      <div className="d-flex jcsb">
+      <div className="orderHeaderWrap">
         <h2>Orders ({ordersList?.meta?.total || 0})</h2>
-        <SearchBar
-          placeholder="Search meal"
-          stillTime={500}
-          onSuccess={(e) =>
-            setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
-          }
-        />
+        <div className="orderFilterWrap">
+          <Select
+            className="orderFilterDropdown"
+            clearable
+            options={orderTypeOptions}
+            onChange={(e, { value }) =>
+              setDefaultQuery((prev) => ({ ...prev, type: value }))
+            }
+          />
+          <SearchBar
+            placeholder="Search meal"
+            stillTime={500}
+            onSuccess={(e) =>
+              setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
+            }
+          />
+        </div>
       </div>
       <Table basic>
         <TableHeader>
@@ -80,6 +94,7 @@ const OrderList = () => {
             <TableHeaderCell>#</TableHeaderCell>
             <TableHeaderCell>User Name</TableHeaderCell>
             <TableHeaderCell>Meal Name</TableHeaderCell>
+            <TableHeaderCell>Meal Type</TableHeaderCell>
             <TableHeaderCell>Meal Id</TableHeaderCell>
             <TableHeaderCell>Description</TableHeaderCell>
             <TableHeaderCell>Created At</TableHeaderCell>
@@ -98,7 +113,8 @@ const OrderList = () => {
                 </TableCell>
                 <TableCell>{capitalize(order?.user?.name || "-")}</TableCell>
                 <TableCell>{capitalize(order?.name || "-")}</TableCell>
-                <TableCell>{order?.uId || "-"}</TableCell>
+                <TableCell>{capitalize(order?.type || "-")}</TableCell>
+                <TableCell>{order?.uId}</TableCell>
                 <TableCell>{capitalize(order?.description || "-")}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.updatedAt)}</TableCell>
@@ -112,14 +128,17 @@ const OrderList = () => {
                 <TableCell>{order?.price}</TableCell>
                 <TableCell>
                   <Select
+                    // disabled={
+                    //   order?.status === "approved" ||
+                    //   order?.status === "canceled"
+                    // }
                     defaultValue={order?.status}
                     className="orderStatusDropdown"
-                    // options={
-                    //   user?.role === "user" ? orderStatus.slice(1) : orderStatus
-                    // }
-                    options={orderStatus}
-                    onChange={(e, data) =>
-                      handleStatusChange(e, data, order?._id)
+                    options={
+                      user?.role === "user" ? userOrderStatus : adminOrderStatus
+                    }
+                    onChange={(e, { value }) =>
+                      handleStatusChange({ status: value, id: order?._id })
                     }
                   />
                 </TableCell>

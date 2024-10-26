@@ -24,7 +24,7 @@ export const RoleOptions = [
   },
 ];
 
-export const orderStatus = [
+export const adminOrderStatus = [
   {
     key: "approved",
     text: "Approve",
@@ -34,5 +34,31 @@ export const orderStatus = [
     key: "canceled",
     text: "Cancel",
     value: "canceled",
+  },
+];
+
+export const userOrderStatus = [
+  {
+    key: "canceled",
+    text: "Cancel",
+    value: "canceled",
+  },
+];
+
+export const orderTypeOptions = [
+  {
+    key: "breakfast",
+    text: "Break Fast",
+    value: "breakfast",
+  },
+  {
+    key: "lunch",
+    text: "Lunch",
+    value: "lunch",
+  },
+  {
+    key: "dinner",
+    text: "Dinner",
+    value: "dinner",
   },
 ];
