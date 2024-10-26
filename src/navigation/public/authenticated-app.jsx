@@ -8,6 +8,7 @@ import Profile from "../../components/Profile/Profile";
 import ManageUser from "../../components/Users/ManageUser";
 import UsersList from "../../components/Users/UsersList";
 import AppLayout from "../../layouts/AppLayout";
+import AuthorizedRoute from "../AuthorizedRoute";
 
 function AuthenticatedApp() {
   return (
@@ -23,68 +24,84 @@ function AuthenticatedApp() {
       <Route
         path="/manage-meal"
         element={
-          <AppLayout>
-            <MealListPage />
-          </AppLayout>
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <MealListPage />
+            </AppLayout>
+          </AuthorizedRoute>
         }
       />
       <Route
         path="/meals"
         element={
-          <AppLayout>
-            <UserMeal />
-          </AppLayout>
+          <AuthorizedRoute permissions={["admin", "user"]}>
+            <AppLayout>
+              <UserMeal />
+            </AppLayout>
+          </AuthorizedRoute>
         }
       />
       <Route
         path="/manage-meal/add"
         element={
-          <AppLayout>
-            <MealDetails />
-          </AppLayout>
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <MealDetails />
+            </AppLayout>
+          </AuthorizedRoute>
         }
       />
       <Route
         path="/manage-meal/:id/edit"
         element={
-          <AppLayout>
-            <MealDetails />
-          </AppLayout>
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <MealDetails />
+            </AppLayout>
+          </AuthorizedRoute>
         }
       />
       <Route
         path="/users"
         element={
-          <AppLayout>
-            <UsersList />
-          </AppLayout>
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <UsersList />
+            </AppLayout>
+          </AuthorizedRoute>
         }
       />
       <Route
         path="/manage-user"
         element={
-          <AppLayout>
-            <ManageUser />
-          </AppLayout>
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <ManageUser />
+            </AppLayout>
+          </AuthorizedRoute>
         }
       />
       <Route
         path="/orders"
         element={
-          <AppLayout>
-            <OrderList />
-          </AppLayout>
+          <AuthorizedRoute permissions={["admin", "user"]}>
+            <AppLayout>
+              <OrderList />
+            </AppLayout>
+          </AuthorizedRoute>
         }
       />
       <Route
         path="/profile"
         element={
-          <AppLayout>
-            <Profile />
-          </AppLayout>
+          <AuthorizedRoute permissions={["admin", "user"]}>
+            <AppLayout>
+              <Profile />
+            </AppLayout>
+          </AuthorizedRoute>
         }
       />
-      {/* <Route path="*" element={<Navigate to="/signin" />} /> */}
+
       <Route
         path="*"
         element={

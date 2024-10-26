@@ -30,7 +30,7 @@ const OrderList = () => {
     page: 1,
     limit: 20,
     searchTerm: "",
-    type: "lunch",
+    type: "",
     // status: ["pending", "canceled"],
   });
 

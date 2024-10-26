@@ -6,12 +6,12 @@ import {
   ModalContent,
   ModalHeader,
 } from "semantic-ui-react";
-import { AsForm, AsInput } from "../../common/form";
+import { AsForm, AsInput } from "../common/form";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { addBalanceSchema } from "../../../validations/user.schema";
+import { addBalanceSchema } from "../../validations/user.schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useClient } from "../../../hooks/pure/useClient";
-import AsToast from "../../common/AsToast";
+import { useClient } from "../../hooks/pure/useClient";
+import AsToast from "../common/AsToast";
 import { FiTrash2 } from "react-icons/fi";
 
 const AddBalanceModal = ({ onClose, open = true }) => {

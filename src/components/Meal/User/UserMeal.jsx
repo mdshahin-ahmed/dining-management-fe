@@ -52,7 +52,7 @@ const UserMeal = () => {
   const client = useClient();
   const { data: mealList, isFetching } = useQuery({
     queryKey: [`${mealType}-list`],
-    queryFn: () => client(`meal?type=${mealType}`),
+    queryFn: () => client(`meal/user-meal?type=${mealType}`),
     enabled: !!mealType,
   });
 

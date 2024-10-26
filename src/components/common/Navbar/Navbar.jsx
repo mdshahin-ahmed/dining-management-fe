@@ -9,19 +9,56 @@ import { GiHotMeal } from "react-icons/gi";
 import { IoHomeSharp } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { Image, List, ListItem, Popup } from "semantic-ui-react";
+import { useAuth } from "../../../context/app/useAuth";
 
 const routeList = [
-  { content: "Home", pathname: "home", src: IoHomeSharp },
-  { content: "Manage Meal", pathname: "manage-meal", src: GiHotMeal },
-  { content: "Meals", pathname: "meals", src: GiHotMeal },
-  { content: "Users", pathname: "users", src: FaUsers },
-  { content: "Order", pathname: "orders", src: FaCartArrowDown },
-  { content: "Manage User", pathname: "manage-user", src: FaUserEdit },
-  { content: "Profile", pathname: "profile", src: FaUserAlt },
+  {
+    content: "Home",
+    pathname: "home",
+    src: IoHomeSharp,
+    permissions: ["user", "admin"],
+  },
+  {
+    content: "Manage Meal",
+    pathname: "manage-meal",
+    src: GiHotMeal,
+    permissions: ["admin"],
+  },
+  {
+    content: "Meals",
+    pathname: "meals",
+    src: GiHotMeal,
+    permissions: ["user", "admin"],
+  },
+  {
+    content: "Users",
+    pathname: "users",
+    src: FaUsers,
+    permissions: ["admin"],
+  },
+  {
+    content: "Order",
+    pathname: "orders",
+    src: FaCartArrowDown,
+    permissions: ["user", "admin"],
+  },
+  {
+    content: "Manage User",
+    pathname: "manage-user",
+    src: FaUserEdit,
+    permissions: ["admin"],
+  },
+  {
+    content: "Profile",
+    pathname: "profile",
+    src: FaUserAlt,
+    permissions: ["user", "admin"],
+  },
 ];
 
 const Navbar = () => {
   const location = useLocation();
+  const { user } = useAuth();
 
   return (
     <div className="navBarWrap">
@@ -31,29 +68,31 @@ const Navbar = () => {
       <div>
         <List link className="navList">
           {routeList.map((route) => {
-            return (
-              <Popup
-                key={route?.pathname}
-                size="small"
-                position="right center"
-                content={route.content}
-                trigger={
-                  <ListItem
-                    className={
-                      location?.pathname?.includes(route.pathname)
-                        ? "navListItem active "
-                        : "navListItem"
-                    }
-                    // className={"navListItem"}
-                    as={NavLink}
-                    to={`/${route.pathname}`}
-                    id={route.pathname}
-                  >
-                    {route.src}
-                  </ListItem>
-                }
-              />
-            );
+            if (route?.permissions.includes(user?.role)) {
+              return (
+                <Popup
+                  key={route?.pathname}
+                  size="small"
+                  position="right center"
+                  content={route.content}
+                  trigger={
+                    <ListItem
+                      className={
+                        location?.pathname?.includes(route.pathname)
+                          ? "navListItem active "
+                          : "navListItem"
+                      }
+                      // className={"navListItem"}
+                      as={NavLink}
+                      to={`/${route.pathname}`}
+                      id={route.pathname}
+                    >
+                      {route.src}
+                    </ListItem>
+                  }
+                />
+              );
+            }
           })}
         </List>
       </div>

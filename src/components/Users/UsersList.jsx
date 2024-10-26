@@ -17,7 +17,7 @@ import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
-import AddBalanceModal from "../Meal/User/AddBalanceModal";
+import AddBalanceModal from "./AddBalanceModal";
 
 const UsersList = () => {
   const [defaultQuery, setDefaultQuery] = useState({
