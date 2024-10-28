@@ -21,6 +21,14 @@ export const mealValidationSchema = Joi.object({
     "number.precision": "Price can have at most 2 decimal places.",
     "any.required": "Price is required.",
   }),
+
+  stock: Joi.number().positive().precision(3).required().messages({
+    "number.base": "Stock must be a number.",
+    "number.positive": "Stock must be a positive number.",
+    "number.precision": "Stock can have at most 3 decimal places.",
+    "any.required": "Stock is required.",
+  }),
+
   description: Joi.string().min(5).max(100).required().messages({
     "string.base": "Description must be a text.",
     "string.empty": "Description is required.",

@@ -30,6 +30,7 @@ const MealDetails = () => {
       name: "",
       type: "",
       price: "",
+      stock: "",
       description: "",
     },
     resolver: joiResolver(mealValidationSchema),
@@ -71,10 +72,11 @@ const MealDetails = () => {
 
   useEffect(() => {
     if (mealDetails && id) {
-      const { name, price, description, type } = mealDetails;
+      const { name, price, stock, description, type } = mealDetails;
       reset({
         name,
         price,
+        stock,
         description,
         type,
       });
@@ -129,6 +131,13 @@ const MealDetails = () => {
               required
               label="Meal Price"
               placeholder="Enter a price"
+              type="number"
+            />
+            <AsInput
+              name="stock"
+              required
+              label="Meal Stock"
+              placeholder="Enter number of stock"
               type="number"
             />
             {/* <GridColumn mobile={16} computer={8}>

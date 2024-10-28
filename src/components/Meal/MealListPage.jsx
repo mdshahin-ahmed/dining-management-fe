@@ -92,7 +92,8 @@ const MealListPage = () => {
                       <CardHeader>{meal?.name}</CardHeader>
                       <CardDescription>{meal?.description}</CardDescription>
                       <h5 className="mt-1 mb-0">Type: {meal?.type}</h5>
-                      <h5 className="mt-0">Price: {meal?.price}</h5>
+                      <h5 className="m-0">Price: {meal?.price}</h5>
+                      <h4 className="mt-0">Available: {meal?.stock}</h4>
                     </CardContent>
                     <CardContent extra>
                       <Grid>

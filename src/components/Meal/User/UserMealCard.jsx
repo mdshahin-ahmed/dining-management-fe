@@ -36,6 +36,7 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                   <CardDescription>{meal?.description}</CardDescription>
                   <h5 className="mt-1 mb-0">Type: {meal?.type}</h5>
                   <h5 className="mt-0">Price: {meal?.price}</h5>
+                  <h4 className="mt-0">Available: {meal?.stock}</h4>
                 </CardContent>
                 <CardContent extra>
                   <Popup
@@ -46,19 +47,25 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                     }
                     position="top center"
                     trigger={
-                      <Button
-                        className={
-                          user?.balance < meal?.price
-                            ? `d-flex mx-auto disable-btn`
-                            : "d-flex mx-auto"
-                        }
-                        primary
-                        onClick={() =>
-                          user?.balance > meal?.price && setCustom(meal?._id)
-                        }
-                      >
-                        Purchase
-                      </Button>
+                      meal?.stock < 1 ? (
+                        <Button className="d-flex mx-auto" color="red">
+                          Stock Out
+                        </Button>
+                      ) : (
+                        <Button
+                          className={
+                            user?.balance < meal?.price
+                              ? `d-flex mx-auto disable-btn`
+                              : "d-flex mx-auto"
+                          }
+                          primary
+                          onClick={() =>
+                            user?.balance > meal?.price && setCustom(meal?._id)
+                          }
+                        >
+                          Purchase
+                        </Button>
+                      )
                     }
                   />
                 </CardContent>
