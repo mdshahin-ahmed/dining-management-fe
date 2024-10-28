@@ -29,7 +29,7 @@ const OrderList = () => {
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
     limit: 20,
-    searchTerm: "",
+    // searchTerm: ,
     type: "",
     // status: ["pending", "canceled"],
   });
@@ -93,9 +93,9 @@ const OrderList = () => {
           <TableRow>
             <TableHeaderCell>#</TableHeaderCell>
             <TableHeaderCell>User Name</TableHeaderCell>
+            <TableHeaderCell>User Id</TableHeaderCell>
             <TableHeaderCell>Meal Name</TableHeaderCell>
             <TableHeaderCell>Meal Type</TableHeaderCell>
-            <TableHeaderCell>Meal Id</TableHeaderCell>
             <TableHeaderCell>Description</TableHeaderCell>
             <TableHeaderCell>Created At</TableHeaderCell>
             <TableHeaderCell>Updated At</TableHeaderCell>
@@ -112,9 +112,9 @@ const OrderList = () => {
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
                 </TableCell>
                 <TableCell>{capitalize(order?.user?.name || "-")}</TableCell>
+                <TableCell>{order?.userId}</TableCell>
                 <TableCell>{capitalize(order?.name || "-")}</TableCell>
                 <TableCell>{capitalize(order?.type || "-")}</TableCell>
-                <TableCell>{order?.uId}</TableCell>
                 <TableCell>{capitalize(order?.description || "-")}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.updatedAt)}</TableCell>
