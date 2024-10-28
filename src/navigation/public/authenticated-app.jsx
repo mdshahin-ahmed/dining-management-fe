@@ -9,6 +9,7 @@ import ManageUser from "../../components/Users/ManageUser";
 import UsersList from "../../components/Users/UsersList";
 import AppLayout from "../../layouts/AppLayout";
 import AuthorizedRoute from "../AuthorizedRoute";
+import AllOrders from "../../components/Order/AllOrders";
 
 function AuthenticatedApp() {
   return (
@@ -87,6 +88,16 @@ function AuthenticatedApp() {
           <AuthorizedRoute permissions={["admin", "user"]}>
             <AppLayout>
               <OrderList />
+            </AppLayout>
+          </AuthorizedRoute>
+        }
+      />
+      <Route
+        path="/all-order"
+        element={
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <AllOrders />
             </AppLayout>
           </AuthorizedRoute>
         }

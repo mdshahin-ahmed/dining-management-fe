@@ -14,9 +14,7 @@ import { useGetQueryDataList } from "../../api/query.api";
 import {
   adminOrderStatus,
   orderTypeOptions,
-  userOrderStatus,
 } from "../../constant/common.constant";
-import { useAuth } from "../../context/app/useAuth";
 import { useClient } from "../../hooks/pure/useClient";
 import { capitalize, getFormattedDateTime } from "../../utils/helper";
 import AsToast from "../common/AsToast";
@@ -24,14 +22,14 @@ import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
-const OrderList = () => {
-  const { user } = useAuth();
+
+const AllOrders = () => {
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
     limit: 20,
     // searchTerm: ,
     type: "",
-    status: ["pending", "canceled"],
+    status: ["approved"],
   });
 
   const client = useClient();
@@ -134,9 +132,7 @@ const OrderList = () => {
                     // }
                     defaultValue={order?.status}
                     className="orderStatusDropdown"
-                    options={
-                      user?.role === "user" ? userOrderStatus : adminOrderStatus
-                    }
+                    options={adminOrderStatus}
                     onChange={(e, { value }) =>
                       handleStatusChange({ status: value, id: order?._id })
                     }
@@ -169,4 +165,4 @@ const OrderList = () => {
   );
 };
 
-export default OrderList;
+export default AllOrders;
