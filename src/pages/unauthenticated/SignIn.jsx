@@ -77,7 +77,7 @@ const SignIn = () => {
                 Sign In
               </Button>
             </GridColumn>
-            <span className="mx-auto pb-2">
+            {/* <span className="mx-auto pb-2">
               Don&apos;t have an account?{" "}
               <span
                 className="c-primary c-pointer"
@@ -87,7 +87,7 @@ const SignIn = () => {
               >
                 Sign Up
               </span>
-            </span>
+            </span> */}
           </AsForm>
         </Grid.Column>
       </Grid>

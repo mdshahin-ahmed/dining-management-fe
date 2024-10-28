@@ -1,11 +1,16 @@
-import { useForm } from "react-hook-form";
-import { AsForm, AsInput, AsSelect } from "../common/form";
-import { RoleOptions } from "../../constant/common.constant";
-import { Button } from "semantic-ui-react";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Button } from "semantic-ui-react";
+import { RoleOptions } from "../../constant/common.constant";
+import { useClient } from "../../hooks/pure/useClient";
 import { userSchema } from "../../validations/user.schema";
+import { AsForm, AsInput, AsSelect } from "../common/form";
+import AsToast from "../common/AsToast";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 const ManageUser = () => {
+  const client = useClient();
   const {
     control,
     formState: { errors },
@@ -18,12 +23,26 @@ const ManageUser = () => {
       room: "",
       password: "",
       role: "",
+      userId: "",
     },
     resolver: joiResolver(userSchema),
   });
 
+  const { mutate: addUserMutate, isPending } = useMutation({
+    mutationFn: (data) => client("auth/signup-admin", { data: data }),
+    onSuccess: () => {
+      AsToast.success(
+        <div className="errorToast">
+          <AiOutlineCheckCircle /> &nbsp;
+          <span>User Registered Successfully!</span>
+        </div>
+      );
+    },
+  });
+
   const handleUserSubmit = (data) => {
     console.log(data);
+    addUserMutate(data);
   };
 
   return (
@@ -77,6 +96,14 @@ const ManageUser = () => {
           placeholder="Room number"
           computer={8}
         />
+        <AsInput
+          maxLength={4}
+          name="userId"
+          required
+          label="User Id"
+          placeholder="Enter User Id"
+          computer={8}
+        />
         <AsSelect
           name="role"
           required
@@ -87,7 +114,7 @@ const ManageUser = () => {
       </AsForm>
       <Button
         className="mt-5"
-        // loading={isAddMealPending}
+        loading={isPending}
         onClick={handleSubmit(handleUserSubmit)}
         primary
       >

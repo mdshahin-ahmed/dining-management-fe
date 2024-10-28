@@ -15,9 +15,10 @@ export const userSchema = Joi.object({
   hostel: Joi.string().min(3).max(30),
   room: Joi.string().min(1).max(4),
   password: Joi.string().min(5).max(30),
-  role: Joi.string().valid("admin").required().messages({
+  userId: Joi.string().required(),
+  role: Joi.string().valid("admin", "user").required().messages({
     "string.base": "Role must be a text.",
-    "any.only": "Role must be one of admin.",
+    "any.only": "Role must be one of admin or user",
     "any.required": "Role is required.",
   }),
 });

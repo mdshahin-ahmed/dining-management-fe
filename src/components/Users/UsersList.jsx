@@ -36,7 +36,7 @@ const UsersList = () => {
       <div className="d-flex jcsb">
         <h2>Users ({usersList?.meta?.total || 0})</h2>
         <SearchBar
-          placeholder="Search meal"
+          placeholder="Search user"
           stillTime={500}
           onSuccess={(e) =>
             setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
@@ -48,6 +48,7 @@ const UsersList = () => {
           <TableRow>
             <TableHeaderCell>#</TableHeaderCell>
             <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>User Id</TableHeaderCell>
             <TableHeaderCell>Role</TableHeaderCell>
             <TableHeaderCell>Email</TableHeaderCell>
             <TableHeaderCell>Mobile</TableHeaderCell>
@@ -65,6 +66,7 @@ const UsersList = () => {
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
                 </TableCell>
                 <TableCell>{capitalize(user?.name)}</TableCell>
+                <TableCell>{user?.userId}</TableCell>
                 <TableCell>
                   <span className={`roleDesign ${user?.role}Role`}>
                     {capitalize(user?.role)}
