@@ -87,10 +87,10 @@ const UsersList = () => {
             ))
           ) : (
             <>
-              {isFetching && <TableLoader columns={9} />}
+              {isFetching && <TableLoader columns={10} />}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan="9">
+                  <TableCell colSpan="10">
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>

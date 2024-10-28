@@ -146,10 +146,10 @@ const OrderList = () => {
             ))
           ) : (
             <>
-              {isFetching && <TableLoader columns={10} />}
+              {isFetching && <TableLoader columns={11} />}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan="10">
+                  <TableCell colSpan="11">
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>

@@ -10,7 +10,6 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const Profile = () => {
   const { user } = useAuth();
-  console.log(user);
 
   return (
     <div className="profileWrap p-2">
@@ -20,7 +19,9 @@ const Profile = () => {
             <Image className="b-radius-50 mx-auto" src={user?.src || avatar} />
           </GridColumn>
           <GridColumn className="asc" mobile={16} computer={12}>
-            <h2 className="mb-1">{capitalize(user?.name)}</h2>
+            <h2 className="mb-1">
+              {capitalize(user?.name)} ({user?.userId})
+            </h2>
             <h4 className="mt-0 profileDetails">
               <FaRegEnvelope />
               <span>{capitalize(user?.email)}</span>

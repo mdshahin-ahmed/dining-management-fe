@@ -36,9 +36,9 @@ export const adminOrderStatus = [
     value: "approved",
   },
   {
-    key: "canceled",
-    text: "Cancel",
-    value: "canceled",
+    key: "pending",
+    text: "Pending",
+    value: "pending",
   },
 ];
 
