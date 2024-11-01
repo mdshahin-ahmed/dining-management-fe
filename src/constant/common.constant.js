@@ -1,3 +1,6 @@
+import nagad from "@/assets/nagad.png";
+import bkash from "@/assets/bkash.png";
+
 export const mealTypeOptions = [
   {
     key: "breakfast",
@@ -65,5 +68,20 @@ export const orderTypeOptions = [
     key: "dinner",
     text: "Dinner",
     value: "dinner",
+  },
+];
+
+export const paymentMethod = [
+  {
+    key: "nagad",
+    text: "Nagad",
+    value: "nagad",
+    image: { avatar: true, src: nagad },
+  },
+  {
+    key: "bkash",
+    text: "B-Kash",
+    value: "bkash",
+    image: { avatar: true, src: bkash },
   },
 ];

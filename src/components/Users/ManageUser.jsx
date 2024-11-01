@@ -41,7 +41,6 @@ const ManageUser = () => {
   });
 
   const handleUserSubmit = (data) => {
-    console.log(data);
     addUserMutate(data);
   };
 

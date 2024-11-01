@@ -68,8 +68,6 @@ const MealDetails = () => {
     enabled: !!id,
   });
 
-  console.log("mealDetails", mealDetails);
-
   useEffect(() => {
     if (mealDetails && id) {
       const { name, price, stock, description, type } = mealDetails;

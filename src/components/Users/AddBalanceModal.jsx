@@ -1,4 +1,7 @@
+import { joiResolver } from "@hookform/resolvers/joi";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
   Button,
   Modal,
@@ -6,13 +9,10 @@ import {
   ModalContent,
   ModalHeader,
 } from "semantic-ui-react";
-import { AsForm, AsInput } from "../common/form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { addBalanceSchema } from "../../validations/user.schema";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useClient } from "../../hooks/pure/useClient";
+import { addBalanceSchema } from "../../validations/user.schema";
 import AsToast from "../common/AsToast";
-import { FiTrash2 } from "react-icons/fi";
+import { AsForm, AsInput } from "../common/form";
 
 const AddBalanceModal = ({ onClose, open = true }) => {
   const client = useClient();
@@ -35,7 +35,7 @@ const AddBalanceModal = ({ onClose, open = true }) => {
       onClose();
       AsToast.success(
         <div className="errorToast">
-          <FiTrash2 /> &nbsp;
+          <AiOutlineCheckCircle /> &nbsp;
           <span>Balance Added Successfully!</span>
         </div>
       );
