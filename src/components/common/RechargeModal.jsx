@@ -14,8 +14,10 @@ import { AsForm, AsInput, AsSelect } from "./form";
 import { paymentMethod } from "../../constant/common.constant";
 import { RechargeBalanceSchema } from "../../validations/user.schema";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useAuth } from "../../context/app/useAuth";
 
 const RechargeModal = ({ onClose, open = true }) => {
+  const { setUser } = useAuth();
   const client = useClient();
   const queryClient = useQueryClient();
   const {
@@ -40,27 +42,27 @@ const RechargeModal = ({ onClose, open = true }) => {
     }
   }
 
-  // const { mutate, isPending } = useMutation({
-  //   mutationFn: (data) => client("user/add-balance", { data, method: "PATCH" }),
-  //   onSuccess: () => {
-  //     queryClient.refetchQueries({
-  //       queryKey: ["user/all-list"],
-  //       type: "active",
-  //     });
-  //     onClose();
-  //     AsToast.success(
-  //       <div className="errorToast">
-  //         <AiOutlineCheckCircle /> &nbsp;
-  //         <span>Recharged Successfully!</span>
-  //       </div>
-  //     );
-  //   },
-  // });
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data) =>
+      client("statement/recharge", { data, method: "POST" }),
+    onSuccess: (res) => {
+      queryClient.refetchQueries({
+        queryKey: ["statement-recharge"],
+        type: "active",
+      });
+      onClose();
+      AsToast.success(
+        <div className="errorToast">
+          <AiOutlineCheckCircle /> &nbsp;
+          <span>Recharged Successfully!</span>
+        </div>
+      );
+      setUser((prev) => ({ ...prev, balance: res?.newBalance }));
+    },
+  });
 
   const handleAddBalance = (data) => {
-    console.log({ ...data, amount: addAmount });
-
-    // mutate({ ...data, id: open });
+    mutate({ ...data, amount: addAmount });
   };
 
   return (
@@ -116,7 +118,7 @@ const RechargeModal = ({ onClose, open = true }) => {
           Cancel
         </Button>
         <Button
-          // loading={isPending}
+          loading={isPending}
           onClick={handleSubmit(handleAddBalance)}
           color="primary"
         >

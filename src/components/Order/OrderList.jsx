@@ -129,7 +129,7 @@ const OrderList = () => {
                 <TableCell>
                   <Select
                     // disabled={
-                    //   order?.status === "approved" ||
+                    //   order?.status === "delivered" ||
                     //   order?.status === "canceled"
                     // }
                     defaultValue={order?.status}

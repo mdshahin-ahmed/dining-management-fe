@@ -29,7 +29,9 @@ const Header = () => {
       />
       <Menu className="headerWrap d-flex jce">
         <span className="headerBalance">Balance</span>
-        <span className="headerBalanceCount">{user?.balance || 0}</span>
+        <span className="headerBalanceCount">
+          {user?.balance.toFixed(2) || 0}
+        </span>
         <MenuItem>
           <Popup
             content={user?.name}

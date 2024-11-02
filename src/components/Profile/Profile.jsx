@@ -40,7 +40,7 @@ const Profile = () => {
             </h4>
             <h4 className="mt-0 profileDetails">
               <FaBangladeshiTakaSign />
-              <span>{user?.balance || 0}</span>
+              <span>{user?.balance.toFixed(2) || 0}</span>
             </h4>
           </GridColumn>
         </Grid>

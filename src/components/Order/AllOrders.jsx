@@ -29,7 +29,7 @@ const AllOrders = () => {
     limit: 20,
     // searchTerm: ,
     type: "",
-    status: ["approved"],
+    status: ["delivered"],
   });
 
   const client = useClient();
@@ -127,7 +127,7 @@ const AllOrders = () => {
                 <TableCell>
                   <Select
                     // disabled={
-                    //   order?.status === "approved" ||
+                    //   order?.status === "delivered" ||
                     //   order?.status === "canceled"
                     // }
                     defaultValue={order?.status}

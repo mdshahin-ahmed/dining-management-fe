@@ -7,7 +7,7 @@
 .pendingOrderStatus {
   background-color: #fbbd08;
 }
-.approvedOrderStatus {
+.deliveredOrderStatus {
   background-color: #21ba45;
 }
 .canceledOrderStatus {
