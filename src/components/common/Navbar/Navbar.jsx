@@ -1,6 +1,7 @@
 import logo from "@/assets/logo.png";
 import {
   FaCartArrowDown,
+  FaFileInvoiceDollar,
   FaUserAlt,
   FaUserEdit,
   FaUsers,
@@ -53,6 +54,12 @@ const routeList = [
     pathname: "manage-user",
     src: FaUserEdit,
     permissions: ["admin"],
+  },
+  {
+    content: "Statements",
+    pathname: "statements",
+    src: FaFileInvoiceDollar,
+    permissions: ["admin", "user"],
   },
   {
     content: "Profile",
