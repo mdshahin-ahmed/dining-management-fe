@@ -86,7 +86,7 @@ function AuthenticatedApp() {
       <Route
         path="/orders"
         element={
-          <AuthorizedRoute permissions={["admin", "user"]}>
+          <AuthorizedRoute permissions={["admin", "user", "manager"]}>
             <AppLayout>
               <OrderList />
             </AppLayout>
@@ -96,7 +96,7 @@ function AuthenticatedApp() {
       <Route
         path="/all-order"
         element={
-          <AuthorizedRoute permissions={["admin"]}>
+          <AuthorizedRoute permissions={["admin", "manager"]}>
             <AppLayout>
               <AllOrders />
             </AppLayout>
@@ -116,7 +116,7 @@ function AuthenticatedApp() {
       <Route
         path="/profile"
         element={
-          <AuthorizedRoute permissions={["admin", "user"]}>
+          <AuthorizedRoute permissions={["admin", "user", "manager"]}>
             <AppLayout>
               <Profile />
             </AppLayout>

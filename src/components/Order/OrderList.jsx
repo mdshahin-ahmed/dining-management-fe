@@ -13,12 +13,13 @@ import {
 import { useGetQueryDataList } from "../../api/query.api";
 import {
   adminOrderStatus,
+  mealNameOptions,
   orderTypeOptions,
   userOrderStatus,
 } from "../../constant/common.constant";
 import { useAuth } from "../../context/app/useAuth";
 import { useClient } from "../../hooks/pure/useClient";
-import { capitalize, getFormattedDateTime } from "../../utils/helper";
+import { getFormattedDateTime } from "../../utils/helper";
 import AsToast from "../common/AsToast";
 import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
@@ -74,13 +75,23 @@ const OrderList = () => {
           <Select
             className="orderFilterDropdown"
             clearable
+            options={mealNameOptions}
+            onChange={(e, { value }) =>
+              setDefaultQuery((prev) => ({ ...prev, name: value }))
+            }
+            placeholder="মেনুর নাম"
+          />
+          <Select
+            className="orderFilterDropdown"
+            clearable
             options={orderTypeOptions}
             onChange={(e, { value }) =>
               setDefaultQuery((prev) => ({ ...prev, type: value }))
             }
+            placeholder="মেনুর ধরন"
           />
           <SearchBar
-            placeholder="Search meal"
+            placeholder="ইউজার আইডি"
             stillTime={500}
             onSuccess={(e) =>
               setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
@@ -111,18 +122,26 @@ const OrderList = () => {
                 <TableCell>
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
                 </TableCell>
-                <TableCell>{capitalize(order?.user?.name || "-")}</TableCell>
+                <TableCell className="t-capitalize">
+                  {order?.user?.name || "-"}
+                </TableCell>
                 <TableCell>{order?.userId}</TableCell>
-                <TableCell>{capitalize(order?.name || "-")}</TableCell>
-                <TableCell>{capitalize(order?.type || "-")}</TableCell>
-                <TableCell>{capitalize(order?.description || "-")}</TableCell>
+                <TableCell className="t-capitalize">
+                  {order?.name || "-"}
+                </TableCell>
+                <TableCell className="t-capitalize">
+                  {order?.type || "-"}
+                </TableCell>
+                <TableCell className="t-capitalize">
+                  {order?.description || "-"}
+                </TableCell>
                 <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.updatedAt)}</TableCell>
                 <TableCell>
                   <span
-                    className={`${order?.status}OrderStatus orderStatusBtn`}
+                    className={`${order?.status}OrderStatus orderStatusBtn t-capitalize`}
                   >
-                    {capitalize(order?.status || "-")}
+                    {order?.status || "-"}
                   </span>
                 </TableCell>
                 <TableCell>{order?.price}</TableCell>

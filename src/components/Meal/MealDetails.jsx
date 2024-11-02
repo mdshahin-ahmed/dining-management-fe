@@ -4,14 +4,17 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { Button } from "semantic-ui-react";
-import { mealTypeOptions } from "../../constant/common.constant";
+import {
+  mealNameOptions,
+  orderTypeOptions,
+} from "../../constant/common.constant";
 import { useClient } from "../../hooks/pure/useClient";
 // import { imageUpload } from "../../utils/cloud-method";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { mealValidationSchema } from "../../validations/meal.schema";
 import AsToast from "../common/AsToast";
 import { AsForm, AsInput, AsSelect, AsTextArea } from "../common/form";
-import { useEffect } from "react";
 
 const MealDetails = () => {
   const navigate = useNavigate();
@@ -110,19 +113,19 @@ const MealDetails = () => {
       ) : (
         <>
           <AsForm control={control} errors={errors} size="large">
-            <AsInput
-              maxLength={30}
+            <AsSelect
               name="name"
               required
               label="Meal Name"
-              placeholder="Enter meal name"
+              placeholder="Select meal name"
+              options={mealNameOptions}
             />
             <AsSelect
               name="type"
               required
               label="Meal Type"
               placeholder="Select meal type"
-              options={mealTypeOptions}
+              options={orderTypeOptions}
             />
             <AsInput
               name="price"

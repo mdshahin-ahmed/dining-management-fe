@@ -81,32 +81,32 @@ const UserMeal = () => {
         open={isOpen}
         onConfirm={() => handlePurchase(isOpen)}
       />
+
+      {mealType ? "" : <h2 className="tac">মেনু পছন্দ করুন</h2>}
       <div className="d-flex jcc mb-5">
         <Button
-          primary={mealType === "breakfast"}
-          onClick={() => setMealType("breakfast")}
+          primary={mealType === "সকাল"}
+          onClick={() => setMealType("সকাল")}
+          fluid
         >
-          Breakfast
+          সকাল
         </Button>
         <Button
-          primary={mealType === "lunch"}
-          onClick={() => setMealType("lunch")}
+          primary={mealType === "দুপুর"}
+          onClick={() => setMealType("দুপুর")}
           className="mx-3"
+          fluid
         >
-          Lunch
+          দুপুর
         </Button>
         <Button
-          primary={mealType === "dinner"}
-          onClick={() => setMealType("dinner")}
+          primary={mealType === "রাত"}
+          onClick={() => setMealType("রাত")}
+          fluid
         >
-          Dinner
+          রাত
         </Button>
       </div>
-      {mealType ? (
-        mealList?.length > 0 && <h2 className="tac">Choose your {mealType}</h2>
-      ) : (
-        <h2 className="tac">Please Choose Meal</h2>
-      )}
       {mealList?.length === 0 && !isFetching && mealType ? (
         <NoDataAvailable />
       ) : (

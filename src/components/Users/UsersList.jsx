@@ -65,18 +65,21 @@ const UsersList = () => {
                 <TableCell>
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
                 </TableCell>
-                <TableCell>{capitalize(user?.name)}</TableCell>
+                <TableCell className="t-capitalize">{user?.name}</TableCell>
                 <TableCell>{user?.userId}</TableCell>
                 <TableCell>
-                  <span className={`roleDesign ${user?.role}Role`}>
-                    {capitalize(user?.role)}
-                  </span>
+                  <Button
+                    fluid
+                    className={`roleDesign ${user?.role}Role t-capitalize`}
+                  >
+                    {user?.role}
+                  </Button>
                 </TableCell>
                 <TableCell>{user?.email}</TableCell>
                 <TableCell>{user?.mobile}</TableCell>
                 <TableCell>{user?.hostel}</TableCell>
                 <TableCell>{user?.room}</TableCell>
-                <TableCell>{user?.balance}</TableCell>
+                <TableCell>{user?.balance.toFixed(2)}</TableCell>
                 <TableCell>
                   <Button onClick={() => setCustom(user?._id)}>
                     <FaBangladeshiTakaSign />

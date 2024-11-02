@@ -41,13 +41,13 @@ const routeList = [
     content: "Order",
     pathname: "orders",
     src: FaCartArrowDown,
-    permissions: ["user", "admin"],
+    permissions: ["user", "admin", "manager"],
   },
   {
     content: "All Order",
     pathname: "all-order",
     src: FaCartArrowDown,
-    permissions: ["admin"],
+    permissions: ["admin", "manager"],
   },
   {
     content: "Manage User",
@@ -65,7 +65,7 @@ const routeList = [
     content: "Profile",
     pathname: "profile",
     src: FaUserAlt,
-    permissions: ["user", "admin"],
+    permissions: ["user", "admin", "manager"],
   },
 ];
 

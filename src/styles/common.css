@@ -594,3 +594,7 @@ body {
   height: 350px;
   margin: 0 auto;
 }
+
+.t-capitalize {
+  text-transform: capitalize;
+}

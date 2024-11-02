@@ -1,21 +1,26 @@
 import nagad from "@/assets/nagad.png";
 import bkash from "@/assets/bkash.png";
 
-export const mealTypeOptions = [
+export const mealNameOptions = [
   {
-    key: "breakfast",
-    text: "Break Fast",
-    value: "breakfast",
+    key: "menu1",
+    text: "মেনু ১",
+    value: "মেনু ১",
   },
   {
-    key: "lunch",
-    text: "Lunch",
-    value: "lunch",
+    key: "menu2",
+    text: "মেনু ২",
+    value: "মেনু ২",
   },
   {
-    key: "dinner",
-    text: "Dinner",
-    value: "dinner",
+    key: "menu3",
+    text: "মেনু ৩",
+    value: "মেনু ৩",
+  },
+  {
+    key: "menu4",
+    text: "মেনু ৪",
+    value: "মেনু ৪ ",
   },
 ];
 
@@ -29,6 +34,11 @@ export const RoleOptions = [
     key: "admin",
     text: "Admin",
     value: "admin",
+  },
+  {
+    key: "manager",
+    text: "Manager",
+    value: "manager",
   },
 ];
 
@@ -56,18 +66,18 @@ export const userOrderStatus = [
 export const orderTypeOptions = [
   {
     key: "breakfast",
-    text: "Break Fast",
-    value: "breakfast",
+    text: "সকাল",
+    value: "সকাল",
   },
   {
     key: "lunch",
-    text: "Lunch",
-    value: "lunch",
+    text: "দুপুর",
+    value: "দুপুর",
   },
   {
     key: "dinner",
-    text: "Dinner",
-    value: "dinner",
+    text: "রাত",
+    value: "রাত",
   },
 ];
 

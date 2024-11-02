@@ -61,6 +61,8 @@ const MealListPage = () => {
     );
   }
 
+  console.log(mealList);
+
   return (
     <>
       <DeleteModal

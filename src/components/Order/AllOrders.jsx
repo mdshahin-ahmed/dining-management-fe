@@ -11,12 +11,9 @@ import {
   TableRow,
 } from "semantic-ui-react";
 import { useGetQueryDataList } from "../../api/query.api";
-import {
-  adminOrderStatus,
-  orderTypeOptions,
-} from "../../constant/common.constant";
+import { adminOrderStatus } from "../../constant/common.constant";
 import { useClient } from "../../hooks/pure/useClient";
-import { capitalize, getFormattedDateTime } from "../../utils/helper";
+import { getFormattedDateTime } from "../../utils/helper";
 import AsToast from "../common/AsToast";
 import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
@@ -69,14 +66,6 @@ const AllOrders = () => {
       <div className="orderHeaderWrap">
         <h2>Orders ({ordersList?.meta?.total || 0})</h2>
         <div className="orderFilterWrap">
-          <Select
-            className="orderFilterDropdown"
-            clearable
-            options={orderTypeOptions}
-            onChange={(e, { value }) =>
-              setDefaultQuery((prev) => ({ ...prev, type: value }))
-            }
-          />
           <SearchBar
             placeholder="Search meal"
             stillTime={500}
@@ -109,18 +98,26 @@ const AllOrders = () => {
                 <TableCell>
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
                 </TableCell>
-                <TableCell>{capitalize(order?.user?.name || "-")}</TableCell>
+                <TableCell className="t-capitalize">
+                  {order?.user?.name || "-"}
+                </TableCell>
                 <TableCell>{order?.userId}</TableCell>
-                <TableCell>{capitalize(order?.name || "-")}</TableCell>
-                <TableCell>{capitalize(order?.type || "-")}</TableCell>
-                <TableCell>{capitalize(order?.description || "-")}</TableCell>
+                <TableCell className="t-capitalize">
+                  {order?.name || "-"}
+                </TableCell>
+                <TableCell className="t-capitalize">
+                  {order?.type || "-"}
+                </TableCell>
+                <TableCell className="t-capitalize">
+                  {order?.description || "-"}
+                </TableCell>
                 <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.updatedAt)}</TableCell>
                 <TableCell>
                   <span
-                    className={`${order?.status}OrderStatus orderStatusBtn`}
+                    className={`${order?.status}OrderStatus orderStatusBtn t-capitalize`}
                   >
-                    {capitalize(order?.status || "-")}
+                    {order?.status || "-"}
                   </span>
                 </TableCell>
                 <TableCell>{order?.price}</TableCell>

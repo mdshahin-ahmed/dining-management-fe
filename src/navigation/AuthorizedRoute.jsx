@@ -9,7 +9,7 @@ const AuthorizedRoute = ({ permissions, children }) => {
 
   useEffect(() => {
     if (!hasPermission) {
-      navigate("home");
+      navigate("/home");
     }
   }, [user, hasPermission, navigate]);
 

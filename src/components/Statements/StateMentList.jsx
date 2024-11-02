@@ -82,6 +82,7 @@ const StateMentList = () => {
             <TableHeaderCell>Mobile</TableHeaderCell>
             <TableHeaderCell>Transaction Number</TableHeaderCell>
             <TableHeaderCell>Amount</TableHeaderCell>
+            <TableHeaderCell>Method</TableHeaderCell>
             <TableHeaderCell>Created At</TableHeaderCell>
             <TableHeaderCell>Status</TableHeaderCell>
             <TableHeaderCell>Prev Balance</TableHeaderCell>
@@ -96,20 +97,23 @@ const StateMentList = () => {
                 <TableCell>
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
                 </TableCell>
-                <TableCell>
-                  {capitalize(statement?.user?.name || "-")}
+                <TableCell className="t-capitalize">
+                  {statement?.user?.name || "-"}
                 </TableCell>
                 <TableCell>{statement?.mobile}</TableCell>
                 <TableCell>{statement?.transactionNumber}</TableCell>
                 <TableCell>{statement?.amount}</TableCell>
+                <TableCell className="t-capitalize">
+                  {statement?.type || "-"}
+                </TableCell>
                 <TableCell>
                   {getFormattedDateTime(statement?.createdAt)}
                 </TableCell>
                 <TableCell>
                   <span
-                    className={`${statement?.status}OrderStatus orderStatusBtn`}
+                    className={`${statement?.status}OrderStatus orderStatusBtn t-capitalize`}
                   >
-                    {capitalize(statement?.status || "-")}
+                    {statement?.status || "-"}
                   </span>
                 </TableCell>
                 <TableCell>{statement?.prevBalance.toFixed(2)}</TableCell>
