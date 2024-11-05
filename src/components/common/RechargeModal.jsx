@@ -34,12 +34,7 @@ const RechargeModal = ({ onClose, open = true }) => {
   const amount = watch("amount");
   const type = watch("type");
   if (amount && type) {
-    if (type === "nagad") {
-      addAmount = amount - (amount / 1000) * 15;
-    }
-    if (type === "bkash") {
-      addAmount = amount - (amount / 1000) * 20;
-    }
+    addAmount = amount - (amount / 1000) * 15;
   }
 
   const { mutate, isPending } = useMutation({

@@ -28,7 +28,7 @@ const AddBalanceModal = ({ onClose, open = true }) => {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data) => client("user/add-balance", { data, method: "PATCH" }),
+    mutationFn: (data) => client("balance", { data, method: "POST" }),
     onSuccess: (res) => {
       queryClient.refetchQueries({
         queryKey: ["user/all-list"],
@@ -41,7 +41,7 @@ const AddBalanceModal = ({ onClose, open = true }) => {
           <span>Balance Added Successfully!</span>
         </div>
       );
-      setUser((prev) => ({ ...prev, balance: res?.balance }));
+      setUser((prev) => ({ ...prev, balance: res?.newBalance }));
     },
   });
 
@@ -61,10 +61,10 @@ const AddBalanceModal = ({ onClose, open = true }) => {
       <ModalContent>
         <AsForm control={control} errors={errors} size="large">
           <AsInput
-            name="balance"
+            name="amount"
             required
-            label="Balance"
-            placeholder="Enter your balance"
+            label="Amount"
+            placeholder="Enter amount"
             mobile={16}
             computer={16}
             type="number"

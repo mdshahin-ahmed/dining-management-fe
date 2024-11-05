@@ -10,6 +10,9 @@
 .deliveredOrderStatus {
   background-color: #21ba45;
 }
+.approvedOrderStatus {
+  background-color: #21ba45;
+}
 .canceledOrderStatus {
   background-color: #d01919;
 }
