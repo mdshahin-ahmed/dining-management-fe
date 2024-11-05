@@ -11,6 +11,7 @@ import AppLayout from "../../layouts/AppLayout";
 import AuthorizedRoute from "../AuthorizedRoute";
 import AllOrders from "../../components/Order/AllOrders";
 import StateMentList from "../../components/Statements/StateMentList";
+import BalanceList from "../../components/Statements/BalanceList";
 
 function AuthenticatedApp() {
   return (
@@ -99,6 +100,16 @@ function AuthenticatedApp() {
           <AuthorizedRoute permissions={["admin", "manager"]}>
             <AppLayout>
               <AllOrders />
+            </AppLayout>
+          </AuthorizedRoute>
+        }
+      />
+      <Route
+        path="/balances"
+        element={
+          <AuthorizedRoute permissions={["admin", "user"]}>
+            <AppLayout>
+              <BalanceList />
             </AppLayout>
           </AuthorizedRoute>
         }

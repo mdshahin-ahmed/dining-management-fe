@@ -1,14 +1,13 @@
-import { Button, Grid, GridColumn, Image } from "semantic-ui-react";
-import { useAuth } from "../../context/app/useAuth";
 import avatar from "@/assets/user-avatar.png";
-import { capitalize } from "../../utils/helper";
-import { FaRegEnvelope } from "react-icons/fa";
 import { BsTelephone } from "react-icons/bs";
+import { FaRegEnvelope } from "react-icons/fa";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { LuHotel } from "react-icons/lu";
 import { MdOutlineMeetingRoom } from "react-icons/md";
-import { FaBangladeshiTakaSign } from "react-icons/fa6";
-import RechargeModal from "../common/RechargeModal";
+import { Button, Grid, GridColumn, Image } from "semantic-ui-react";
+import { useAuth } from "../../context/app/useAuth";
 import { useDisclosure } from "../../hooks/pure/useDisclosure";
+import RechargeModal from "../common/RechargeModal";
 
 const Profile = () => {
   const { user } = useAuth();

@@ -11,6 +11,7 @@ import { IoHomeSharp } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { Image, List, ListItem, Popup } from "semantic-ui-react";
 import { useAuth } from "../../../context/app/useAuth";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const routeList = [
   {
@@ -54,6 +55,12 @@ const routeList = [
     pathname: "manage-user",
     src: FaUserEdit,
     permissions: ["admin"],
+  },
+  {
+    content: "Balance",
+    pathname: "balances",
+    src: FaBangladeshiTakaSign,
+    permissions: ["admin", "user"],
   },
   {
     content: "Statements",
