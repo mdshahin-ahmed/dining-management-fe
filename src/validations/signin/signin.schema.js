@@ -21,4 +21,23 @@ const signupSchema = Joi.object({
   password: Joi.string().min(5).max(30),
 });
 
-export { signinSchema, signupSchema };
+const changePasswordSchema = Joi.object({
+  oldPass: Joi.string().required().messages({
+    "string.base": "Old password must be a string",
+    "any.required": "Old password is required",
+  }),
+
+  newPass: Joi.string().min(5).max(30).required().messages({
+    "string.base": "New password must be a string",
+    "string.min": "New password must be at least 5 characters long",
+    "string.max": "New password must be max 30 characters long",
+    "any.required": "New password is required",
+  }),
+
+  confirmPass: Joi.string().valid(Joi.ref("newPass")).required().messages({
+    "any.only": "New pass and confirm pass doesn't match",
+    "any.required": "Confirm password is required",
+  }),
+});
+
+export { signinSchema, signupSchema, changePasswordSchema };

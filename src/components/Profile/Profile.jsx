@@ -8,13 +8,20 @@ import { Button, Grid, GridColumn, Image } from "semantic-ui-react";
 import { useAuth } from "../../context/app/useAuth";
 import { useDisclosure } from "../../hooks/pure/useDisclosure";
 import RechargeModal from "../common/RechargeModal";
+import ChangePasswordModal from "../common/ChangePasswordModal";
 
 const Profile = () => {
   const { user } = useAuth();
   const { isOpen, onClose, setCustom: setRechargeCustom } = useDisclosure();
+  const {
+    isOpen: isPassOpen,
+    onClose: onPassClose,
+    setCustom: setPassCustom,
+  } = useDisclosure();
   return (
     <>
       <RechargeModal onClose={onClose} open={isOpen} />
+      <ChangePasswordModal onClose={onPassClose} open={isPassOpen} />
 
       <div className="profileWrap p-2">
         <div className="profileHeader">
@@ -55,6 +62,13 @@ const Profile = () => {
                 onClick={() => setRechargeCustom(true)}
               >
                 Add Balance
+              </Button>
+              <Button
+                onClick={() => setPassCustom(true)}
+                className="ml-2"
+                color="red"
+              >
+                Change password
               </Button>
             </GridColumn>
           </Grid>
