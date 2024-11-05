@@ -13,10 +13,8 @@ import { useClient } from "../../hooks/pure/useClient";
 import { addBalanceSchema } from "../../validations/user.schema";
 import AsToast from "../common/AsToast";
 import { AsForm, AsInput } from "../common/form";
-import { useAuth } from "../../context/app/useAuth";
 
 const AddBalanceModal = ({ onClose, open = true }) => {
-  const { setUser } = useAuth();
   const client = useClient();
   const queryClient = useQueryClient();
   const {
@@ -29,7 +27,7 @@ const AddBalanceModal = ({ onClose, open = true }) => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data) => client("balance", { data, method: "POST" }),
-    onSuccess: (res) => {
+    onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: ["user/all-list"],
         type: "active",
@@ -41,7 +39,7 @@ const AddBalanceModal = ({ onClose, open = true }) => {
           <span>Balance Added Successfully!</span>
         </div>
       );
-      setUser((prev) => ({ ...prev, balance: res?.newBalance }));
+      // setUser((prev) => ({ ...prev, balance: res?.newBalance }));
     },
   });
 

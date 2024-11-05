@@ -10,3 +10,9 @@
   margin-right: 5px;
   margin-bottom: -1px;
 }
+.mealCardHeader {
+  padding: 10px 10px;
+  text-align: center;
+  background: #a6aebf;
+  border-radius: 0.28571429rem 0.28571429rem 0 0;
+}

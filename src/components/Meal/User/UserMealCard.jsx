@@ -33,14 +33,20 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
         ) : (
           <>
             {mealList?.map((meal) => (
-              <GridColumn key={meal?._id} mobile={16} computer={5}>
+              <GridColumn key={meal?._id} mobile={16} computer={4}>
                 <Card className="w-100">
-                  <CardContent>
-                    <CardHeader>{meal?.name}</CardHeader>
+                  <CardContent className="p-0">
+                    <CardHeader className="mealCardHeader">
+                      {meal?.name}
+                    </CardHeader>
                     <CardDescription>{meal?.description}</CardDescription>
-                    <h5 className="mt-1 mb-0">Type: {meal?.type}</h5>
-                    <h5 className="mt-0">Price: {meal?.price}</h5>
-                    <h4 className="mt-0">Available: {meal?.stock}</h4>
+                    {/* <h5 className="mt-1 mb-0">Type: {meal?.type}</h5> */}
+                    <div className="d-flex jcsb p-3">
+                      <h4 className="mt-0 mealStock">
+                        Available: {meal?.stock}
+                      </h4>
+                      <h4 className="mt-0 mealPrice">Price: {meal?.price}</h4>
+                    </div>
                   </CardContent>
                   <CardContent extra>
                     <Popup
@@ -57,12 +63,8 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                           </Button>
                         ) : (
                           <Button
+                            fluid
                             color={user?.balance > meal?.price ? "blue" : "red"}
-                            className={
-                              user?.balance < meal?.price
-                                ? `d-flex mx-auto`
-                                : "d-flex mx-auto"
-                            }
                             onClick={() => {
                               if (user?.balance > meal?.price) {
                                 setCustom(meal?._id);

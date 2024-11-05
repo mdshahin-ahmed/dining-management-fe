@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { Button } from "semantic-ui-react";
@@ -44,6 +44,7 @@ const UserMeal = () => {
   // } = useDisclosure();
 
   const client = useClient();
+  const queryClient = useQueryClient();
   const { data: mealList, isFetching } = useQuery({
     queryKey: [`${mealType}-list`],
     queryFn: () => client(`meal/user-meal?type=${mealType}`),
@@ -60,6 +61,10 @@ const UserMeal = () => {
         </div>
       );
       onClose();
+      queryClient.refetchQueries({
+        queryKey: [`${mealType}-list`],
+        type: "active",
+      });
       setUser((prev) => ({ ...prev, balance: prev.balance - res?.price }));
     },
   });
