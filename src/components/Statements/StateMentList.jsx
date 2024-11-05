@@ -1,8 +1,6 @@
-import { useState } from "react";
-import { useClient } from "../../hooks/pure/useClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useGetQueryDataList } from "../../api/query.api";
-import SearchBar from "../common/SearchBar";
+import { useState } from "react";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
   Select,
   Table,
@@ -12,11 +10,14 @@ import {
   TableHeaderCell,
   TableRow,
 } from "semantic-ui-react";
-import { capitalize } from "lodash";
-import TableLoader from "../common/TableLoader";
-import NoDataAvailable from "../common/NoDataAvailable";
-import CustomPagination from "../common/CustomPagination";
+import { useGetQueryDataList } from "../../api/query.api";
+import { useClient } from "../../hooks/pure/useClient";
 import { getFormattedDateTime } from "../../utils/helper";
+import AsToast from "../common/AsToast";
+import CustomPagination from "../common/CustomPagination";
+import NoDataAvailable from "../common/NoDataAvailable";
+import SearchBar from "../common/SearchBar";
+import TableLoader from "../common/TableLoader";
 
 const StateMentList = () => {
   const [defaultQuery, setDefaultQuery] = useState({
@@ -37,27 +38,25 @@ const StateMentList = () => {
     }
   );
 
-  console.log(statementList);
-
-  //   const { mutate: updateStatusMutate } = useMutation({
-  //     mutationFn: ({ id, status }) =>
-  //       client(`order/${id}`, { method: "PATCH", data: { status } }),
-  //     onSuccess: () => {
-  //       queryClient.refetchQueries({
-  //         queryKey: ["order-list"],
-  //         type: "active",
-  //       });
-  //       AsToast.success(
-  //         <div className="errorToast">
-  //           <AiOutlineCheckCircle /> &nbsp;
-  //           <span>Order updated successfully!</span>
-  //         </div>
-  //       );
-  //     },
-  //   });
+  const { mutate: updateStatusMutate } = useMutation({
+    mutationFn: ({ id, status }) =>
+      client(`statement/${id}`, { method: "PATCH", data: { status } }),
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: ["statement-list"],
+        type: "active",
+      });
+      AsToast.success(
+        <div className="errorToast">
+          <AiOutlineCheckCircle /> &nbsp;
+          <span>Order updated successfully!</span>
+        </div>
+      );
+    },
+  });
 
   const handleStatusChange = (data) => {
-    // updateStatusMutate(data);
+    updateStatusMutate(data);
   };
 
   return (

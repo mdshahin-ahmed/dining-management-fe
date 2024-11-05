@@ -596,5 +596,5 @@ body {
 }
 
 .t-capitalize {
-  text-transform: capitalize;
+  text-transform: capitalize !important;
 }

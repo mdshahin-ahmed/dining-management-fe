@@ -12,7 +12,6 @@ import {
 } from "semantic-ui-react";
 import { useGetQueryDataList } from "../../api/query.api";
 import { useDisclosure } from "../../hooks/pure/useDisclosure";
-import { capitalize } from "../../utils/helper";
 import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
