@@ -39,7 +39,7 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                     <CardHeader className="mealCardHeader">
                       {meal?.name}
                     </CardHeader>
-                    <CardDescription className="px-3 pt-2">
+                    <CardDescription className="px-3 pt-2 mealDescHeight">
                       <div
                         dangerouslySetInnerHTML={{
                           __html: meal?.description || "",
@@ -66,11 +66,15 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                       position="top center"
                       trigger={
                         meal?.stock < 1 ? (
-                          <Button className="d-flex mx-auto" color="red">
+                          <Button
+                            className="d-flex mx-auto purchaseButton"
+                            color="red"
+                          >
                             Stock Out
                           </Button>
                         ) : (
                           <Button
+                            className="purchaseButton"
                             fluid
                             color={user?.balance > meal?.price ? "blue" : "red"}
                             onClick={() => {

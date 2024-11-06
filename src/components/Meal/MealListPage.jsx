@@ -92,7 +92,7 @@ const MealListPage = () => {
                       <CardHeader className="mealCardHeader">
                         {meal?.name}
                       </CardHeader>
-                      <CardDescription className="px-3">
+                      <CardDescription className="px-3 mealDescHeight">
                         <div
                           dangerouslySetInnerHTML={{
                             __html: meal?.description || "",

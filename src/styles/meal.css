@@ -31,3 +31,11 @@
   color: white !important;
   background-color: #ff0066 !important;
 }
+
+.purchaseButton {
+  border-radius: 0px 0px 0.28571429rem 0.28571429rem !important;
+}
+
+.mealDescHeight {
+  height: 95px !important;
+}
