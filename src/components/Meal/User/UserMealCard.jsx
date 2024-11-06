@@ -35,7 +35,7 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
             {mealList?.map((meal) => (
               <GridColumn key={meal?._id} mobile={16} computer={4}>
                 <Card className="w-100 cardShadow">
-                  <CardContent className="p-0">
+                  <CardContent className="p-0 mealContent">
                     <CardHeader className="mealCardHeader">
                       {meal?.name}
                     </CardHeader>

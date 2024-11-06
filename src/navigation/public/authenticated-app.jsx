@@ -75,6 +75,26 @@ function AuthenticatedApp() {
         }
       />
       <Route
+        path="/users/add"
+        element={
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <ManageUser />
+            </AppLayout>
+          </AuthorizedRoute>
+        }
+      />
+      <Route
+        path="/users/edit/:id"
+        element={
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <ManageUser />
+            </AppLayout>
+          </AuthorizedRoute>
+        }
+      />
+      <Route
         path="/manage-user"
         element={
           <AuthorizedRoute permissions={["admin"]}>

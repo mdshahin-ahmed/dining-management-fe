@@ -17,8 +17,11 @@ import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
 import AddBalanceModal from "./AddBalanceModal";
+import { useNavigate } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
 
 const UsersList = () => {
+  const navigate = useNavigate();
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
     limit: 20,
@@ -34,13 +37,18 @@ const UsersList = () => {
       <AddBalanceModal onClose={onClose} open={isOpen} />
       <div className="d-flex jcsb">
         <h2>Users ({usersList?.meta?.total || 0})</h2>
-        <SearchBar
-          placeholder="Search user"
-          stillTime={500}
-          onSuccess={(e) =>
-            setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
-          }
-        />
+        <div>
+          <SearchBar
+            placeholder="Search user"
+            stillTime={500}
+            onSuccess={(e) =>
+              setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
+            }
+          />
+          <Button onClick={() => navigate("add")} className="ml-3" primary>
+            Add User
+          </Button>
+        </div>
       </div>
       <Table basic>
         <TableHeader>
@@ -54,7 +62,7 @@ const UsersList = () => {
             <TableHeaderCell>Hostel</TableHeaderCell>
             <TableHeaderCell>Room</TableHeaderCell>
             <TableHeaderCell>Balance</TableHeaderCell>
-            <TableHeaderCell>Action</TableHeaderCell>
+            <TableHeaderCell>Actions</TableHeaderCell>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -79,7 +87,10 @@ const UsersList = () => {
                 <TableCell>{user?.hostel}</TableCell>
                 <TableCell>{user?.room}</TableCell>
                 <TableCell>{user?.balance.toFixed(2)}</TableCell>
-                <TableCell>
+                <TableCell className="d-flex jcsb">
+                  <Button onClick={() => navigate(`edit/${user?._id}`)}>
+                    <FaEdit />
+                  </Button>
                   <Button onClick={() => setCustom(user?._id)}>
                     <FaBangladeshiTakaSign />
                     <MdAdd />

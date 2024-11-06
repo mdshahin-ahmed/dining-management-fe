@@ -18,8 +18,10 @@ import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
+import { useAuth } from "../../context/app/useAuth";
 
 const StateMentList = () => {
+  const { user } = useAuth();
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
     limit: 20,
@@ -65,7 +67,7 @@ const StateMentList = () => {
         <h2>Statements ({statementList?.meta?.total || 0})</h2>
         <div className="orderFilterWrap">
           <SearchBar
-            placeholder="Search meal"
+            placeholder="Search by mobile"
             stillTime={500}
             onSuccess={(e) =>
               setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
@@ -86,7 +88,9 @@ const StateMentList = () => {
             <TableHeaderCell>Status</TableHeaderCell>
             <TableHeaderCell>Prev Balance</TableHeaderCell>
             <TableHeaderCell>New Balance</TableHeaderCell>
-            <TableHeaderCell>Action</TableHeaderCell>
+            {user?.role === "admin" && (
+              <TableHeaderCell>Action</TableHeaderCell>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -117,31 +121,38 @@ const StateMentList = () => {
                 </TableCell>
                 <TableCell>{statement?.prevBalance.toFixed(2)}</TableCell>
                 <TableCell>{statement?.newBalance.toFixed(2)}</TableCell>
-                <TableCell>
-                  <Select
-                    disabled={statement?.status === "approved"}
-                    defaultValue={statement?.status}
-                    className="orderStatusDropdown"
-                    options={[
-                      {
-                        key: "approved",
-                        text: "Approved",
-                        value: "approved",
-                      },
-                    ]}
-                    onChange={(e, { value }) =>
-                      handleStatusChange({ status: value, id: statement?._id })
-                    }
-                  />
-                </TableCell>
+                {user?.role === "admin" && (
+                  <TableCell>
+                    <Select
+                      disabled={statement?.status === "approved"}
+                      defaultValue={statement?.status}
+                      className="orderStatusDropdown"
+                      options={[
+                        {
+                          key: "approved",
+                          text: "Approved",
+                          value: "approved",
+                        },
+                      ]}
+                      onChange={(e, { value }) =>
+                        handleStatusChange({
+                          status: value,
+                          id: statement?._id,
+                        })
+                      }
+                    />
+                  </TableCell>
+                )}
               </TableRow>
             ))
           ) : (
             <>
-              {isFetching && <TableLoader columns={11} />}
+              {isFetching && (
+                <TableLoader columns={user?.role === "admin" ? 11 : 10} />
+              )}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan="11">
+                  <TableCell colSpan={(user?.role === "admin" && 11) || 10}>
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>

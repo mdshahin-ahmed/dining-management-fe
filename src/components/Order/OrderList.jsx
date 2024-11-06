@@ -113,7 +113,9 @@ const OrderList = () => {
             <TableHeaderCell>Updated At</TableHeaderCell>
             <TableHeaderCell>Status</TableHeaderCell>
             <TableHeaderCell>Price</TableHeaderCell>
-            <TableHeaderCell>Action</TableHeaderCell>
+            {user?.role === "admin" && (
+              <TableHeaderCell>Action</TableHeaderCell>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -150,30 +152,36 @@ const OrderList = () => {
                   </span>
                 </TableCell>
                 <TableCell>{order?.price}</TableCell>
-                <TableCell>
-                  <Select
-                    // disabled={
-                    //   order?.status === "delivered" ||
-                    //   order?.status === "canceled"
-                    // }
-                    defaultValue={order?.status}
-                    className="orderStatusDropdown"
-                    options={
-                      user?.role === "user" ? userOrderStatus : adminOrderStatus
-                    }
-                    onChange={(e, { value }) =>
-                      handleStatusChange({ status: value, id: order?._id })
-                    }
-                  />
-                </TableCell>
+                {user?.role === "admin" && (
+                  <TableCell>
+                    <Select
+                      // disabled={
+                      //   order?.status === "delivered" ||
+                      //   order?.status === "canceled"
+                      // }
+                      defaultValue={order?.status}
+                      className="orderStatusDropdown"
+                      options={
+                        user?.role === "user"
+                          ? userOrderStatus
+                          : adminOrderStatus
+                      }
+                      onChange={(e, { value }) =>
+                        handleStatusChange({ status: value, id: order?._id })
+                      }
+                    />
+                  </TableCell>
+                )}
               </TableRow>
             ))
           ) : (
             <>
-              {isFetching && <TableLoader columns={11} />}
+              {isFetching && (
+                <TableLoader columns={user?.role === "admin" ? 11 : 10} />
+              )}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan="11">
+                  <TableCell colSpan={user?.role === "admin" ? 11 : 10}>
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>

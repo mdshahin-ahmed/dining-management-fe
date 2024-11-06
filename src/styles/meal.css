@@ -39,3 +39,7 @@
 .mealDescHeight {
   height: 95px !important;
 }
+
+.mealContent {
+  background-color: #feffde !important;
+}
