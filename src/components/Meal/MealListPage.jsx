@@ -93,7 +93,11 @@ const MealListPage = () => {
                         {meal?.name}
                       </CardHeader>
                       <CardDescription className="px-3">
-                        {meal?.description}
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: meal?.description || "",
+                          }}
+                        />
                       </CardDescription>
                       <h5 className="mt-1 mb-0 px-3">Type: {meal?.type}</h5>
                       <h5 className="m-0 px-3">Price: {meal?.price}</h5>

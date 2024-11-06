@@ -7,6 +7,7 @@ import { AppProviders } from "./context/app/index.jsx";
 import "./index.css";
 import "./styles/global-styles";
 import "react-toastify/dist/ReactToastify.css";
+import "react-quill/dist/quill.snow.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

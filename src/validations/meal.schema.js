@@ -29,7 +29,7 @@ export const mealValidationSchema = Joi.object({
     "any.required": "Stock is required.",
   }),
 
-  description: Joi.string().min(5).max(100).required().messages({
+  description: Joi.string().min(5).max(500).required().messages({
     "string.base": "Description must be a text.",
     "string.empty": "Description is required.",
     "string.min": "Description must be at least 5 characters long.",

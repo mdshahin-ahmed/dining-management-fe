@@ -11,6 +11,7 @@ import {
   Grid,
   GridColumn,
 } from "semantic-ui-react";
+import ReactQuill from "react-quill";
 
 function AsForm({ children, control, errors, onSubmit = () => {}, ...rest }) {
   return (
@@ -218,6 +219,51 @@ function AsRadio({
   );
 }
 
+function AsEditor({
+  control,
+  name,
+  label,
+  required = false,
+  width = 16,
+  mobile = 16,
+  computer = 16,
+  modules = {}, // Customizable Quill modules
+  // formats = [], // Customizable Quill formats
+  ...rest
+}) {
+  return (
+    <GridColumn mobile={mobile} computer={computer} width={width}>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field, fieldState: { error } }) => (
+          <FormField required={required}>
+            <label htmlFor={name}>{label}</label>
+            <ReactQuill
+              style={{
+                width: "100%",
+                minHeight: "100px",
+                background: "white",
+              }}
+              theme="snow"
+              modules={modules}
+              // formats={formats}
+              value={field.value || ""}
+              onChange={field.onChange}
+              {...rest}
+            />
+            {error && (
+              <div className="ui pointing above prompt label" role="alert">
+                {error.message}
+              </div>
+            )}
+          </FormField>
+        )}
+      />
+    </GridColumn>
+  );
+}
+
 // function Editor({control, error, name, width, label, formFieldProps, ...rest}) {
 //   return (
 //     <VmoGridColumn width={width}>
@@ -281,4 +327,4 @@ function AsRadio({
 //   )
 // }
 
-export { AsForm, AsInput, AsTextArea, AsSelect, AsCheckbox, AsRadio };
+export { AsForm, AsInput, AsTextArea, AsSelect, AsCheckbox, AsRadio, AsEditor };

@@ -109,7 +109,11 @@ const AllOrders = () => {
                   {order?.type || "-"}
                 </TableCell>
                 <TableCell className="t-capitalize">
-                  {order?.description || "-"}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: order?.description || "",
+                    }}
+                  />
                 </TableCell>
                 <TableCell>{getFormattedDateTime(order?.createdAt)}</TableCell>
                 <TableCell>{getFormattedDateTime(order?.updatedAt)}</TableCell>

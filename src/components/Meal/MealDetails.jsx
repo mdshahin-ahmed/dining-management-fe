@@ -14,7 +14,21 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { mealValidationSchema } from "../../validations/meal.schema";
 import AsToast from "../common/AsToast";
-import { AsForm, AsInput, AsSelect, AsTextArea } from "../common/form";
+import { AsEditor, AsForm, AsInput, AsSelect } from "../common/form";
+
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["link"],
+  ],
+};
 
 const MealDetails = () => {
   const navigate = useNavigate();
@@ -38,6 +52,8 @@ const MealDetails = () => {
     },
     resolver: joiResolver(mealValidationSchema),
   });
+
+  console.log(errors);
 
   // const { mutate: mutationImageUpload, isPending: isImageUploadPending } =
   //   useMutation({
@@ -85,6 +101,7 @@ const MealDetails = () => {
   }, [mealDetails]);
 
   const handleMealSubmit = (data) => {
+    // console.log(data);
     addMealMutate(data);
     // setData(data);
     // if (!file) {
@@ -169,16 +186,23 @@ const MealDetails = () => {
             />
           </FormField>
         </GridColumn> */}
-            <AsTextArea
+            <AsEditor
+              name="description"
+              label="Description"
+              required
+              modules={modules}
+            />
+
+            {/* <AsTextArea
               maxLength={100}
               name="description"
               required
               label="Enter description"
               placeholder="Enter meal description"
-            />
+            /> */}
           </AsForm>
           <Button
-            className="mt-5"
+            className="mt-3"
             loading={isAddMealPending}
             onClick={handleSubmit(handleMealSubmit)}
             primary

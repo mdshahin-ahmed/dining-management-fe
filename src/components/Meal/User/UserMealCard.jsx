@@ -40,7 +40,11 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                       {meal?.name}
                     </CardHeader>
                     <CardDescription className="px-3 pt-2">
-                      {meal?.description}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: meal?.description || "",
+                        }}
+                      />
                     </CardDescription>
                     {/* <h5 className="mt-1 mb-0">Type: {meal?.type}</h5> */}
                     <div className="d-flex jcsb px-3 pt-6 pb-2">
