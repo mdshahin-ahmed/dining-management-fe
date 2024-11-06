@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
+  Button,
   Select,
   Table,
   TableBody,
@@ -127,7 +128,7 @@ const OrderList = () => {
                 </TableCell>
                 <TableCell>{order?.userId}</TableCell>
                 <TableCell className="t-capitalize">
-                  {order?.name || "-"}
+                  <Button className={order?.name}>{order?.name || "-"}</Button>
                 </TableCell>
                 <TableCell className="t-capitalize">
                   {order?.type || "-"}

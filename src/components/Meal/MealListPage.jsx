@@ -88,12 +88,16 @@ const MealListPage = () => {
               {mealList?.map((meal) => (
                 <GridColumn key={meal?._id} mobile={16} computer={4}>
                   <Card className="w-100">
-                    <CardContent>
-                      <CardHeader>{meal?.name}</CardHeader>
-                      <CardDescription>{meal?.description}</CardDescription>
-                      <h5 className="mt-1 mb-0">Type: {meal?.type}</h5>
-                      <h5 className="m-0">Price: {meal?.price}</h5>
-                      <h4 className="mt-0">Available: {meal?.stock}</h4>
+                    <CardContent className="p-0">
+                      <CardHeader className="mealCardHeader">
+                        {meal?.name}
+                      </CardHeader>
+                      <CardDescription className="px-3">
+                        {meal?.description}
+                      </CardDescription>
+                      <h5 className="mt-1 mb-0 px-3">Type: {meal?.type}</h5>
+                      <h5 className="m-0 px-3">Price: {meal?.price}</h5>
+                      <h4 className="mt-0 px-3">Available: {meal?.stock}</h4>
                     </CardContent>
                     <CardContent extra>
                       <Grid>

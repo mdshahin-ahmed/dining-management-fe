@@ -34,21 +34,25 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
           <>
             {mealList?.map((meal) => (
               <GridColumn key={meal?._id} mobile={16} computer={4}>
-                <Card className="w-100">
+                <Card className="w-100 cardShadow">
                   <CardContent className="p-0">
                     <CardHeader className="mealCardHeader">
                       {meal?.name}
                     </CardHeader>
-                    <CardDescription>{meal?.description}</CardDescription>
+                    <CardDescription className="px-3 pt-2">
+                      {meal?.description}
+                    </CardDescription>
                     {/* <h5 className="mt-1 mb-0">Type: {meal?.type}</h5> */}
-                    <div className="d-flex jcsb p-3">
-                      <h4 className="mt-0 mealStock">
+                    <div className="d-flex jcsb px-3 pt-6 pb-2">
+                      <Button className="mt-0 mealStock availableBtn">
                         Available: {meal?.stock}
-                      </h4>
-                      <h4 className="mt-0 mealPrice">Price: {meal?.price}</h4>
+                      </Button>
+                      <Button className="mt-0 mealPrice priceBtn">
+                        Price: {meal?.price}
+                      </Button>
                     </div>
                   </CardContent>
-                  <CardContent extra>
+                  <CardContent extra className="p-0">
                     <Popup
                       content={
                         user?.balance < meal?.price

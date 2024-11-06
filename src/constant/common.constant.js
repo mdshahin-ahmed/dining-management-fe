@@ -4,23 +4,23 @@ import bkash from "@/assets/bkash.png";
 export const mealNameOptions = [
   {
     key: "menu1",
-    text: "মেনু ১",
-    value: "মেনু ১",
+    text: "মেনু-১",
+    value: "মেনু-১",
   },
   {
     key: "menu2",
-    text: "মেনু ২",
-    value: "মেনু ২",
+    text: "মেনু-২",
+    value: "মেনু-২",
   },
   {
     key: "menu3",
-    text: "মেনু ৩",
-    value: "মেনু ৩",
+    text: "মেনু-৩",
+    value: "মেনু-৩",
   },
   {
     key: "menu4",
-    text: "মেনু ৪",
-    value: "মেনু ৪ ",
+    text: "মেনু-৪",
+    value: "মেনু-৪",
   },
 ];
 
