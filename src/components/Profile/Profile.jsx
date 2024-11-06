@@ -29,7 +29,7 @@ const Profile = () => {
             <GridColumn mobile={16} computer={4}>
               <Image
                 className="b-radius-50 mx-auto"
-                src={user?.src || avatar}
+                src={user?.imageUrl || avatar}
               />
             </GridColumn>
             <GridColumn className="asc" mobile={16} computer={12}>

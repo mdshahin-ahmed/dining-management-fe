@@ -8,8 +8,11 @@ import { userSchema } from "../../validations/user.schema";
 import { AsForm, AsInput, AsSelect } from "../common/form";
 import AsToast from "../common/AsToast";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 
 const ManageUser = () => {
+  const { id } = useParams();
+  console.log(id);
   const client = useClient();
   const {
     control,

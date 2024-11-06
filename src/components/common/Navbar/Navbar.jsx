@@ -3,7 +3,6 @@ import {
   FaCartArrowDown,
   FaFileInvoiceDollar,
   FaUserAlt,
-  FaUserEdit,
   FaUsers,
 } from "react-icons/fa";
 import { GiHotMeal } from "react-icons/gi";
@@ -49,12 +48,6 @@ const routeList = [
     pathname: "all-order",
     src: FaCartArrowDown,
     permissions: ["admin", "manager"],
-  },
-  {
-    content: "Manage User",
-    pathname: "manage-user",
-    src: FaUserEdit,
-    permissions: ["admin"],
   },
   {
     content: "Balance",

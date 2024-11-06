@@ -53,8 +53,6 @@ const MealDetails = () => {
     resolver: joiResolver(mealValidationSchema),
   });
 
-  console.log(errors);
-
   // const { mutate: mutationImageUpload, isPending: isImageUploadPending } =
   //   useMutation({
   //     mutationFn: imageUpload,

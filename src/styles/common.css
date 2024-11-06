@@ -55,6 +55,9 @@ body {
 .asc {
   align-self: center !important;
 }
+.dif {
+  display: inline-flex !important;
+}
 .w-100 {
   width: 100% !important;
 }

@@ -42,7 +42,7 @@ const Header = () => {
             trigger={
               <Image
                 className="b-radius-50 headerAvatar c-pointer"
-                src={user?.src || avatar}
+                src={user?.imageUrl || avatar}
               />
             }
           />

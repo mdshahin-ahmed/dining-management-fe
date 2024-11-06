@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { MdAdd } from "react-icons/md";
+import avatar from "@/assets/user-avatar.png";
 import {
   Button,
+  Image,
   Table,
   TableBody,
   TableCell,
@@ -19,6 +21,7 @@ import TableLoader from "../common/TableLoader";
 import AddBalanceModal from "./AddBalanceModal";
 import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import UpdateProfileModal from "./UpdateProfileModal";
 
 const UsersList = () => {
   const navigate = useNavigate();
@@ -32,9 +35,15 @@ const UsersList = () => {
     defaultQuery
   );
   const { isOpen, onClose, setCustom } = useDisclosure();
+  const {
+    isOpen: isProfileOpen,
+    onClose: onProfileClose,
+    setCustom: setProfileCustom,
+  } = useDisclosure();
   return (
     <div className="previewLayout">
       <AddBalanceModal onClose={onClose} open={isOpen} />
+      <UpdateProfileModal onClose={onProfileClose} open={isProfileOpen} />
       <div className="d-flex jcsb">
         <h2>Users ({usersList?.meta?.total || 0})</h2>
         <div>
@@ -72,7 +81,15 @@ const UsersList = () => {
                 <TableCell>
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
                 </TableCell>
-                <TableCell className="t-capitalize">{user?.name}</TableCell>
+                <TableCell>
+                  <div className="d-flex aic">
+                    <Image
+                      className="b-radius-50 headerAvatar"
+                      src={user?.imageUrl || avatar}
+                    />
+                    <span className="t-capitalize ml-2">{user?.name}</span>
+                  </div>
+                </TableCell>
                 <TableCell>{user?.userId}</TableCell>
                 <TableCell>
                   <Button
@@ -88,7 +105,7 @@ const UsersList = () => {
                 <TableCell>{user?.room}</TableCell>
                 <TableCell>{user?.balance.toFixed(2)}</TableCell>
                 <TableCell className="d-flex jcsb">
-                  <Button onClick={() => navigate(`edit/${user?._id}`)}>
+                  <Button onClick={() => setProfileCustom(user?._id)}>
                     <FaEdit />
                   </Button>
                   <Button onClick={() => setCustom(user?._id)}>
