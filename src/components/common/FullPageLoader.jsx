@@ -1,7 +1,10 @@
+import { Image } from "semantic-ui-react";
+import logo from "@/assets/logo.png";
+
 const FullPageLoader = () => {
   return (
     <div className="scene">
-      <svg
+      {/* <svg
         version="1.1"
         id="dc-spinner"
         xmlns="http://www.w3.org/2000/svg"
@@ -84,8 +87,9 @@ const FullPageLoader = () => {
             repeatCount="indefinite"
           />
         </path>
-      </svg>
+      </svg> */}
 
+      <Image src={logo} />
       <div id="progress-bar-container">
         <div className="progress-bar-child progress" />
         <div className="progress-bar-child shrinker timelapse" />
