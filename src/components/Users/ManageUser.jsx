@@ -2,7 +2,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Button } from "semantic-ui-react";
-import { RoleOptions } from "../../constant/common.constant";
+import { hallOptions, RoleOptions } from "../../constant/common.constant";
 import { useClient } from "../../hooks/pure/useClient";
 import { userSchema } from "../../validations/user.schema";
 import { AsForm, AsInput, AsSelect } from "../common/form";
@@ -82,13 +82,12 @@ const ManageUser = () => {
           placeholder="Enter your mobile number"
           computer={8}
         />
-        <AsInput
-          maxLength={30}
+        <AsSelect
           name="hostel"
           required
-          label="Hostel Name"
-          placeholder="Enter your hall name"
-          computer={8}
+          label="Hostel"
+          placeholder="Select Hostel"
+          options={hallOptions}
         />
         <AsInput
           maxLength={4}

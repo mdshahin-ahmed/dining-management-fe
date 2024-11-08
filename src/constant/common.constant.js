@@ -41,6 +41,33 @@ export const RoleOptions = [
     value: "manager",
   },
 ];
+export const hallOptions = [
+  {
+    key: 1,
+    text: "Bijoy 24 Bhaban",
+    value: "Bijoy 24 Bhaban",
+  },
+  {
+    key: 2,
+    text: "Uttara Bhaban",
+    value: "Uttara Bhaban",
+  },
+  {
+    key: 3,
+    text: "CM Bhaban",
+    value: "CM Bhaban",
+  },
+  {
+    key: 4,
+    text: "Shapla Bhaban",
+    value: "Shapla Bhaban",
+  },
+  {
+    key: 5,
+    text: "Others",
+    value: "Others",
+  },
+];
 
 export const adminOrderStatus = [
   {
