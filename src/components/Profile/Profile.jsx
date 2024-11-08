@@ -65,7 +65,7 @@ const Profile = () => {
               </Button>
               <Button
                 onClick={() => setPassCustom(true)}
-                className="ml-2"
+                className="changePassBtn"
                 color="red"
               >
                 Change password
