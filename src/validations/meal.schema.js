@@ -22,9 +22,9 @@ export const mealValidationSchema = Joi.object({
     "any.required": "Price is required.",
   }),
 
-  stock: Joi.number().positive().precision(3).required().messages({
+  stock: Joi.number().min(0).precision(3).required().messages({
     "number.base": "Stock must be a number.",
-    "number.positive": "Stock must be a positive number.",
+    "number.min": "Stock must be at least 0.",
     "number.precision": "Stock can have at most 3 decimal places.",
     "any.required": "Stock is required.",
   }),
