@@ -56,26 +56,24 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                       </Button>
                     </div>
                   </CardContent>
-                  <CardContent extra className="p-0">
+                  <CardContent extra className="p-0 py-2">
                     <Popup
                       content={
                         user?.balance < meal?.price
-                          ? "You balance is low. Please recharge."
+                          ? meal?.stock < 1
+                            ? "Out of stock"
+                            : "Your balance is low. Please recharge."
                           : "Purchase"
                       }
                       position="top center"
                       trigger={
                         meal?.stock < 1 ? (
-                          <Button
-                            className="d-flex mx-auto purchaseButton"
-                            color="red"
-                          >
+                          <Button className="d-flex mx-auto" color="red">
                             Stock Out
                           </Button>
                         ) : (
                           <Button
-                            className="purchaseButton"
-                            fluid
+                            className="mx-auto d-flex"
                             color={user?.balance > meal?.price ? "blue" : "red"}
                             onClick={() => {
                               if (user?.balance > meal?.price) {

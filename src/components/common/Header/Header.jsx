@@ -14,7 +14,7 @@ const Header = () => {
   const { isOpen, onClose, setCustom } = useDisclosure();
   const handleDelete = () => {
     logout();
-    setUser(null);
+    setUser("");
     onClose();
     navigate("/signin");
   };

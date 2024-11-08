@@ -18,8 +18,12 @@ function AuthProvider(props) {
   });
 
   useEffect(() => {
-    setUser(data);
-  }, [data]);
+    if (token) {
+      setUser(data);
+    } else {
+      setUser("");
+    }
+  }, [data, token]);
 
   const value = useMemo(
     () => ({ user, setUser, isMeApiFetching }),
