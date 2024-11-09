@@ -1,14 +1,15 @@
 import avatar from "@/assets/user-avatar.png";
 import { BsTelephone } from "react-icons/bs";
-import { FaRegEnvelope } from "react-icons/fa";
+import { FaEdit, FaRegEnvelope } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { LuHotel } from "react-icons/lu";
 import { MdOutlineMeetingRoom } from "react-icons/md";
-import { Button, Grid, GridColumn, Image } from "semantic-ui-react";
+import { Button, Grid, GridColumn, Image, Popup } from "semantic-ui-react";
 import { useAuth } from "../../context/app/useAuth";
 import { useDisclosure } from "../../hooks/pure/useDisclosure";
 import RechargeModal from "../common/RechargeModal";
 import ChangePasswordModal from "../common/ChangePasswordModal";
+import UpdateProfileModal from "../Users/UpdateProfileModal";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -18,11 +19,16 @@ const Profile = () => {
     onClose: onPassClose,
     setCustom: setPassCustom,
   } = useDisclosure();
+  const {
+    isOpen: isProfileOpen,
+    onClose: onProfileClose,
+    setCustom: setProfileCustom,
+  } = useDisclosure();
   return (
     <>
       <RechargeModal onClose={onClose} open={isOpen} />
       <ChangePasswordModal onClose={onPassClose} open={isPassOpen} />
-
+      <UpdateProfileModal onClose={onProfileClose} open={isProfileOpen} />
       <div className="profileWrap p-2">
         <div className="profileHeader">
           <Grid>
@@ -30,6 +36,18 @@ const Profile = () => {
               <Image
                 className="b-radius-50 mx-auto"
                 src={user?.imageUrl || avatar}
+              />
+              <Popup
+                content="Update Profile"
+                position="top center"
+                trigger={
+                  <div
+                    onClick={() => setProfileCustom(true)}
+                    className="profileUploadBtn mt-2"
+                  >
+                    <FaEdit />
+                  </div>
+                }
               />
             </GridColumn>
             <GridColumn className="asc" mobile={16} computer={12}>

@@ -23,7 +23,12 @@ body {
   justify-content: center;
   flex-direction: column;
 }
-
+.p-relative {
+  position: relative !important;
+}
+.p-absolute {
+  position: absolute;
+}
 .scene svg {
   width: 120px;
   height: 120px;

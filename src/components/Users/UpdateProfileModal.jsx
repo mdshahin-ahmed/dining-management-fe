@@ -29,11 +29,11 @@ const UpdateProfileModal = ({ onClose, open = true }) => {
   });
 
   const { mutate: updateUserProfile, isPending } = useMutation({
-    mutationFn: (data) => client(`user/${open}`, { data, method: "PATCH" }),
+    mutationFn: (data) => client(`user/profile`, { data, method: "PATCH" }),
     onSuccess: () => {
       onClose();
       queryClient.refetchQueries({
-        queryKey: ["user/all-list"],
+        queryKey: ["me"],
         type: "active",
       });
       AsToast.success(

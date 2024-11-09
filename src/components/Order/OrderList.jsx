@@ -162,9 +162,9 @@ const OrderList = () => {
                       defaultValue={order?.status}
                       className="orderStatusDropdown"
                       options={
-                        user?.role === "user"
-                          ? userOrderStatus
-                          : adminOrderStatus
+                        user?.role === "admin" || user?.role === "manager"
+                          ? adminOrderStatus
+                          : userOrderStatus
                       }
                       onChange={(e, { value }) =>
                         handleStatusChange({ status: value, id: order?._id })

@@ -1,7 +1,9 @@
+import avatar from "@/assets/user-avatar.png";
 import { useState } from "react";
+import { FaEdit } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { MdAdd } from "react-icons/md";
-import avatar from "@/assets/user-avatar.png";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Image,
@@ -19,9 +21,6 @@ import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
 import AddBalanceModal from "./AddBalanceModal";
-import { useNavigate } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
-import UpdateProfileModal from "./UpdateProfileModal";
 
 const UsersList = () => {
   const navigate = useNavigate();
@@ -35,15 +34,11 @@ const UsersList = () => {
     defaultQuery
   );
   const { isOpen, onClose, setCustom } = useDisclosure();
-  const {
-    isOpen: isProfileOpen,
-    onClose: onProfileClose,
-    setCustom: setProfileCustom,
-  } = useDisclosure();
+
   return (
     <div className="previewLayout">
       <AddBalanceModal onClose={onClose} open={isOpen} />
-      <UpdateProfileModal onClose={onProfileClose} open={isProfileOpen} />
+
       <div className="d-flex jcsb">
         <h2>Users ({usersList?.meta?.total || 0})</h2>
         <div>
@@ -105,7 +100,7 @@ const UsersList = () => {
                 <TableCell>{user?.room}</TableCell>
                 <TableCell>{user?.balance.toFixed(2)}</TableCell>
                 <TableCell className="d-flex jcsb">
-                  <Button onClick={() => setProfileCustom(user?._id)}>
+                  <Button>
                     <FaEdit />
                   </Button>
                   <Button onClick={() => setCustom(user?._id)}>
