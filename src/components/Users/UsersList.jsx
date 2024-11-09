@@ -21,8 +21,10 @@ import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
 import AddBalanceModal from "./AddBalanceModal";
+import { useAuth } from "../../context/app/useAuth";
 
 const UsersList = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
@@ -40,7 +42,12 @@ const UsersList = () => {
       <AddBalanceModal onClose={onClose} open={isOpen} />
 
       <div className="d-flex jcsb">
-        <h2>Users ({usersList?.meta?.total || 0})</h2>
+        <div>
+          <h2>Users ({usersList?.meta?.total || 0})</h2>
+          {user?.role === "admin" && (
+            <h4 className="mt-0">Total Balance ({usersList?.totalBalance})</h4>
+          )}
+        </div>
         <div>
           <SearchBar
             placeholder="Search user"
