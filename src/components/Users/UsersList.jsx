@@ -2,11 +2,12 @@ import avatar from "@/assets/user-avatar.png";
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
   Image,
+  Popup,
   Table,
   TableBody,
   TableCell,
@@ -22,9 +23,16 @@ import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
 import AddBalanceModal from "./AddBalanceModal";
 import { useAuth } from "../../context/app/useAuth";
+import DeleteModal from "../common/DeleteModal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import AsToast from "../common/AsToast";
+import { FiTrash2 } from "react-icons/fi";
+import { useClient } from "../../hooks/pure/useClient";
 
 const UsersList = () => {
   const { user } = useAuth();
+  const client = useClient();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
@@ -36,16 +44,53 @@ const UsersList = () => {
     defaultQuery
   );
   const { isOpen, onClose, setCustom } = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onClose: onDeleteClose,
+    setCustom: setDeleteCustom,
+  } = useDisclosure();
+
+  const { mutate: deleteUserMutate, isPending } = useMutation({
+    mutationFn: (id) => client(`user/${id}`, { method: "DELETE" }),
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: ["user/all-list"],
+        type: "active",
+      });
+      onDeleteClose();
+      AsToast.error(
+        <div className="errorToast">
+          <FiTrash2 /> &nbsp;
+          <span>User Deleted!</span>
+        </div>
+      );
+    },
+  });
+
+  const handleDelete = (id) => {
+    deleteUserMutate(id);
+  };
 
   return (
     <div className="previewLayout">
       <AddBalanceModal onClose={onClose} open={isOpen} />
+      <DeleteModal
+        modalHeader="Delete User"
+        modalContent="Are you sure you want to delete user?"
+        onClose={onDeleteClose}
+        confirmText="Delete"
+        open={isDeleteOpen}
+        isLoading={isPending}
+        onConfirm={() => handleDelete(isDeleteOpen)}
+      />
 
       <div className="d-flex jcsb">
         <div>
           <h2>Users ({usersList?.meta?.total || 0})</h2>
           {user?.role === "admin" && (
-            <h4 className="mt-0">Total Balance ({usersList?.totalBalance})</h4>
+            <h4 className="mt-0">
+              Total Balance ({usersList?.totalBalance || 0})
+            </h4>
           )}
         </div>
         <div>
@@ -107,13 +152,37 @@ const UsersList = () => {
                 <TableCell>{user?.room}</TableCell>
                 <TableCell>{user?.balance.toFixed(2)}</TableCell>
                 <TableCell className="d-flex jcsb">
-                  <Button>
-                    <FaEdit />
-                  </Button>
-                  <Button onClick={() => setCustom(user?._id)}>
-                    <FaBangladeshiTakaSign />
-                    <MdAdd />
-                  </Button>
+                  <Popup
+                    content="Add Balance"
+                    position="top center"
+                    trigger={
+                      <Button onClick={() => setCustom(user?._id)}>
+                        <FaBangladeshiTakaSign />
+                        <MdAdd />
+                      </Button>
+                    }
+                  />
+                  <Popup
+                    content="Edit User"
+                    position="top center"
+                    trigger={
+                      <Button onClick={() => navigate(`edit/${user?._id}`)}>
+                        <FaEdit />
+                      </Button>
+                    }
+                  />
+                  <Popup
+                    content="Delete"
+                    position="top center"
+                    trigger={
+                      <Button
+                        color="red"
+                        onClick={() => setDeleteCustom(user?._id)}
+                      >
+                        <MdDelete />
+                      </Button>
+                    }
+                  />
                 </TableCell>
               </TableRow>
             ))

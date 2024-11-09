@@ -1,39 +1,61 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Button } from "semantic-ui-react";
 import { hallOptions, RoleOptions } from "../../constant/common.constant";
 import { useClient } from "../../hooks/pure/useClient";
-import { userSchema } from "../../validations/user.schema";
+import { updateUserSchema, userSchema } from "../../validations/user.schema";
 import { AsForm, AsInput, AsSelect } from "../common/form";
 import AsToast from "../common/AsToast";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const ManageUser = () => {
   const { id } = useParams();
-  console.log(id);
+  const navigate = useNavigate();
   const client = useClient();
   const {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({
     defaultValues: {
       name: "",
       email: "",
       hostel: "",
       room: "",
-      password: "",
       role: "",
       userId: "",
     },
-    resolver: joiResolver(userSchema),
+    resolver: joiResolver(id ? updateUserSchema : userSchema),
   });
+
+  const { data } = useQuery({
+    queryKey: [`${id}`],
+    queryFn: () => client(`user/${id}`), // Fetch function
+    enabled: Boolean(id), // Run the query only if the token is available
+  });
+  useEffect(() => {
+    if (data) {
+      const { name, email, hostel, room, role, userId, mobile } = data;
+      reset({
+        name,
+        email,
+        hostel,
+        room,
+        role,
+        userId,
+        mobile,
+      });
+    }
+  }, [data]);
 
   const { mutate: addUserMutate, isPending } = useMutation({
     mutationFn: (data) => client("auth/signup-admin", { data: data }),
     onSuccess: () => {
+      navigate("/users");
       AsToast.success(
         <div className="errorToast">
           <AiOutlineCheckCircle /> &nbsp;
@@ -42,14 +64,29 @@ const ManageUser = () => {
       );
     },
   });
+  const { mutate: updateMutateUser, isPending: isUpdatePending } = useMutation({
+    mutationFn: (data) => client(`user/${id}`, { data: data, method: "PATCH" }),
+    onSuccess: () => {
+      AsToast.success(
+        <div className="errorToast">
+          <AiOutlineCheckCircle /> &nbsp;
+          <span>User Updated Successfully!</span>
+        </div>
+      );
+    },
+  });
 
   const handleUserSubmit = (data) => {
-    addUserMutate(data);
+    if (id) {
+      updateMutateUser(data);
+    } else {
+      addUserMutate(data);
+    }
   };
 
   return (
     <div className="previewLayout">
-      <h2 className="mb-4">Create User</h2>
+      <h2 className="mb-4"> {id ? "Update" : "Create"} User</h2>
       <AsForm control={control} errors={errors} size="large">
         <AsInput
           maxLength={30}
@@ -68,6 +105,7 @@ const ManageUser = () => {
           computer={8}
         />
         <AsInput
+          disabled={id}
           maxLength={30}
           name="password"
           required
@@ -115,11 +153,11 @@ const ManageUser = () => {
       </AsForm>
       <Button
         className="mt-5"
-        loading={isPending}
+        loading={isPending || isUpdatePending}
         onClick={handleSubmit(handleUserSubmit)}
         primary
       >
-        Create
+        {id ? "Update" : "Create"}
       </Button>
     </div>
   );
