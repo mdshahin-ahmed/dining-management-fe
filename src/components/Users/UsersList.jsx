@@ -177,6 +177,9 @@ const UsersList = () => {
                     trigger={
                       <Button
                         color="red"
+                        disabled={
+                          user?.role === "admin" || user?.role === "manager"
+                        }
                         onClick={() => setDeleteCustom(user?._id)}
                       >
                         <MdDelete />

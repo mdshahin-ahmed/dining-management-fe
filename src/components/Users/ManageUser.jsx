@@ -32,13 +32,13 @@ const ManageUser = () => {
     resolver: joiResolver(id ? updateUserSchema : userSchema),
   });
 
-  const { data } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: [`${id}`],
     queryFn: () => client(`user/${id}`), // Fetch function
     enabled: Boolean(id), // Run the query only if the token is available
   });
   useEffect(() => {
-    if (data) {
+    if (data && id) {
       const { name, email, hostel, room, role, userId, mobile } = data;
       reset({
         name,
@@ -87,78 +87,84 @@ const ManageUser = () => {
   return (
     <div className="previewLayout">
       <h2 className="mb-4"> {id ? "Update" : "Create"} User</h2>
-      <AsForm control={control} errors={errors} size="large">
-        <AsInput
-          maxLength={30}
-          name="name"
-          required
-          label="Name"
-          placeholder="Enter your name"
-          computer={8}
-        />
-        <AsInput
-          maxLength={100}
-          name="email"
-          required
-          label="Email"
-          placeholder="Enter your email"
-          computer={8}
-        />
-        <AsInput
-          disabled={id}
-          maxLength={30}
-          name="password"
-          required
-          label="Password"
-          placeholder="Enter a password"
-          computer={8}
-        />
-        <AsInput
-          name="mobile"
-          required
-          label="Mobile"
-          placeholder="Enter your mobile number"
-          computer={8}
-        />
-        <AsSelect
-          name="hostel"
-          required
-          label="Hostel"
-          placeholder="Select Hostel"
-          options={hallOptions}
-        />
-        <AsInput
-          maxLength={4}
-          name="room"
-          required
-          label="Room Number"
-          placeholder="Room number"
-          computer={8}
-        />
-        <AsInput
-          maxLength={4}
-          name="userId"
-          required
-          label="User Id"
-          placeholder="Enter User Id"
-          computer={8}
-        />
-        <AsSelect
-          name="role"
-          required
-          label="Role"
-          placeholder="Select Role"
-          options={RoleOptions}
-        />
-      </AsForm>
-      <Button
-        className="mt-5"
-        loading={isPending || isUpdatePending}
-        onClick={handleSubmit(handleUserSubmit)}
-        primary
-      >
-        {id ? "Update" : "Create"}
-      </Button>
+      {isFetching ? (
+        <span>Loading...</span>
+      ) : (
+        <>
+          <AsForm control={control} errors={errors} size="large">
+            <AsInput
+              maxLength={30}
+              name="name"
+              required
+              label="Name"
+              placeholder="Enter your name"
+              computer={8}
+            />
+            <AsInput
+              maxLength={100}
+              name="email"
+              required
+              label="Email"
+              placeholder="Enter your email"
+              computer={8}
+            />
+            <AsInput
+              disabled={id}
+              maxLength={30}
+              name="password"
+              required
+              label="Password"
+              placeholder="Enter a password"
+              computer={8}
+            />
+            <AsInput
+              name="mobile"
+              required
+              label="Mobile"
+              placeholder="Enter your mobile number"
+              computer={8}
+            />
+            <AsSelect
+              name="hostel"
+              required
+              label="Hostel"
+              placeholder="Select Hostel"
+              options={hallOptions}
+            />
+            <AsInput
+              maxLength={4}
+              name="room"
+              required
+              label="Room Number"
+              placeholder="Room number"
+              computer={8}
+            />
+            <AsInput
+              maxLength={4}
+              name="userId"
+              required
+              label="User Id"
+              placeholder="Enter User Id"
+              computer={8}
+            />
+            <AsSelect
+              name="role"
+              required
+              label="Role"
+              placeholder="Select Role"
+              options={RoleOptions}
+            />
+          </AsForm>
+          <Button
+            className="mt-5"
+            loading={isPending || isUpdatePending}
+            onClick={handleSubmit(handleUserSubmit)}
+            primary
+          >
+            {id ? "Update" : "Create"}
+          </Button>
+        </>
+      )}
     </div>
   );
 };
