@@ -47,7 +47,7 @@ const routeList = [
     content: "All Order",
     pathname: "all-order",
     src: FaCartArrowDown,
-    permissions: ["admin", "manager"],
+    permissions: ["admin", "manager", "user"],
   },
   {
     content: "Balance",

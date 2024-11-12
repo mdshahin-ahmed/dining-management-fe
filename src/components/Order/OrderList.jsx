@@ -113,7 +113,7 @@ const OrderList = () => {
             <TableHeaderCell>Updated At</TableHeaderCell>
             <TableHeaderCell>Status</TableHeaderCell>
             <TableHeaderCell>Price</TableHeaderCell>
-            {user?.role === "admin" && (
+            {(user?.role === "admin" || user?.role === "manager") && (
               <TableHeaderCell>Action</TableHeaderCell>
             )}
           </TableRow>
@@ -152,7 +152,7 @@ const OrderList = () => {
                   </span>
                 </TableCell>
                 <TableCell>{order?.price}</TableCell>
-                {user?.role === "admin" && (
+                {(user?.role === "admin" || user?.role === "manager") && (
                   <TableCell>
                     <Select
                       // disabled={
@@ -177,11 +177,21 @@ const OrderList = () => {
           ) : (
             <>
               {isFetching && (
-                <TableLoader columns={user?.role === "admin" ? 11 : 10} />
+                <TableLoader
+                  columns={
+                    user?.role === "admin" || user?.role === "manager" ? 11 : 10
+                  }
+                />
               )}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan={user?.role === "admin" ? 11 : 10}>
+                  <TableCell
+                    colSpan={
+                      user?.role === "admin" || user?.role === "manager"
+                        ? 11
+                        : 10
+                    }
+                  >
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>

@@ -107,7 +107,7 @@ function AuthenticatedApp() {
       <Route
         path="/all-order"
         element={
-          <AuthorizedRoute permissions={["admin", "manager"]}>
+          <AuthorizedRoute permissions={["admin", "manager", "user"]}>
             <AppLayout>
               <AllOrders />
             </AppLayout>
