@@ -28,7 +28,7 @@ const AllOrders = () => {
     limit: 20,
     // searchTerm: ,
     type: "",
-    status: ["delivered"],
+    status: ["delivered", "canceled"],
   });
 
   const client = useClient();
@@ -132,10 +132,10 @@ const AllOrders = () => {
                 {(user?.role === "admin" || user?.role === "manager") && (
                   <TableCell>
                     <Select
-                      // disabled={
-                      //   order?.status === "delivered" ||
-                      //   order?.status === "canceled"
-                      // }
+                      disabled={
+                        // order?.status === "delivered" ||
+                        order?.status === "canceled"
+                      }
                       defaultValue={order?.status}
                       className="orderStatusDropdown"
                       options={adminOrderStatus}

@@ -80,6 +80,11 @@ export const adminOrderStatus = [
     text: "Pending",
     value: "pending",
   },
+  {
+    key: "canceled",
+    text: "Canceled",
+    value: "canceled",
+  },
 ];
 
 export const userOrderStatus = [

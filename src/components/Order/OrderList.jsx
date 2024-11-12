@@ -33,7 +33,7 @@ const OrderList = () => {
     limit: 20,
     // searchTerm: ,
     type: "",
-    status: ["pending", "canceled"],
+    status: ["pending"],
   });
 
   const client = useClient();
@@ -63,9 +63,29 @@ const OrderList = () => {
       );
     },
   });
+  const { mutate: cancelOrderMutate } = useMutation({
+    mutationFn: ({ id, status }) =>
+      client(`order/cancel/${id}`, { method: "PATCH", data: { status } }),
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: ["order-list"],
+        type: "active",
+      });
+      AsToast.success(
+        <div className="errorToast">
+          <AiOutlineCheckCircle /> &nbsp;
+          <span>Order canceled successfully!</span>
+        </div>
+      );
+    },
+  });
 
   const handleStatusChange = (data) => {
-    updateStatusMutate(data);
+    if (data?.status === "canceled") {
+      cancelOrderMutate(data);
+    } else {
+      updateStatusMutate(data);
+    }
   };
 
   return (
