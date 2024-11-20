@@ -116,6 +116,7 @@ const ManageUser = () => {
               label="Password"
               placeholder="Enter a password"
               computer={8}
+              type="password"
             />
             <AsInput
               name="mobile"

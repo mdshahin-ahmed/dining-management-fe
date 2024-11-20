@@ -66,6 +66,7 @@ const SignIn = () => {
               label="Password"
               placeholder="Enter your password"
               computer={16}
+              type="password"
             />
             <GridColumn width={16}>
               <Button

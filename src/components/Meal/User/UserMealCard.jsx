@@ -74,9 +74,11 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                         ) : (
                           <Button
                             className="mx-auto d-flex"
-                            color={user?.balance > meal?.price ? "blue" : "red"}
+                            color={
+                              user?.balance >= meal?.price ? "blue" : "red"
+                            }
                             onClick={() => {
-                              if (user?.balance > meal?.price) {
+                              if (user?.balance >= meal?.price) {
                                 setCustom(meal?._id);
                               }
                               if (user?.balance < meal?.price) {

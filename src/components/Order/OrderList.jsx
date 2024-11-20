@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
   Button,
@@ -38,23 +38,29 @@ const OrderList = () => {
 
   const client = useClient();
   const queryClient = useQueryClient();
+  const [ordersList, setOrdersList] = useState([]);
+  console.log(ordersList);
 
-  const { data: ordersList, isFetching } = useGetQueryDataList(
+  const { data: ordersData, isFetching } = useGetQueryDataList(
     "order",
-    defaultQuery,
-    {
-      onSuccess: () => {},
-    }
+    defaultQuery
   );
+
+  useEffect(() => {
+    if (ordersData?.result) {
+      setOrdersList(ordersData?.result);
+    }
+  }, [ordersData?.result]);
 
   const { mutate: updateStatusMutate } = useMutation({
     mutationFn: ({ id, status }) =>
       client(`order/${id}`, { method: "PATCH", data: { status } }),
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: ["order-list"],
-        type: "active",
-      });
+    onSuccess: (res) => {
+      // queryClient.refetchQueries({
+      //   queryKey: ["order-list"],
+      //   type: "active",
+      // });
+      setOrdersList((prev) => prev.filter((order) => order?._id !== res?._id));
       AsToast.success(
         <div className="errorToast">
           <AiOutlineCheckCircle /> &nbsp;
@@ -91,7 +97,7 @@ const OrderList = () => {
   return (
     <div className="previewLayout">
       <div className="orderHeaderWrap">
-        <h2>Orders ({ordersList?.meta?.total || 0})</h2>
+        <h2>Orders ({ordersData?.meta?.total || 0})</h2>
         <div className="orderFilterWrap">
           <Select
             className="orderFilterDropdown"
@@ -139,8 +145,8 @@ const OrderList = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {ordersList?.result?.length > 0 && !isFetching ? (
-            ordersList?.result?.map((order, index) => (
+          {ordersList?.length > 0 && !isFetching ? (
+            ordersList?.map((order, index) => (
               <TableRow key={order?._id}>
                 <TableCell>
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
@@ -221,7 +227,7 @@ const OrderList = () => {
         </TableBody>
       </Table>
       <CustomPagination
-        totalPages={ordersList?.meta?.totalPage || 0}
+        totalPages={ordersData?.meta?.totalPage || 0}
         activePage={defaultQuery?.page || 0}
         onPageChange={(value) =>
           setDefaultQuery((prev) => ({ ...prev, page: value }))

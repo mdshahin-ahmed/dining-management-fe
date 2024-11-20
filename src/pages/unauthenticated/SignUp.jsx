@@ -79,6 +79,7 @@ const SignUp = () => {
               label="Password"
               placeholder="Enter a password"
               computer={16}
+              type="password"
             />
             <AsInput
               name="mobile"
