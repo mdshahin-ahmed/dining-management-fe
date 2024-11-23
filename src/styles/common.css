@@ -69,6 +69,9 @@ body {
 .color-white {
   color: white !important;
 }
+.fw-bold {
+  font-weight: bold;
+}
 .bg-primary {
   background-color: #2196f3 !important ;
 }
@@ -593,6 +596,15 @@ body {
 
 .c-primary {
   color: #2185d0 !important;
+}
+.c-red {
+  color: red !important;
+}
+
+.balanceCount {
+  color: #ff0066;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .disable-btn {
