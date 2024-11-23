@@ -17,7 +17,7 @@ const routeList = [
     content: "Home",
     pathname: "home",
     src: IoHomeSharp,
-    permissions: ["user", "admin"],
+    permissions: ["user", "admin", "manager"],
   },
   {
     content: "Manage Meal",
@@ -29,7 +29,7 @@ const routeList = [
     content: "Meals",
     pathname: "meals",
     src: GiHotMeal,
-    permissions: ["user", "admin"],
+    permissions: ["user", "admin", "manager"],
   },
   {
     content: "Users",

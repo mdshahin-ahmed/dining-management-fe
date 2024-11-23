@@ -11,7 +11,11 @@ import {
   TableRow,
 } from "semantic-ui-react";
 import { useGetQueryDataList } from "../../api/query.api";
-import { adminOrderStatus } from "../../constant/common.constant";
+import {
+  adminOrderStatus,
+  managerOrderStatus,
+} from "../../constant/common.constant";
+import { useAuth } from "../../context/app/useAuth";
 import { useClient } from "../../hooks/pure/useClient";
 import { getFormattedDateTime } from "../../utils/helper";
 import AsToast from "../common/AsToast";
@@ -19,7 +23,6 @@ import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
-import { useAuth } from "../../context/app/useAuth";
 
 const AllOrders = () => {
   const { user } = useAuth();
@@ -138,7 +141,10 @@ const AllOrders = () => {
                       }
                       defaultValue={order?.status}
                       className="orderStatusDropdown"
-                      options={adminOrderStatus}
+                      options={
+                        (user?.role === "admin" && adminOrderStatus) ||
+                        (user?.role === "manager" && managerOrderStatus)
+                      }
                       onChange={(e, { value }) =>
                         handleStatusChange({ status: value, id: order?._id })
                       }

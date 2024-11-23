@@ -37,7 +37,7 @@ function AuthenticatedApp() {
       <Route
         path="/meals"
         element={
-          <AuthorizedRoute permissions={["admin", "user"]}>
+          <AuthorizedRoute permissions={["admin", "user", "manager"]}>
             <AppLayout>
               <UserMeal />
             </AppLayout>

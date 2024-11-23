@@ -14,9 +14,9 @@ import {
 import { useGetQueryDataList } from "../../api/query.api";
 import {
   adminOrderStatus,
+  managerOrderStatus,
   mealNameOptions,
   orderTypeOptions,
-  userOrderStatus,
 } from "../../constant/common.constant";
 import { useAuth } from "../../context/app/useAuth";
 import { useClient } from "../../hooks/pure/useClient";
@@ -30,7 +30,7 @@ const OrderList = () => {
   const { user } = useAuth();
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
-    limit: 20,
+    limit: 500,
     // searchTerm: ,
     type: "",
     status: ["pending"],
@@ -39,7 +39,7 @@ const OrderList = () => {
   const client = useClient();
   const queryClient = useQueryClient();
   const [ordersList, setOrdersList] = useState([]);
-  console.log(ordersList);
+  const [searchOrderList, setSearchOrderList] = useState([]);
 
   const { data: ordersData, isFetching } = useGetQueryDataList(
     "order",
@@ -49,6 +49,7 @@ const OrderList = () => {
   useEffect(() => {
     if (ordersData?.result) {
       setOrdersList(ordersData?.result);
+      setSearchOrderList(ordersData?.result);
     }
   }, [ordersData?.result]);
 
@@ -61,6 +62,9 @@ const OrderList = () => {
       //   type: "active",
       // });
       setOrdersList((prev) => prev.filter((order) => order?._id !== res?._id));
+      setSearchOrderList((prev) =>
+        prev.filter((order) => order?._id !== res?._id)
+      );
       AsToast.success(
         <div className="errorToast">
           <AiOutlineCheckCircle /> &nbsp;
@@ -94,10 +98,20 @@ const OrderList = () => {
     }
   };
 
+  const handleFindUser = (userId) => {
+    if (userId) {
+      setSearchOrderList(
+        ordersList?.filter((order) => order?.userId === userId)
+      );
+    } else {
+      setSearchOrderList(ordersList);
+    }
+  };
+
   return (
     <div className="previewLayout">
       <div className="orderHeaderWrap">
-        <h2>Orders ({ordersData?.meta?.total || 0})</h2>
+        <h2>Orders ({ordersList?.length || 0})</h2>
         <div className="orderFilterWrap">
           <Select
             className="orderFilterDropdown"
@@ -120,8 +134,9 @@ const OrderList = () => {
           <SearchBar
             placeholder="ইউজার আইডি"
             stillTime={500}
-            onSuccess={(e) =>
-              setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
+            onSuccess={
+              (e) => handleFindUser(e)
+              // setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
             }
           />
         </div>
@@ -145,8 +160,8 @@ const OrderList = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {ordersList?.length > 0 && !isFetching ? (
-            ordersList?.map((order, index) => (
+          {searchOrderList?.length > 0 && !isFetching ? (
+            searchOrderList?.map((order, index) => (
               <TableRow key={order?._id}>
                 <TableCell>
                   {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
@@ -188,9 +203,8 @@ const OrderList = () => {
                       defaultValue={order?.status}
                       className="orderStatusDropdown"
                       options={
-                        user?.role === "admin" || user?.role === "manager"
-                          ? adminOrderStatus
-                          : userOrderStatus
+                        (user?.role === "admin" && adminOrderStatus) ||
+                        (user?.role === "manager" && managerOrderStatus)
                       }
                       onChange={(e, { value }) =>
                         handleStatusChange({ status: value, id: order?._id })

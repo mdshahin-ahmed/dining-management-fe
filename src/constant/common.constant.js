@@ -87,12 +87,17 @@ export const adminOrderStatus = [
   },
 ];
 
-export const userOrderStatus = [
-  // {
-  //   key: "canceled",
-  //   text: "Cancel",
-  //   value: "canceled",
-  // },
+export const managerOrderStatus = [
+  {
+    key: "delivered",
+    text: "Delivered",
+    value: "delivered",
+  },
+  {
+    key: "pending",
+    text: "Pending",
+    value: "pending",
+  },
 ];
 
 export const orderTypeOptions = [
