@@ -86,6 +86,23 @@ export const adminOrderStatus = [
     value: "canceled",
   },
 ];
+export const cancelRequestStatus = [
+  {
+    key: "approved",
+    text: "Approved",
+    value: "approved",
+  },
+  {
+    key: "pending",
+    text: "Pending",
+    value: "pending",
+  },
+  {
+    key: "canceled",
+    text: "Canceled",
+    value: "canceled",
+  },
+];
 
 export const managerOrderStatus = [
   {

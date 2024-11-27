@@ -11,6 +11,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Image, List, ListItem, Popup } from "semantic-ui-react";
 import { useAuth } from "../../../context/app/useAuth";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { TbDevicesCancel } from "react-icons/tb";
 
 const routeList = [
   {
@@ -48,6 +49,12 @@ const routeList = [
     pathname: "all-order",
     src: FaCartArrowDown,
     permissions: ["admin", "manager", "user"],
+  },
+  {
+    content: "All Cancel Request",
+    pathname: "cancel-req",
+    src: TbDevicesCancel,
+    permissions: ["admin", "user"],
   },
   {
     content: "Balance",
