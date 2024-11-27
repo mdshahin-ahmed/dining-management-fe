@@ -76,7 +76,7 @@ const AddCancelReq = () => {
         onClick={handleSubmit(handleUserSubmit)}
         primary
       >
-        Create
+        Submit
       </Button>
     </div>
   );

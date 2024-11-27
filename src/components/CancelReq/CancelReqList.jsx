@@ -69,7 +69,7 @@ const CancelReqList = () => {
       <div className="d-flex jcsb">
         <h2>Cancel ({cancelReqList?.meta?.total || 0})</h2>
         <Button onClick={() => navigate("add")} className="ml-3" primary>
-          Add Cancel
+          Cancel Request
         </Button>
       </div>
       <Table basic>

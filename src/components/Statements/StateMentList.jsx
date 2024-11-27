@@ -19,9 +19,12 @@ import NoDataAvailable from "../common/NoDataAvailable";
 import SearchBar from "../common/SearchBar";
 import TableLoader from "../common/TableLoader";
 import { useAuth } from "../../context/app/useAuth";
+import { useDisclosure } from "../../hooks/pure/useDisclosure";
+import DeleteModal from "../common/DeleteModal";
 
 const StateMentList = () => {
   const { user } = useAuth();
+  const { isOpen, onClose, setCustom } = useDisclosure();
   const [defaultQuery, setDefaultQuery] = useState({
     page: 1,
     limit: 20,
@@ -40,7 +43,7 @@ const StateMentList = () => {
     }
   );
 
-  const { mutate: updateStatusMutate } = useMutation({
+  const { mutate: updateStatusMutate, isPending } = useMutation({
     mutationFn: ({ id, status }) =>
       client(`statement/${id}`, { method: "PATCH", data: { status } }),
     onSuccess: () => {
@@ -48,6 +51,7 @@ const StateMentList = () => {
         queryKey: ["statement-list"],
         type: "active",
       });
+      onClose();
       AsToast.success(
         <div className="errorToast">
           <AiOutlineCheckCircle /> &nbsp;
@@ -63,6 +67,15 @@ const StateMentList = () => {
 
   return (
     <div className="previewLayout">
+      <DeleteModal
+        isLoading={isPending}
+        confirmText="Approved"
+        modalContent="Are you sure you want to Approved?"
+        modalHeader="Approved"
+        onClose={onClose}
+        open={isOpen}
+        onConfirm={() => handleStatusChange(isOpen)}
+      />
       <div className="orderHeaderWrap">
         <h2>Statements ({statementList?.meta?.total || 0})</h2>
         <div className="orderFilterWrap">
@@ -135,7 +148,7 @@ const StateMentList = () => {
                         },
                       ]}
                       onChange={(e, { value }) =>
-                        handleStatusChange({
+                        setCustom({
                           status: value,
                           id: statement?._id,
                         })

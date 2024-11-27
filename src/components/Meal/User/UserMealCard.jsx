@@ -86,7 +86,7 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                               }
                             }}
                           >
-                            {user?.balance > meal?.price
+                            {user?.balance >= meal?.price
                               ? "Purchase"
                               : "Recharge"}
                           </Button>

@@ -88,9 +88,7 @@ const UsersList = () => {
         <div>
           <h2>Users ({usersList?.meta?.total || 0})</h2>
           {user?.role === "admin" && (
-            <h4 className="mt-0">
-              Total Balance ({usersList?.totalBalance || 0})
-            </h4>
+            <h4 className="mt-0">({usersList?.totalBalance || 0})</h4>
           )}
         </div>
         <div>
