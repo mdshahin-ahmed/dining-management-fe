@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
+  Button,
   Select,
   Table,
   TableBody,
@@ -19,6 +20,7 @@ import NoDataAvailable from "../common/NoDataAvailable";
 import TableLoader from "../common/TableLoader";
 import { useAuth } from "../../context/app/useAuth";
 import { cancelRequestStatus } from "../../constant/common.constant";
+import { useNavigate } from "react-router-dom";
 
 const CancelReqList = () => {
   const { user } = useAuth();
@@ -30,6 +32,7 @@ const CancelReqList = () => {
   });
 
   const client = useClient();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const { data: cancelReqList, isFetching } = useGetQueryDataList(
@@ -63,17 +66,11 @@ const CancelReqList = () => {
 
   return (
     <div className="previewLayout">
-      <div className="orderHeaderWrap">
-        <h2>Cancel Orders ({cancelReqList?.meta?.total || 0})</h2>
-        {/* <div className="orderFilterWrap">
-          <SearchBar
-            placeholder="Search by mobile"
-            stillTime={500}
-            onSuccess={(e) =>
-              setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
-            }
-          />
-        </div> */}
+      <div className="d-flex jcsb">
+        <h2>Cancel ({cancelReqList?.meta?.total || 0})</h2>
+        <Button onClick={() => navigate("add")} className="ml-3" primary>
+          Add Cancel
+        </Button>
       </div>
       <Table basic>
         <TableHeader>
@@ -102,7 +99,11 @@ const CancelReqList = () => {
                   {cancel?.user?.name || "-"}
                 </TableCell>
                 <TableCell>{cancel?.user?.userId || "-"}</TableCell>
-                <TableCell>{cancel?.mealName || "-"}</TableCell>
+                <TableCell className="t-capitalize">
+                  <Button className={cancel?.mealName}>
+                    {cancel?.mealName || "-"}
+                  </Button>
+                </TableCell>
                 <TableCell>{cancel?.mealType || "-"}</TableCell>
                 <TableCell>
                   <span

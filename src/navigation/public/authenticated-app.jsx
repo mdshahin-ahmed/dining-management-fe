@@ -13,6 +13,7 @@ import AllOrders from "../../components/Order/AllOrders";
 import StateMentList from "../../components/Statements/StateMentList";
 import BalanceList from "../../components/Statements/BalanceList";
 import CancelReqList from "../../components/CancelReq/CancelReqList";
+import AddCancelReq from "../../components/CancelReq/AddCancelReq";
 
 function AuthenticatedApp() {
   return (
@@ -121,6 +122,16 @@ function AuthenticatedApp() {
           <AuthorizedRoute permissions={["admin", "user"]}>
             <AppLayout>
               <CancelReqList />
+            </AppLayout>
+          </AuthorizedRoute>
+        }
+      />
+      <Route
+        path="/cancel-req/add"
+        element={
+          <AuthorizedRoute permissions={["admin", "user"]}>
+            <AppLayout>
+              <AddCancelReq />
             </AppLayout>
           </AuthorizedRoute>
         }
