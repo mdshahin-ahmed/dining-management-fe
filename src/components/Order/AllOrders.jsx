@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
+  Button,
   Select,
   Table,
   TableBody,
@@ -14,6 +15,8 @@ import { useGetQueryDataList } from "../../api/query.api";
 import {
   adminOrderStatus,
   managerOrderStatus,
+  mealNameOptions,
+  orderTypeOptions,
 } from "../../constant/common.constant";
 import { useAuth } from "../../context/app/useAuth";
 import { useClient } from "../../hooks/pure/useClient";
@@ -71,6 +74,24 @@ const AllOrders = () => {
       <div className="orderHeaderWrap">
         <h2>Orders ({ordersList?.meta?.total || 0})</h2>
         <div className="orderFilterWrap">
+          <Select
+            className="orderFilterDropdown"
+            clearable
+            options={mealNameOptions}
+            onChange={(e, { value }) =>
+              setDefaultQuery((prev) => ({ ...prev, name: value }))
+            }
+            placeholder="মেনুর নাম"
+          />
+          <Select
+            className="orderFilterDropdown"
+            clearable
+            options={orderTypeOptions}
+            onChange={(e, { value }) =>
+              setDefaultQuery((prev) => ({ ...prev, type: value }))
+            }
+            placeholder="মেনুর ধরন"
+          />
           <SearchBar
             placeholder="Search meal"
             stillTime={500}
@@ -110,7 +131,7 @@ const AllOrders = () => {
                 </TableCell>
                 <TableCell>{order?.userId}</TableCell>
                 <TableCell className="t-capitalize">
-                  {order?.name || "-"}
+                  <Button className={order?.name}>{order?.name || "-"}</Button>
                 </TableCell>
                 <TableCell className="t-capitalize">
                   {order?.type || "-"}
