@@ -111,7 +111,7 @@ const OrderList = () => {
   return (
     <div className="previewLayout">
       <div className="orderHeaderWrap">
-        <h2>Orders ({ordersList?.length || 0})</h2>
+        <h2>Orders ({searchOrderList?.length || 0})</h2>
         <div className="orderFilterWrap">
           <Select
             className="orderFilterDropdown"

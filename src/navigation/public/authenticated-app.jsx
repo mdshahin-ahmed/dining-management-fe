@@ -1,19 +1,18 @@
 import { Route, Routes } from "react-router-dom";
+import CancelReqList from "../../components/CancelReq/CancelReqList";
 import Home from "../../components/Home/Home";
 import MealDetails from "../../components/Meal/MealDetails";
 import MealListPage from "../../components/Meal/MealListPage";
 import UserMeal from "../../components/Meal/User/UserMeal";
+import AllOrders from "../../components/Order/AllOrders";
 import OrderList from "../../components/Order/OrderList";
 import Profile from "../../components/Profile/Profile";
+import BalanceList from "../../components/Statements/BalanceList";
+import StateMentList from "../../components/Statements/StateMentList";
 import ManageUser from "../../components/Users/ManageUser";
 import UsersList from "../../components/Users/UsersList";
 import AppLayout from "../../layouts/AppLayout";
 import AuthorizedRoute from "../AuthorizedRoute";
-import AllOrders from "../../components/Order/AllOrders";
-import StateMentList from "../../components/Statements/StateMentList";
-import BalanceList from "../../components/Statements/BalanceList";
-import CancelReqList from "../../components/CancelReq/CancelReqList";
-import AddCancelReq from "../../components/CancelReq/AddCancelReq";
 
 function AuthenticatedApp() {
   return (
@@ -122,16 +121,6 @@ function AuthenticatedApp() {
           <AuthorizedRoute permissions={["admin", "user"]}>
             <AppLayout>
               <CancelReqList />
-            </AppLayout>
-          </AuthorizedRoute>
-        }
-      />
-      <Route
-        path="/cancel-req/add"
-        element={
-          <AuthorizedRoute permissions={["admin", "user"]}>
-            <AppLayout>
-              <AddCancelReq />
             </AppLayout>
           </AuthorizedRoute>
         }
