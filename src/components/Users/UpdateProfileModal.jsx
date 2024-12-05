@@ -49,12 +49,9 @@ const UpdateProfileModal = ({ onClose, open = true }) => {
     useMutation({
       mutationFn: imageUpload,
       onSuccess: (res) => {
-        console.log(res);
         updateUserProfile({ imageUrl: res?.secure_url });
       },
-      onError: (error) => {
-        console.log(error);
-      },
+      onError: () => {},
     });
 
   const handleAddBalance = () => {

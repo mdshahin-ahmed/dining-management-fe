@@ -40,4 +40,38 @@ const changePasswordSchema = Joi.object({
   }),
 });
 
-export { signinSchema, signupSchema, changePasswordSchema };
+const sendOtpSchema = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
+  // password: Joi.string().min(5).max(30),
+});
+const verifyOtpSchema = Joi.object({
+  otp: Joi.string().required().length(6).messages({
+    "string.empty": "OTP is required.",
+    "string.length": "OTP must be exactly 6 characters long.",
+    "any.required": "OTP is required.",
+  }),
+});
+
+const updatePasswordSchema = Joi.object({
+  password: Joi.string().min(5).max(30).required().messages({
+    "string.base": "New password must be a string",
+    "string.min": "New password must be at least 5 characters long",
+    "string.max": "New password must be max 30 characters long",
+    "any.required": "New password is required",
+  }),
+  confirmPass: Joi.string().valid(Joi.ref("password")).required().messages({
+    "any.only": "New pass and confirm pass doesn't match",
+    "any.required": "Confirm password is required",
+  }),
+});
+
+export {
+  signinSchema,
+  signupSchema,
+  changePasswordSchema,
+  sendOtpSchema,
+  verifyOtpSchema,
+  updatePasswordSchema,
+};

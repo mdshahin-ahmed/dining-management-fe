@@ -1,8 +1,7 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useForm } from "react-hook-form";
-import AsToast from "./AsToast";
-import { AiOutlineCheckCircle } from "react-icons/ai";
 import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
   Button,
   Modal,
@@ -10,41 +9,49 @@ import {
   ModalContent,
   ModalHeader,
 } from "semantic-ui-react";
-import { AsForm, AsInput } from "./form";
-import { useClient } from "../../hooks/pure/useClient";
-import { changePasswordSchema } from "../../validations/signin/signin.schema";
 
-const ChangePasswordModal = ({ onClose, open = true }) => {
+import { useClient } from "../../hooks/pure/useClient";
+import { updatePasswordSchema } from "../../validations/signin/signin.schema";
+import AsToast from "../common/AsToast";
+import { AsForm, AsInput } from "../common/form";
+
+const UpdatePasswordModal = ({
+  onClose,
+  open = true,
+  setOtp,
+  setEmail,
+  otp,
+  email,
+}) => {
   const client = useClient();
+
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm({
-    resolver: joiResolver(changePasswordSchema),
+    resolver: joiResolver(updatePasswordSchema),
   });
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data) =>
-      client("auth/change-password", { data, method: "POST" }),
+      client("auth/update-password", { data, method: "PATCH" }),
     onSuccess: () => {
-      //   queryClient.refetchQueries({
-      //     queryKey: ["statement-recharge"],
-      //     type: "active",
-      //   });
+      setOtp("");
+      setEmail("");
       onClose();
       AsToast.success(
         <div className="errorToast">
           <AiOutlineCheckCircle /> &nbsp;
-          <span>Password Changed Successfully!</span>
+          <span>Password Updated!</span>
         </div>
       );
     },
   });
 
-  const handleAddBalance = (data) => {
+  const handleSendOtp = (data) => {
     delete data.confirmPass;
-    mutate(data);
+    mutate({ ...data, otp, email });
   };
 
   return (
@@ -55,32 +62,26 @@ const ChangePasswordModal = ({ onClose, open = true }) => {
       open={Boolean(open)}
       onClose={onClose}
     >
-      <ModalHeader>You want to change password?</ModalHeader>
+      <ModalHeader>Update password!</ModalHeader>
       <ModalContent>
         <AsForm control={control} errors={errors} size="large">
           <AsInput
-            name="oldPass"
+            name="password"
             required
-            label="Old Password"
-            placeholder="Enter Your Old Password"
+            label="New password"
+            placeholder="Enter new password"
             mobile={16}
             computer={16}
-          />
-          <AsInput
-            name="newPass"
-            required
-            label="New Password"
-            placeholder="Enter Your New Password"
-            mobile={16}
-            computer={16}
+            // type="email"
           />
           <AsInput
             name="confirmPass"
             required
-            label="Confirm Password"
-            placeholder="Enter Confirm Password"
+            label="Confirm password"
+            placeholder="Enter confirm password"
             mobile={16}
             computer={16}
+            // type="email"
           />
         </AsForm>
       </ModalContent>
@@ -90,14 +91,15 @@ const ChangePasswordModal = ({ onClose, open = true }) => {
         </Button>
         <Button
           loading={isPending}
-          onClick={handleSubmit(handleAddBalance)}
+          onClick={handleSubmit(handleSendOtp)}
           color="primary"
+          type="submit"
         >
-          Change
+          Verify OTP
         </Button>
       </ModalActions>
     </Modal>
   );
 };
 
-export default ChangePasswordModal;
+export default UpdatePasswordModal;
