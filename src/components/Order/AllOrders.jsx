@@ -96,7 +96,7 @@ const AllOrders = () => {
             placeholder="Search meal"
             stillTime={500}
             onSuccess={(e) =>
-              setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
+              setDefaultQuery((prev) => ({ ...prev, searchTerm: e, page: 1 }))
             }
           />
         </div>

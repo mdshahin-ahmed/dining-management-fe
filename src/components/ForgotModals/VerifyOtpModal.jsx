@@ -81,6 +81,7 @@ const VerifyOtpModal = ({
         </Button>
         <Button
           loading={isPending}
+          disabled={isPending}
           onClick={handleSubmit(handleSendOtp)}
           color="primary"
           type="submit"

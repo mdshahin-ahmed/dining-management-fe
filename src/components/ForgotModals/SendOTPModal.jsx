@@ -73,6 +73,7 @@ const SendOtpModal = ({ onClose, open = true, setEmail, setOtpCustom }) => {
         </Button>
         <Button
           loading={isPending}
+          disabled={isPending}
           onClick={handleSubmit(handleSendOtp)}
           color="primary"
           type="submit"

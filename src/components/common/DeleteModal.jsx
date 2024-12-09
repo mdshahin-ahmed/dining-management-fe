@@ -54,7 +54,7 @@ function DeleteModal({
           Cancel
         </Button>
         <Button
-          disabled={isManual && inputText !== "DELETE"}
+          disabled={isLoading || (isManual && inputText !== "DELETE")}
           loading={isLoading}
           color={confirm ? "primary" : "red"}
           onClick={onConfirm}

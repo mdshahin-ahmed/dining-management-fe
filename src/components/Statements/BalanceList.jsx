@@ -47,6 +47,7 @@ const BalanceList = () => {
           <TableRow>
             <TableHeaderCell>#</TableHeaderCell>
             <TableHeaderCell>User Name</TableHeaderCell>
+            <TableHeaderCell>User Id</TableHeaderCell>
             <TableHeaderCell>Amount</TableHeaderCell>
             <TableHeaderCell>Method</TableHeaderCell>
             <TableHeaderCell>Created At</TableHeaderCell>
@@ -65,6 +66,7 @@ const BalanceList = () => {
                 <TableCell className="t-capitalize">
                   {balance?.user?.name || "-"}
                 </TableCell>
+                <TableCell>{balance?.user?.userId || "-"}</TableCell>
                 <TableCell>{balance?.amount}</TableCell>
                 <TableCell className="t-capitalize">
                   {balance?.type || "-"}

@@ -108,6 +108,7 @@ const SignUp = () => {
             <GridColumn width={16}>
               <Button
                 loading={isPending}
+                disabled={isPending}
                 onClick={handleSubmit(handleSignUp)}
                 primary
                 fluid

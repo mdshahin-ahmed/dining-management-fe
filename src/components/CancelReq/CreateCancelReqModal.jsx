@@ -115,6 +115,7 @@ const CreateCancelReqModal = ({ onClose, open = true }) => {
         <Button
           className="mt-5"
           loading={isPending}
+          disabled={isPending}
           onClick={handleSubmit(handleUserSubmit)}
           primary
         >

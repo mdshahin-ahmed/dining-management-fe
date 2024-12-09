@@ -159,6 +159,7 @@ const ManageUser = () => {
           <Button
             className="mt-5"
             loading={isPending || isUpdatePending}
+            disabled={isPending || isUpdatePending}
             onClick={handleSubmit(handleUserSubmit)}
             primary
           >

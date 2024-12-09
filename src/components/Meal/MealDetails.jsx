@@ -202,6 +202,7 @@ const MealDetails = () => {
           <Button
             className="mt-3"
             loading={isAddMealPending}
+            disabled={isAddMealPending}
             onClick={handleSubmit(handleMealSubmit)}
             primary
           >

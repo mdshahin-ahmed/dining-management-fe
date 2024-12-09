@@ -83,7 +83,7 @@ const StateMentList = () => {
             placeholder="Search by mobile"
             stillTime={500}
             onSuccess={(e) =>
-              setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
+              setDefaultQuery((prev) => ({ ...prev, searchTerm: e, page: 1 }))
             }
           />
         </div>
@@ -93,6 +93,7 @@ const StateMentList = () => {
           <TableRow>
             <TableHeaderCell>#</TableHeaderCell>
             <TableHeaderCell>User Name</TableHeaderCell>
+            <TableHeaderCell>User Id</TableHeaderCell>
             <TableHeaderCell>Mobile</TableHeaderCell>
             <TableHeaderCell>Transaction Number</TableHeaderCell>
             <TableHeaderCell>Amount</TableHeaderCell>
@@ -116,6 +117,7 @@ const StateMentList = () => {
                 <TableCell className="t-capitalize">
                   {statement?.user?.name || "-"}
                 </TableCell>
+                <TableCell>{statement?.user?.userId || "-"}</TableCell>
                 <TableCell>{statement?.mobile}</TableCell>
                 <TableCell>{statement?.transactionNumber}</TableCell>
                 <TableCell>{statement?.amount}</TableCell>

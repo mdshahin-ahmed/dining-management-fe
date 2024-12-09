@@ -117,6 +117,7 @@ const UpdateProfileModal = ({ onClose, open = true }) => {
         </Button>
         <Button
           loading={isImageUploadPending || isPending}
+          disabled={isImageUploadPending || isPending}
           onClick={handleSubmit(handleAddBalance)}
           color="primary"
         >

@@ -75,6 +75,7 @@ const AddBalanceModal = ({ onClose, open = true }) => {
         </Button>
         <Button
           loading={isPending}
+          disabled={isPending}
           onClick={handleSubmit(handleAddBalance)}
           color="primary"
         >

@@ -96,7 +96,7 @@ const UsersList = () => {
             placeholder="Search user"
             stillTime={500}
             onSuccess={(e) =>
-              setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
+              setDefaultQuery((prev) => ({ ...prev, searchTerm: e, page: 1 }))
             }
           />
           <Button onClick={() => navigate("add")} className="ml-3" primary>
