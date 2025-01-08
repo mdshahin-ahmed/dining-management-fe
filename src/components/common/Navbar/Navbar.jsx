@@ -12,6 +12,7 @@ import { Image, List, ListItem, Popup } from "semantic-ui-react";
 import { useAuth } from "../../../context/app/useAuth";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { TbDevicesCancel } from "react-icons/tb";
+import { SiGoogleanalytics } from "react-icons/si";
 
 const routeList = [
   {
@@ -67,6 +68,12 @@ const routeList = [
     pathname: "statements",
     src: FaFileInvoiceDollar,
     permissions: ["admin", "user"],
+  },
+  {
+    content: "Analytics",
+    pathname: "analytics",
+    src: SiGoogleanalytics,
+    permissions: ["admin"],
   },
   {
     content: "Profile",
