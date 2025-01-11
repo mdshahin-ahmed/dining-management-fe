@@ -14,7 +14,7 @@ const CreateExpenseModal = ({ onClose, open = true }) => {
   const {
     control,
     formState: { errors },
-    handleSubmit,
+    // handleSubmit,
   } = useForm({
     defaultValues: {
       amount: "",
