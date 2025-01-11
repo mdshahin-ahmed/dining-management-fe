@@ -8,3 +8,4 @@ import "./profile.css";
 import "./meal.css";
 import "./user.css";
 import "./order.css";
+import "./analytics.css";

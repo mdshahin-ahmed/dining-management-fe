@@ -9,7 +9,7 @@ const AnalyticsPage = () => {
       <div className="d-flex jcsb">
         <h2 className="previewLayout">Analytics</h2>
         <div className="dateRangePicker">
-          <AsDateRangePicker />
+          <AsDateRangePicker className="rest" />
         </div>
       </div>
       <h4 className="ml-4 mb-0 tac">Analytics By Date Range</h4>
