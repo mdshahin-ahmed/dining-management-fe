@@ -5,7 +5,7 @@ import {
   FaUserAlt,
   FaUsers,
 } from "react-icons/fa";
-import { GiHotMeal } from "react-icons/gi";
+import { GiExpense, GiHotMeal } from "react-icons/gi";
 import { IoHomeSharp } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { Image, List, ListItem, Popup } from "semantic-ui-react";
@@ -70,11 +70,18 @@ const routeList = [
     permissions: ["admin", "user"],
   },
   {
+    content: "Expense",
+    pathname: "expense",
+    src: GiExpense,
+    permissions: ["admin"],
+  },
+  {
     content: "Analytics",
     pathname: "analytics",
     src: SiGoogleanalytics,
     permissions: ["admin"],
   },
+
   {
     content: "Profile",
     pathname: "profile",

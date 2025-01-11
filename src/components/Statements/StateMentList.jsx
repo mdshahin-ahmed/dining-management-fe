@@ -120,7 +120,7 @@ const StateMentList = () => {
                 <TableCell>{statement?.user?.userId || "-"}</TableCell>
                 <TableCell>{statement?.mobile}</TableCell>
                 <TableCell>{statement?.transactionNumber}</TableCell>
-                <TableCell>{statement?.amount}</TableCell>
+                <TableCell>{statement?.amount.toFixed(2)}</TableCell>
                 <TableCell className="t-capitalize">
                   {statement?.type || "-"}
                 </TableCell>

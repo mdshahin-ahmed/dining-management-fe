@@ -8,8 +8,8 @@ import "./index.css";
 import "./styles/global-styles";
 import "react-toastify/dist/ReactToastify.css";
 import "react-quill/dist/quill.snow.css";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
+import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
+import "react-calendar/dist/Calendar.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

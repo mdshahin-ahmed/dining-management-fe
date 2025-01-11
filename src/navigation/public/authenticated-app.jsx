@@ -14,6 +14,7 @@ import UsersList from "../../components/Users/UsersList";
 import AppLayout from "../../layouts/AppLayout";
 import AuthorizedRoute from "../AuthorizedRoute";
 import AnalyticsPage from "../../components/Analytics/AnalyticsPage";
+import ExpenseList from "../../components/Expense/ExpenseList";
 
 function AuthenticatedApp() {
   return (
@@ -142,6 +143,16 @@ function AuthenticatedApp() {
           <AuthorizedRoute permissions={["admin", "user"]}>
             <AppLayout>
               <StateMentList />
+            </AppLayout>
+          </AuthorizedRoute>
+        }
+      />
+      <Route
+        path="/expense"
+        element={
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <ExpenseList />
             </AppLayout>
           </AuthorizedRoute>
         }

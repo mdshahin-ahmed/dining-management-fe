@@ -1,3 +1,4 @@
+import AsDateRangePicker from "../common/AsDateRangePicker";
 import ExpenseIncomePieChart from "./ExpenseIncomePieChart";
 import MonthLineChart from "./MonthLineChart";
 import YearLineChart from "./YearLineChart";
@@ -5,8 +6,12 @@ import YearLineChart from "./YearLineChart";
 const AnalyticsPage = () => {
   return (
     <>
-      <h2 className="previewLayout">Analytics</h2>
-      {/* <AsDataRangePicker /> */}
+      <div className="d-flex jcsb">
+        <h2 className="previewLayout">Analytics</h2>
+        <div className="dateRangePicker">
+          <AsDateRangePicker />
+        </div>
+      </div>
       <h4 className="ml-4 mb-0 tac">Analytics By Date Range</h4>
       <div style={{ width: "100vw", height: "300px" }}>
         <ExpenseIncomePieChart />
