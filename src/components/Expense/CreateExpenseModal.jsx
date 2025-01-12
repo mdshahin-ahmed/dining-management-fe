@@ -17,7 +17,6 @@ import { useEffect } from "react";
 
 const CreateExpenseModal = ({ onClose, open = true }) => {
   const { id, amount, description } = open;
-  console.log(id);
 
   const client = useClient();
   const queryClient = useQueryClient();
@@ -38,6 +37,11 @@ const CreateExpenseModal = ({ onClose, open = true }) => {
       reset({
         amount,
         description,
+      });
+    } else {
+      reset({
+        amount: "",
+        description: "",
       });
     }
   }, [amount, description]);

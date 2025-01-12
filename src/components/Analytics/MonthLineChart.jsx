@@ -1,38 +1,39 @@
 import { ResponsiveLine } from "@nivo/line";
-const data = [
-  {
-    id: "Expense",
-    data: [
-      { x: "Date 1", y: 0 },
-      { x: "Date 2", y: 187 },
-      { x: "Date 3", y: 35 },
-      { x: "Date 4", y: 134 },
-      { x: "Date 5", y: 150 },
-      { x: "Date 6", y: 120 },
-      { x: "Date 7", y: 121 },
-      { x: "Date 8", y: 133 },
-    ],
-  },
-  {
-    id: "Income",
-    data: [
-      { x: "Date 1", y: 0 },
-      { x: "Date 2", y: 0 },
-      { x: "Date 3", y: 34 },
-      { x: "Date 4", y: 14 },
-      { x: "Date 5", y: 36 },
-      { x: "Date 6", y: 157 },
-      { x: "Date 7", y: 47 },
-      { x: "Date 8", y: 175 },
-    ],
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { useClient } from "../../hooks/pure/useClient";
+// const data1 = [
+//   {
+//     id: "Expense",
+//     data: [
+//       { x: "27-12-2024", y: 0 },
+//       { x: "28-12-2024", y: 187 },
+//       { x: "31-12-2024", y: 35 },
+//       { x: "01-01-2025", y: 14 },
+//     ],
+//   },
+//   {
+//     id: "Income",
+//     data: [
+//       { x: "27-12-2024", y: 0 },
+//       { x: "28-12-2024", y: 0 },
+//       { x: "31-12-2024", y: 34 },
+//       { x: "01-01-2025", y: 14 },
+//     ],
+//   },
+// ];
 
 const MonthLineChart = () => {
+  const client = useClient();
+
+  const { data = [], isFetching } = useQuery({
+    queryKey: ["analytics-monthly"],
+    queryFn: () => client(`analytics/monthly`),
+  });
+  console.log(data);
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 110, bottom: 80, left: 70 }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
@@ -48,9 +49,9 @@ const MonthLineChart = () => {
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
-        tickRotation: 0,
+        tickRotation: -30,
         legend: "Days",
-        legendOffset: 36,
+        legendOffset: 55,
         legendPosition: "middle",
         truncateTickAt: 0,
       }}
@@ -59,7 +60,7 @@ const MonthLineChart = () => {
         tickPadding: 5,
         tickRotation: 0,
         legend: "Money Amount",
-        legendOffset: -40,
+        legendOffset: -50,
         legendPosition: "middle",
         truncateTickAt: 0,
       }}
@@ -71,7 +72,7 @@ const MonthLineChart = () => {
       pointLabelYOffset={-12}
       enableTouchCrosshair={true}
       useMesh={true}
-      colors={["#ff0066", "#33FF57"]}
+      colors={["#33FF57", "#ff0066"]}
       legends={[
         {
           anchor: "right",
