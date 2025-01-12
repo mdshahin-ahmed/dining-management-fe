@@ -14,6 +14,7 @@ import { useGetQueryDataList } from "../../api/query.api";
 import TableLoader from "../common/TableLoader";
 import NoDataAvailable from "../common/NoDataAvailable";
 import CustomPagination from "../common/CustomPagination";
+import { getFormattedDateTime } from "../../utils/helper";
 
 const ExpenseList = () => {
   const [defaultQuery, setDefaultQuery] = useState({
@@ -47,12 +48,23 @@ const ExpenseList = () => {
               <TableHeaderCell>#</TableHeaderCell>
               <TableHeaderCell>Description</TableHeaderCell>
               <TableHeaderCell>Amount</TableHeaderCell>
+              <TableHeaderCell>Created At</TableHeaderCell>
             </TableRow>
           </TableHeader>
           <TableBody>
             {expenseList?.result?.length > 0 && !isFetching ? (
               expenseList?.result?.map((expense, index) => (
-                <TableRow key={index}>
+                <TableRow
+                  key={index}
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    setCustom({
+                      id: expense?._id,
+                      amount: expense?.amount,
+                      description: expense?.description,
+                    })
+                  }
+                >
                   <TableCell>
                     {(defaultQuery?.page - 1) * defaultQuery?.limit + index + 1}
                   </TableCell>
@@ -60,14 +72,17 @@ const ExpenseList = () => {
                     {expense?.description || "-"}
                   </TableCell>
                   <TableCell>{expense?.amount || "-"}</TableCell>
+                  <TableCell>
+                    {getFormattedDateTime(expense?.createdAt)}
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
               <>
-                {isFetching && <TableLoader columns={3} />}
+                {isFetching && <TableLoader columns={4} />}
                 {!isFetching && (
                   <TableRow>
-                    <TableCell colSpan={3}>
+                    <TableCell colSpan={4}>
                       <NoDataAvailable />
                     </TableCell>
                   </TableRow>
