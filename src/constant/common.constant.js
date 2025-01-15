@@ -103,6 +103,18 @@ export const cancelRequestStatus = [
     value: "canceled",
   },
 ];
+export const withdrawRequestStatus = [
+  {
+    key: "approved",
+    text: "Approved",
+    value: "approved",
+  },
+  {
+    key: "canceled",
+    text: "Canceled",
+    value: "canceled",
+  },
+];
 
 export const managerOrderStatus = [
   {

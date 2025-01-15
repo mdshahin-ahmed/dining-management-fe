@@ -15,6 +15,7 @@ import AppLayout from "../../layouts/AppLayout";
 import AuthorizedRoute from "../AuthorizedRoute";
 import AnalyticsPage from "../../components/Analytics/AnalyticsPage";
 import ExpenseList from "../../components/Expense/ExpenseList";
+import WithdrawReqList from "../../components/WithdrawReq/WithdrawReqList";
 
 function AuthenticatedApp() {
   return (
@@ -163,6 +164,16 @@ function AuthenticatedApp() {
           <AuthorizedRoute permissions={["admin"]}>
             <AppLayout>
               <AnalyticsPage />
+            </AppLayout>
+          </AuthorizedRoute>
+        }
+      />
+      <Route
+        path="/withdraw"
+        element={
+          <AuthorizedRoute permissions={["admin"]}>
+            <AppLayout>
+              <WithdrawReqList />
             </AppLayout>
           </AuthorizedRoute>
         }

@@ -13,6 +13,7 @@ import { useAuth } from "../../../context/app/useAuth";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { TbDevicesCancel } from "react-icons/tb";
 import { SiGoogleanalytics } from "react-icons/si";
+import { BiMoneyWithdraw } from "react-icons/bi";
 
 const routeList = [
   {
@@ -79,6 +80,12 @@ const routeList = [
     content: "Analytics",
     pathname: "analytics",
     src: SiGoogleanalytics,
+    permissions: ["admin"],
+  },
+  {
+    content: "Withdraw",
+    pathname: "withdraw",
+    src: BiMoneyWithdraw,
     permissions: ["admin"],
   },
 

@@ -32,8 +32,7 @@ const RechargeModal = ({ onClose, open = true }) => {
   let addAmount;
 
   const amount = watch("amount");
-  const type = watch("type");
-  if (amount && type) {
+  if (amount) {
     addAmount = amount - (amount / 1000) * 15;
   }
 
@@ -57,7 +56,7 @@ const RechargeModal = ({ onClose, open = true }) => {
   });
 
   const handleAddBalance = (data) => {
-    mutate({ ...data, amount: addAmount });
+    mutate({ ...data, amount: addAmount, exactAmount: data?.amount });
   };
 
   return (

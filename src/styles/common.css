@@ -624,3 +624,9 @@ body {
 .t-capitalize {
   text-transform: capitalize !important;
 }
+
+.tableHighlightAmount {
+  color: #ff0066;
+  font-size: 1.2rem;
+  font-weight: bold;
+}

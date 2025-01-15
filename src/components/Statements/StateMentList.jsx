@@ -96,6 +96,7 @@ const StateMentList = () => {
             <TableHeaderCell>User Id</TableHeaderCell>
             <TableHeaderCell>Mobile</TableHeaderCell>
             <TableHeaderCell>Transaction Number</TableHeaderCell>
+            <TableHeaderCell>Exact Amount</TableHeaderCell>
             <TableHeaderCell>Amount</TableHeaderCell>
             <TableHeaderCell>Method</TableHeaderCell>
             <TableHeaderCell>Created At</TableHeaderCell>
@@ -120,6 +121,9 @@ const StateMentList = () => {
                 <TableCell>{statement?.user?.userId || "-"}</TableCell>
                 <TableCell>{statement?.mobile}</TableCell>
                 <TableCell>{statement?.transactionNumber}</TableCell>
+                <TableCell className="tableHighlightAmount">
+                  {statement?.exactAmount || "-"}
+                </TableCell>
                 <TableCell>{statement?.amount.toFixed(2)}</TableCell>
                 <TableCell className="t-capitalize">
                   {statement?.type || "-"}
@@ -163,11 +167,11 @@ const StateMentList = () => {
           ) : (
             <>
               {isFetching && (
-                <TableLoader columns={user?.role === "admin" ? 11 : 10} />
+                <TableLoader columns={user?.role === "admin" ? 13 : 12} />
               )}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan={(user?.role === "admin" && 11) || 10}>
+                  <TableCell colSpan={(user?.role === "admin" && 13) || 12}>
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>
