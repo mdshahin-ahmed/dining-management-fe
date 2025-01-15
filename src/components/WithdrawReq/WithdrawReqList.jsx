@@ -105,7 +105,6 @@ const WithdrawReqList = () => {
               <TableHeaderCell>User Id</TableHeaderCell>
               <TableHeaderCell>User Balance</TableHeaderCell>
               <TableHeaderCell>Amount</TableHeaderCell>
-              <TableHeaderCell>Reason</TableHeaderCell>
               <TableHeaderCell>Status</TableHeaderCell>
               <TableHeaderCell>Created At</TableHeaderCell>
               <TableHeaderCell>Updated At</TableHeaderCell>
@@ -129,7 +128,7 @@ const WithdrawReqList = () => {
                   <TableCell className="tableHighlightAmount">
                     {withdraw?.amount || "-"}
                   </TableCell>
-                  <TableCell>{withdraw?.reason || "-"}</TableCell>
+
                   <TableCell>
                     <span
                       className={`${withdraw?.status}OrderStatus orderStatusBtn t-capitalize`}
@@ -168,11 +167,11 @@ const WithdrawReqList = () => {
             ) : (
               <>
                 {isFetching && (
-                  <TableLoader columns={user?.role === "admin" ? 10 : 9} />
+                  <TableLoader columns={user?.role === "admin" ? 9 : 8} />
                 )}
                 {!isFetching && (
                   <TableRow>
-                    <TableCell colSpan={(user?.role === "admin" && 10) || 9}>
+                    <TableCell colSpan={(user?.role === "admin" && 9) || 8}>
                       <NoDataAvailable />
                     </TableCell>
                   </TableRow>

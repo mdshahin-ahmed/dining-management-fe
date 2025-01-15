@@ -12,7 +12,7 @@ import {
 import { useClient } from "../../hooks/pure/useClient";
 import { withdrawReqVSchema } from "../../validations/withdrawReq.schema";
 import AsToast from "../common/AsToast";
-import { AsForm, AsInput, AsTextArea } from "../common/form";
+import { AsForm, AsInput } from "../common/form";
 
 const WithdrawReqModal = ({ onClose, open = true }) => {
   const client = useClient();
@@ -24,7 +24,6 @@ const WithdrawReqModal = ({ onClose, open = true }) => {
   } = useForm({
     defaultValues: {
       amount: "",
-      reason: "",
     },
     resolver: joiResolver(withdrawReqVSchema),
   });
@@ -67,15 +66,6 @@ const WithdrawReqModal = ({ onClose, open = true }) => {
             mobile={16}
             computer={16}
             type="number"
-          />
-          <AsTextArea
-            maxLength={100}
-            name="reason"
-            required
-            label="Cancel Reason"
-            placeholder="Please provide a valid reason"
-            mobile={16}
-            computer={16}
           />
         </AsForm>
       </ModalContent>
