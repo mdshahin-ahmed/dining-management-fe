@@ -49,7 +49,7 @@ const WithdrawReqList = () => {
       client(`withdraw/approved/${id}`, { method: "PATCH", data }),
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: ["cancel-list"],
+        queryKey: ["withdraw-list"],
         type: "active",
       });
       AsToast.success(
