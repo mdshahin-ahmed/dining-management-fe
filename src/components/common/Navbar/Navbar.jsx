@@ -86,7 +86,7 @@ const routeList = [
     content: "Withdraw",
     pathname: "withdraw",
     src: BiMoneyWithdraw,
-    permissions: ["admin"],
+    permissions: ["user", "admin", "manager"],
   },
 
   {

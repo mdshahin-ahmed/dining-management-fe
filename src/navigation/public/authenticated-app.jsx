@@ -171,7 +171,7 @@ function AuthenticatedApp() {
       <Route
         path="/withdraw"
         element={
-          <AuthorizedRoute permissions={["admin"]}>
+          <AuthorizedRoute permissions={["admin", "user", "manager"]}>
             <AppLayout>
               <WithdrawReqList />
             </AppLayout>
