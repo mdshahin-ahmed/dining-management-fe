@@ -1,19 +1,19 @@
 import logo from "@/assets/logo.png";
+import { BiMoneyWithdraw } from "react-icons/bi";
 import {
   FaCartArrowDown,
   FaFileInvoiceDollar,
   FaUserAlt,
   FaUsers,
 } from "react-icons/fa";
-import { GiExpense, GiHotMeal } from "react-icons/gi";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { GiHotMeal } from "react-icons/gi";
 import { IoHomeSharp } from "react-icons/io5";
+import { SiGoogleanalytics } from "react-icons/si";
+import { TbDevicesCancel } from "react-icons/tb";
 import { NavLink, useLocation } from "react-router-dom";
 import { Image, List, ListItem, Popup } from "semantic-ui-react";
 import { useAuth } from "../../../context/app/useAuth";
-import { FaBangladeshiTakaSign } from "react-icons/fa6";
-import { TbDevicesCancel } from "react-icons/tb";
-import { SiGoogleanalytics } from "react-icons/si";
-import { BiMoneyWithdraw } from "react-icons/bi";
 
 const routeList = [
   {
@@ -70,12 +70,12 @@ const routeList = [
     src: FaFileInvoiceDollar,
     permissions: ["admin", "user"],
   },
-  {
-    content: "Expense",
-    pathname: "expense",
-    src: GiExpense,
-    permissions: ["admin"],
-  },
+  // {
+  //   content: "Expense",
+  //   pathname: "expense",
+  //   src: GiExpense,
+  //   permissions: ["admin"],
+  // },
   {
     content: "Analytics",
     pathname: "analytics",

@@ -14,7 +14,6 @@ import UsersList from "../../components/Users/UsersList";
 import AppLayout from "../../layouts/AppLayout";
 import AuthorizedRoute from "../AuthorizedRoute";
 import AnalyticsPage from "../../components/Analytics/AnalyticsPage";
-import ExpenseList from "../../components/Expense/ExpenseList";
 import WithdrawReqList from "../../components/WithdrawReq/WithdrawReqList";
 
 function AuthenticatedApp() {
@@ -148,7 +147,7 @@ function AuthenticatedApp() {
           </AuthorizedRoute>
         }
       />
-      <Route
+      {/* <Route
         path="/expense"
         element={
           <AuthorizedRoute permissions={["admin"]}>
@@ -157,7 +156,7 @@ function AuthenticatedApp() {
             </AppLayout>
           </AuthorizedRoute>
         }
-      />
+      /> */}
       <Route
         path="/analytics"
         element={
