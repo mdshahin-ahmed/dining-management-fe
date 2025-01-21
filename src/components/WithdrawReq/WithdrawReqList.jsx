@@ -124,7 +124,9 @@ const WithdrawReqList = () => {
                     {withdraw?.user?.name || "-"}
                   </TableCell>
                   <TableCell>{withdraw?.user?.userId || "-"}</TableCell>
-                  <TableCell>{withdraw?.user?.balance || "-"}</TableCell>
+                  <TableCell>
+                    {withdraw?.user?.balance.toFixed(2) || "-"}
+                  </TableCell>
                   <TableCell className="tableHighlightAmount">
                     {withdraw?.amount || "-"}
                   </TableCell>
