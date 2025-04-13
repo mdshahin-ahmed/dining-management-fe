@@ -94,7 +94,7 @@ const UserMeal = () => {
           onClick={() => setMealType("সকাল")}
           fluid
         >
-          সেহরি
+          সকাল
         </Button>
         <Button
           primary={mealType === "দুপুর"}
@@ -102,7 +102,7 @@ const UserMeal = () => {
           className="mx-3"
           fluid
         >
-          ইফতার
+          দুপুর
         </Button>
         <Button
           primary={mealType === "রাত"}
