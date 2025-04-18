@@ -25,11 +25,10 @@ import { useClient } from "../../hooks/pure/useClient";
 const MonthLineChart = () => {
   const client = useClient();
 
-  const { data = [], isFetching } = useQuery({
+  const { data = [] } = useQuery({
     queryKey: ["analytics-monthly"],
     queryFn: () => client(`analytics/monthly`),
   });
-  console.log(data);
   return (
     <ResponsiveLine
       data={data}

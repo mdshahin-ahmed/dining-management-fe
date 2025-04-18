@@ -21,6 +21,7 @@ import TableLoader from "../common/TableLoader";
 import { useAuth } from "../../context/app/useAuth";
 import { useDisclosure } from "../../hooks/pure/useDisclosure";
 import DeleteModal from "../common/DeleteModal";
+import { paymentMethod } from "../../constant/common.constant";
 
 const StateMentList = () => {
   const { user } = useAuth();
@@ -79,6 +80,15 @@ const StateMentList = () => {
       <div className="orderHeaderWrap">
         <h2>Statements ({statementList?.meta?.total || 0})</h2>
         <div className="orderFilterWrap">
+          <Select
+            className="orderFilterDropdown"
+            clearable
+            options={paymentMethod}
+            onChange={(e, { value }) =>
+              setDefaultQuery((prev) => ({ ...prev, type: value }))
+            }
+            placeholder="Payment Method"
+          />
           <SearchBar
             placeholder="Search by mobile"
             stillTime={500}
