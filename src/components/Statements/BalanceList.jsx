@@ -12,6 +12,7 @@ import { getFormattedDateTime } from "../../utils/helper";
 import CustomPagination from "../common/CustomPagination";
 import NoDataAvailable from "../common/NoDataAvailable";
 import TableLoader from "../common/TableLoader";
+import SearchBar from "../common/SearchBar";
 
 const BalanceList = () => {
   const [defaultQuery, setDefaultQuery] = useState({
@@ -32,15 +33,15 @@ const BalanceList = () => {
     <div className="previewLayout">
       <div className="orderHeaderWrap">
         <h2>Statements ({balanceList?.meta?.total || 0})</h2>
-        {/* <div className="orderFilterWrap">
+        <div className="orderFilterWrap">
           <SearchBar
-            placeholder="Search meal"
+            placeholder="User Id"
             stillTime={500}
             onSuccess={(e) =>
               setDefaultQuery((prev) => ({ ...prev, searchTerm: e }))
             }
           />
-        </div> */}
+        </div>
       </div>
       <Table basic>
         <TableHeader>
