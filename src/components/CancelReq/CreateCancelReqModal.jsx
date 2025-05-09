@@ -67,9 +67,9 @@ const CreateCancelReqModal = ({ onClose, open = true }) => {
         <h5 className="mb-0" style={{ color: "blue" }}>
           অর্ডার বাতিল করার সময়সূচি
         </h5>
-        <h5 className="mb-1 mt-1">সকাল: আগের দিন রাত ১১:00 টা</h5>
+        <h5 className="mb-1 mt-1">সকাল: সকাল ৭:00 টা</h5>
         <h5 className="mb-1 mt-1">দুপুর: সকাল ১০:০০ টা</h5>
-        <h5 className="mb-1 mt-1">রাত: বিকেল ৩:০০ টা</h5>
+        <h5 className="mb-1 mt-1">রাত: বিকেল ২:০০ টা</h5>
         <span
           className="c-red fw-bold mb-4 d-flex"
           style={{ backgroundColor: "#7767130" }}
