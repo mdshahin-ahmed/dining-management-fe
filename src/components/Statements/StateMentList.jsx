@@ -80,8 +80,15 @@ const StateMentList = () => {
       <div className="orderHeaderWrap">
         <h2>Statements ({statementList?.meta?.total || 0})</h2>
         <div className="orderFilterWrap">
+          <SearchBar
+            placeholder="Search by mobile"
+            stillTime={500}
+            onSuccess={(e) =>
+              setDefaultQuery((prev) => ({ ...prev, searchTerm: e, page: 1 }))
+            }
+          />
           <Select
-            className="orderFilterDropdown"
+            className="mx-2"
             clearable
             options={paymentMethod}
             onChange={(e, { value }) =>
@@ -89,12 +96,25 @@ const StateMentList = () => {
             }
             placeholder="Payment Method"
           />
-          <SearchBar
-            placeholder="Search by mobile"
-            stillTime={500}
-            onSuccess={(e) =>
-              setDefaultQuery((prev) => ({ ...prev, searchTerm: e, page: 1 }))
+          <Select
+            // className="orderFilterDropdown"
+            clearable
+            options={[
+              {
+                key: "pending",
+                value: "pending",
+                text: "Pending",
+              },
+              {
+                key: "approved",
+                value: "approved",
+                text: "Approved",
+              },
+            ]}
+            onChange={(e, { value }) =>
+              setDefaultQuery((prev) => ({ ...prev, status: value }))
             }
+            placeholder="Status"
           />
         </div>
       </div>
