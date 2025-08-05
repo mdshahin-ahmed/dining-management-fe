@@ -112,9 +112,8 @@ const OrderList = () => {
     <div className="previewLayout">
       <div className="orderHeaderWrap">
         <h2>Orders ({searchOrderList?.length || 0})</h2>
-        <div className="orderFilterWrap">
+        <div className="orderFilterWrap ">
           <Select
-            className="orderFilterDropdown"
             clearable
             options={mealNameOptions}
             onChange={(e, { value }) =>
@@ -123,7 +122,6 @@ const OrderList = () => {
             placeholder="Menu Name"
           />
           <Select
-            className="orderFilterDropdown"
             clearable
             options={orderTypeOptions}
             onChange={(e, { value }) =>

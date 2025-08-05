@@ -84,14 +84,14 @@ const UsersList = () => {
         onConfirm={() => handleDelete(isDeleteOpen)}
       />
 
-      <div className="d-flex jcsb">
+      <div className="d-flex jcsb mobileScreenUsersList">
         <div>
           <h2>Users ({usersList?.meta?.total || 0})</h2>
           {user?.role === "admin" && (
             <h4 className="mt-0">({usersList?.totalBalance || 0})</h4>
           )}
         </div>
-        <div>
+        <div className="mobileScreenUsersList addUsrBtnWrap">
           <SearchBar
             placeholder="Search user"
             stillTime={500}
@@ -99,7 +99,7 @@ const UsersList = () => {
               setDefaultQuery((prev) => ({ ...prev, searchTerm: e, page: 1 }))
             }
           />
-          <Button onClick={() => navigate("add")} className="ml-3" primary>
+          <Button onClick={() => navigate("add")} className="" primary>
             Add User
           </Button>
         </div>

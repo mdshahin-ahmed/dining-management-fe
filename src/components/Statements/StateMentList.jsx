@@ -88,7 +88,7 @@ const StateMentList = () => {
             }
           />
           <Select
-            className="mx-2"
+            // className="mx-2"
             clearable
             options={paymentMethod}
             onChange={(e, { value }) =>

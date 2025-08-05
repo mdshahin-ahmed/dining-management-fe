@@ -13,7 +13,7 @@ const AnalyticsPage = () => {
       <div style={{ width: "100vw", height: "300px" }}>
         <ExpenseIncomePieChart />
       </div> */}
-      <h4 className="mb-0 mt-4 tac">Analytics Of Last 30 Days</h4>
+      <h4 className="mb-0 mt-4 tac">Analytics of Last 30 Days</h4>
       <div style={{ width: "95vw", height: "550px" }}>
         <MonthLineChart />
       </div>

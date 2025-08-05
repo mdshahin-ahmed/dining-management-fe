@@ -31,6 +31,7 @@
 }
 .orderFilterWrap {
   display: flex;
+  gap: 10px;
 }
 .orderFilterDropdown {
   margin-right: 10px;
@@ -42,7 +43,9 @@
     display: block;
   }
   .orderFilterWrap {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
   .orderFilterDropdown {
     margin-right: 0px;
