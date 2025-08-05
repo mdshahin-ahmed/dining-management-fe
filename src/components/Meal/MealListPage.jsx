@@ -18,6 +18,7 @@ import DeleteModal from "../common/DeleteModal";
 import AsToast from "../common/AsToast";
 import { FiTrash2 } from "react-icons/fi";
 import NoDataAvailable from "../common/NoDataAvailable";
+import { capitalize } from "../../utils/helper";
 
 const MealListPage = () => {
   const { isOpen, onClose, setCustom } = useDisclosure();
@@ -90,7 +91,7 @@ const MealListPage = () => {
                   <Card className="w-100">
                     <CardContent className="p-0 mealContent">
                       <CardHeader className="mealCardHeader">
-                        {meal?.name}
+                        {capitalize(meal?.name)}
                       </CardHeader>
                       <CardDescription className="px-3 mealDescHeight">
                         <div

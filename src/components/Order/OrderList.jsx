@@ -120,7 +120,7 @@ const OrderList = () => {
             onChange={(e, { value }) =>
               setDefaultQuery((prev) => ({ ...prev, name: value }))
             }
-            placeholder="মেনুর নাম"
+            placeholder="Menu Name"
           />
           <Select
             className="orderFilterDropdown"
@@ -129,10 +129,10 @@ const OrderList = () => {
             onChange={(e, { value }) =>
               setDefaultQuery((prev) => ({ ...prev, type: value }))
             }
-            placeholder="মেনুর ধরন"
+            placeholder="Menu Type"
           />
           <SearchBar
-            placeholder="ইউজার আইডি"
+            placeholder="User Id"
             stillTime={500}
             onSuccess={
               (e) => handleFindUser(e)

@@ -87,29 +87,29 @@ const UserMeal = () => {
         onConfirm={() => handlePurchase(isOpen)}
       />
 
-      {mealType ? "" : <h2 className="tac">মেনু পছন্দ করুন</h2>}
+      {mealType ? "" : <h2 className="tac">Choose Menu</h2>}
       <div className="d-flex jcc mb-5">
         <Button
-          primary={mealType === "সকাল"}
-          onClick={() => setMealType("সকাল")}
+          primary={mealType === "breakfast"}
+          onClick={() => setMealType("breakfast")}
           fluid
         >
-          সকাল
+          Breakfast
         </Button>
         <Button
-          primary={mealType === "দুপুর"}
-          onClick={() => setMealType("দুপুর")}
+          primary={mealType === "lunch"}
+          onClick={() => setMealType("lunch")}
           className="mx-3"
           fluid
         >
-          দুপুর
+          Lunch
         </Button>
         <Button
-          primary={mealType === "রাত"}
-          onClick={() => setMealType("রাত")}
+          primary={mealType === "dinner"}
+          onClick={() => setMealType("dinner")}
           fluid
         >
-          রাত
+          Dinner
         </Button>
       </div>
       {mealList?.length === 0 && !isFetching && mealType ? (

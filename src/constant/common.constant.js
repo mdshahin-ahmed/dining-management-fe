@@ -4,23 +4,23 @@ import bkash from "@/assets/bkash.png";
 export const mealNameOptions = [
   {
     key: "menu1",
-    text: "মেনু-১",
-    value: "মেনু-১",
+    text: "Menu 1",
+    value: "menu-1",
   },
   {
     key: "menu2",
-    text: "মেনু-২",
-    value: "মেনু-২",
+    text: "Menu 2",
+    value: "menu-2",
   },
   {
     key: "menu3",
-    text: "মেনু-৩",
-    value: "মেনু-৩",
+    text: "Menu 3",
+    value: "menu-3",
   },
   {
     key: "menu4",
-    text: "মেনু-৪",
-    value: "মেনু-৪",
+    text: "Menu 4",
+    value: "menu-4",
   },
 ];
 
@@ -132,18 +132,18 @@ export const managerOrderStatus = [
 export const orderTypeOptions = [
   {
     key: "breakfast",
-    text: "সকাল",
-    value: "সকাল",
+    text: "Breakfast",
+    value: "breakfast",
   },
   {
     key: "lunch",
-    text: "দুপুর",
-    value: "দুপুর",
+    text: "Lunch",
+    value: "lunch",
   },
   {
     key: "dinner",
-    text: "রাত",
-    value: "রাত",
+    text: "Dinner",
+    value: "dinner",
   },
 ];
 

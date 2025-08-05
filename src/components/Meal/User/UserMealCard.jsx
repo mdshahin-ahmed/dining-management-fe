@@ -13,6 +13,7 @@ import { useAuth } from "../../../context/app/useAuth";
 import CardLoader from "../../common/CardLoader";
 import RechargeModal from "../../common/RechargeModal";
 import { useDisclosure } from "../../../hooks/pure/useDisclosure";
+import { capitalize } from "../../../utils/helper";
 
 const UserMealCard = ({ mealList, isFetching, setCustom }) => {
   const { user } = useAuth();
@@ -37,7 +38,7 @@ const UserMealCard = ({ mealList, isFetching, setCustom }) => {
                 <Card className="w-100 cardShadow">
                   <CardContent className="p-0 mealContent">
                     <CardHeader className="mealCardHeader">
-                      {meal?.name}
+                      {capitalize(meal?.name)}
                     </CardHeader>
                     <CardDescription className="px-3 pt-2 mealDescHeight">
                       <div

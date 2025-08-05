@@ -14,6 +14,8 @@ import { TbDevicesCancel } from "react-icons/tb";
 import { NavLink, useLocation } from "react-router-dom";
 import { Image, List, ListItem, Popup } from "semantic-ui-react";
 import { useAuth } from "../../../context/app/useAuth";
+import { MdSetMeal } from "react-icons/md";
+import { FcAcceptDatabase } from "react-icons/fc";
 
 const routeList = [
   {
@@ -25,7 +27,7 @@ const routeList = [
   {
     content: "Manage Meal",
     pathname: "manage-meal",
-    src: GiHotMeal,
+    src: MdSetMeal,
     permissions: ["admin"],
   },
   {
@@ -49,7 +51,7 @@ const routeList = [
   {
     content: "All Order",
     pathname: "all-order",
-    src: FaCartArrowDown,
+    src: FcAcceptDatabase,
     permissions: ["admin", "manager", "user"],
   },
   {
