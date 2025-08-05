@@ -88,10 +88,10 @@ const BalanceList = () => {
             ))
           ) : (
             <>
-              {isFetching && <TableLoader columns={8} />}
+              {isFetching && <TableLoader columns={9} />}
               {!isFetching && (
                 <TableRow>
-                  <TableCell colSpan="8">
+                  <TableCell colSpan="9">
                     <NoDataAvailable />
                   </TableCell>
                 </TableRow>

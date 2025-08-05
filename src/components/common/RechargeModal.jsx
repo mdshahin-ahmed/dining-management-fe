@@ -70,11 +70,11 @@ const RechargeModal = ({ onClose, open = true }) => {
       <ModalHeader>You want to recharge?</ModalHeader>
       <ModalContent>
         <h5 className="mb-0">
-          BKash Payment: <span className="balanceCount">01303565316</span>
+          BKash Payment: <span className="balanceCount">016********</span>
         </h5>
         <h5 className="mb-1 mt-1">
           BKash & Nagad Send Money:{" "}
-          <span className="balanceCount">01784135726</span>
+          <span className="balanceCount">016********</span>
         </h5>
         <span
           className="c-red fw-bold mb-4 d-flex"

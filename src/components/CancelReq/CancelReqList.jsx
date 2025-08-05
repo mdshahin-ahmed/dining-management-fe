@@ -144,11 +144,11 @@ const CancelReqList = () => {
             ) : (
               <>
                 {isFetching && (
-                  <TableLoader columns={user?.role === "admin" ? 9 : 8} />
+                  <TableLoader columns={user?.role === "admin" ? 10 : 9} />
                 )}
                 {!isFetching && (
                   <TableRow>
-                    <TableCell colSpan={(user?.role === "admin" && 9) || 8}>
+                    <TableCell colSpan={user?.role === "admin" ? 10 : 9}>
                       <NoDataAvailable />
                     </TableCell>
                   </TableRow>

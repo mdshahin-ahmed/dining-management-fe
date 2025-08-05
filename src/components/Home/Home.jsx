@@ -3,10 +3,10 @@ const Home = () => {
     <div className="previewLayout">
       <h1>Welcome! to ASFCS</h1>
       <h5 className="mb-0">
-        BKash Payment: <span className="balanceCount">01303565316</span>
+        BKash Payment: <span className="balanceCount">016********</span>
       </h5>
       <h5 className="mb-1 mt-1">
-        Nagad Send Money: <span className="balanceCount">01784135726</span>
+        Nagad Send Money: <span className="balanceCount">016********</span>
       </h5>
       {/* <h5 className="mb-4 mt-1"> */}
       <span
